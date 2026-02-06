@@ -2,15 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { ROUTES_ADMIN } from '../features/admin/admin.routes.ts'
 import { useAuthStore } from '../stores/authStore.ts'
 
-const PrestationsView = () => import('@/features/well-being/PrestationsView.vue')
-const ContactForm = () => import('@/features/well-being/components/contact/ContactForm.vue')
-const BookingView = () => import('@/features/well-being/components/booking/BookingView.vue')
-const BookingForm = () => import('@/features/well-being/components/booking/BookingForm.vue')
-const BookingConfirmation = () => import('@/features/well-being/components/booking/BookingConfirmation.vue')
-const TestimonialView = () => import('@/features/well-being/components/testimonials/TestimonialView.vue')
+const PrestationsView = () => import('@/features/advocat/PrestationsView.vue')
+const ContactForm = () => import('@/features/advocat/components/contact/ContactForm.vue')
+const BookingView = () => import('@/features/advocat/components/booking/BookingView.vue')
+const BookingForm = () => import('@/features/advocat/components/booking/BookingForm.vue')
+const BookingConfirmation = () => import('@/features/advocat/components/booking/BookingConfirmation.vue')
+const TestimonialView = () => import('@/features/advocat/components/testimonials/TestimonialView.vue')
 const Legal = () => import('../templates/mentions-legales/Legal.vue')
-const Login = () => import('@/features/well-being/components/auth/Login.vue')
-const RequestPassword = () => import('@/features/well-being/components/auth/reset-password/RequestPassword.vue')
+const Login = () => import('@/features/advocat/components/auth/Login.vue')
+const RequestPassword = () => import('@/features/advocat/components/auth/reset-password/RequestPassword.vue')
 const NotFound = () => import('../templates/notFound/NotFound.vue')
 const Admin = () => import('../features/admin/Admin.vue')
 

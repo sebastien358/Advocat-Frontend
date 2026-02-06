@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, nextTick, watch } from "vue";
+import {onMounted, ref, nextTick, watch, onUnmounted} from "vue";
 import gsap from "gsap";
 import { useRouter } from "vue-router";
 import Calc from "@/templates/calc/Calc.vue";
@@ -7,6 +7,20 @@ import { useAuthStore } from "@/stores/authStore.ts";
 
 const authStore = useAuthStore();
 
+const isHeaderVisible = ref(false)
+
+
+const onScroll = () => {
+  isHeaderVisible.value = window.scrollY > 30
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 /*===============
   ÉTAT CONNEXION, RÉCUPÉRATION UTILISATEUR
 ===============*/
@@ -112,23 +126,21 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <header class="header">
+  <header class="header" :class="{'is-header-visible': isHeaderVisible}">
     <div class="header__container" ref="headerRef">
       <!-- LOGO -->
       <div class="header__brand">
         <div class="header__logo">
-          <svg width="50" height="50" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-            <path
-              d="M6 13c2-2 4-2 6 0s4 2 6 0"
-              stroke="currentColor"
-              stroke-width="2"
-              fill="none"
-            />
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+            <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+            <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+            <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
           </svg>
         </div>
         <div class="d-flex flex-column">
-          <p>Cabinet Bien-Être</p>
+          <p>Cabinet Avocat</p>
           <span>Consultations sur rendez-vous</span>
         </div>
       </div>
@@ -231,23 +243,24 @@ const closeMenu = () => {
 
 <style scoped lang="scss">
 .header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  background: #ffffffcc;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  max-width: 1200px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 12px;
+  z-index: 100;
+  padding: 15px 2rem;
   &__container {
-    max-width: 1300px;
-    margin: auto;
-    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
   }
-
   &__brand {
     display: flex;
     align-items: center;
@@ -267,17 +280,16 @@ const closeMenu = () => {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: white;
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    border: 1px solid #c7a44a;
     svg {
-      width: 18px;
-      height: 18px;
-      color: #a259ff; /* ton violet clair */
+      width: 20px;
+      height: 20px;
+      color: var(--green-page);
     }
     span {
       font-weight: 600;
@@ -294,11 +306,11 @@ const closeMenu = () => {
     gap: 1.8rem;
     a {
       font-size: 14px;
-      color: #333;
+      color: white;
       transition: 0.2s;
     }
     a:hover {
-      color: #b22ad0;
+      color: var(--green-page);
     }
     a:last-child {
       opacity: 0.25;
@@ -344,13 +356,12 @@ const closeMenu = () => {
   }
   /* CTA */
   &__cta {
-    background: #ff4dd4;
+    background: #8dbf67;
     color: white;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10px;
+    padding: 0.8rem 4rem;
+    border-radius: 20px;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(255, 77, 212, 0.35);
-    border: 0;
+    border: none;
     cursor: pointer;
   }
   /* BURGER */
@@ -373,6 +384,18 @@ const closeMenu = () => {
     }
   }
 }
+
+/* Apparition de header */
+
+.header.is-header-visible {
+  background: white;
+  transition: all 180ms ease;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 12px 30px rgba(0, 0, 0, 0.10);
+}
+
+
 
 /* MENU MOBILE */
 .mobile-menu {

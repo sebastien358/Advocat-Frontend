@@ -54,18 +54,16 @@ function goRedirectLegal() {
       <div class="footer__col">
         <div class="footer__logo__wrapper">
           <div class="logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-              <path
-                d="M6 13c2-2 4-2 6 0s4 2 6 0"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-              />
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+              <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+              <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+              <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
             </svg>
           </div>
           <div>
-            <h3 class="footer__brand">Cabinet Bien-Être</h3>
+            <h3 class="footer__brand">Cabinet Avocat</h3>
             <p class="footer__subtitle">Consultations sur rendez-vous</p>
           </div>
         </div>
@@ -134,7 +132,7 @@ function goRedirectLegal() {
       </div>
     </div>
     <div class="footer__bottom">
-      <p>© 2026 Cabinet Bien-Être. Tous droits réservés.</p>
+      <p>© 2026 Cabinet Avocat. Tous droits réservés.</p>
       <p @click="goRedirectLegal()" class="legal-notices">
         Mentions légales — Politique de confidentialité — CGV
       </p>
@@ -145,10 +143,8 @@ function goRedirectLegal() {
 <style scoped lang="scss">
 .footer {
   opacity: 0;
-  //transform: translateY(20px);
   background: #050816; /* noir légèrement violet, comme Figma */
   color: #f9fafb;
-  border-radius: 24px 24px 0 0;
   box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.55);
   padding: 3.5rem 0 1.7rem;
   @media (max-width: 991.98px) {
@@ -209,7 +205,7 @@ function goRedirectLegal() {
     border-radius: 50%;
     height: 37px;
     width: 37px;
-    background-color: #a259ff;
+    background: var(--green-page);
     @media (max-width: 767.98px) {
       height: 32px;
       width: 32px;
@@ -433,7 +429,7 @@ function goRedirectLegal() {
   cursor: pointer;
   margin-top: 1.2rem;
   font-size: 13px;
-  background: linear-gradient(90deg, #ff4fd8 0%, #b07bff 100%);
+  background: var(--green-page);
   transition:
     background 0.2s ease,
     border-color 0.2s ease,

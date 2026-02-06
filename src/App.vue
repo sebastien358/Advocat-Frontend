@@ -43,7 +43,7 @@ onMounted(async () => {
 .app {
   display: grid;
   grid-template-areas: "header" "main" "footer";
-  grid-template-rows: 100px 1fr auto;
+  grid-template-rows: auto 1fr auto;
   min-height: 100dvh;
   .header {
     grid-area: header;
@@ -59,14 +59,14 @@ onMounted(async () => {
 @media (max-width: 991.98px) {
   .app {
     height: 100vh;
-    grid-template-rows: 100px 1fr auto;
+    grid-template-rows: auto 1fr auto;
   }
 }
 
 @media (max-width: 767.98px) {
   .app {
     height: 100vh;
-    grid-template-rows: 90px 1fr auto;
+    grid-template-rows: auto 1fr auto;
   }
 }
 
