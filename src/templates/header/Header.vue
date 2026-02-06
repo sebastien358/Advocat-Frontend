@@ -149,12 +149,16 @@ const closeMenu = () => {
         <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }"
         >Accueil</RouterLink
         >
-        <RouterLink to="/#about" :class="{ active: $route.hash === '#about' }">À propos</RouterLink>
-        <RouterLink to="/#services" :class="{ active: $route.hash === '#services' }"
-        >Services</RouterLink
+        <RouterLink to="/#equipe" :class="{ active: $route.hash === '#equipe' }"
+        >Cabinet</RouterLink
         >
-        <RouterLink to="/#testimonials" :class="{ active: $route.hash === '#testimonials' }"
-        >Témoignages</RouterLink
+        <RouterLink to="/#expertises" :class="{ active: $route.hash === '#expertises' }"
+        >Expertises</RouterLink
+        >
+        <RouterLink
+          to="#procedures"
+          :class="{ active: $route.path === '#procedures' && !$route.hash }"
+        >Procédures</RouterLink
         >
         <RouterLink
           to="/contact/form"
@@ -297,7 +301,7 @@ const closeMenu = () => {
     }
   }
   .active {
-    color: #b22ad0;
+    color: var(--green-page);
   }
   /* NAV DESKTOP */
   &__nav {

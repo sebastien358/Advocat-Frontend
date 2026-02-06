@@ -30,8 +30,6 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
-
-
 const items = [
   { title: 'Avocat divorce', content: 'Accompagnement dans les procédures de divorce.' },
   { title: 'Avocat séparation', content: 'Organisation juridique adaptée.' },
@@ -39,7 +37,6 @@ const items = [
   { title: 'Avocat succession', content: 'Conseil et assistance successorale.' },
   { title: 'Violences conjugales', content: 'Procédures d’urgence.' }
 ]
-
 
 const openIndex = ref(null)
 const contents = ref([])
@@ -94,7 +91,7 @@ const toggle = async (index) => {
     <!-- MAIN CONTENT -->
     <main>
       <!-- HERO -->
-      <section class="hero">
+      <section id="hero" class="hero">
         <div class="hero__bg"></div>
         <div class="hero__content">
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
@@ -116,7 +113,7 @@ const toggle = async (index) => {
         </div>
       </section>
       <!-- INTRO -->
-      <section class="intro">
+      <section id="cabinet-intro" class="intro">
         <h2>Une équipe dynamique à votre écoute</h2>
         <p>
           Installé à <strong>Évreux</strong> et <strong>Louviers</strong>, notre cabinet
@@ -129,7 +126,7 @@ const toggle = async (index) => {
       </section>
       <!-- ÉQUIPE -->
 
-      <section class="sections">
+      <section id="equipe" class="sections">
         <!-- BLOC 1 : ÉQUIPE -->
         <section class="block block--team">
           <div class="block__grid">
@@ -147,7 +144,7 @@ const toggle = async (index) => {
           </div>
         </section>
         <!-- BLOC 2 : DOMAINES -->
-        <section class="block block--domains">
+        <section id="expertises" class="block block--domains">
           <div class="block__grid">
             <img src="@/assets/images/pexels-smuldur-30573089.jpg" alt="">
             <div class="block__content">
@@ -163,10 +160,8 @@ const toggle = async (index) => {
         </section>
       </section>
 
-
-      <section class="engagements">
+      <section id="engagements" class="engagements">
         <h2>Nos engagements</h2>
-
         <div class="engagements__grid">
           <div class="engagement">Écoute</div>
           <div class="engagement">Disponibilité</div>
@@ -175,11 +170,8 @@ const toggle = async (index) => {
         </div>
       </section>
 
-
-
-
       <!-- MENUS DÉROULANT -->
-      <section class="accordion">
+      <section id="procedures" class="accordion">
         <div class="accordion-item" v-for="(item, index) in items" :key="index">
           <button class="accordion-header" @click="toggle(index)">
             {{ item.title }}
@@ -188,6 +180,89 @@ const toggle = async (index) => {
           <div class="accordion-content" ref="contents">
             <p>{{ item.content }}</p>
           </div>
+        </div>
+      </section>
+
+      <!-- ENGAGEMENT QUALITY -->
+
+      <section id="engagements-quality" class="engagements-quality">
+        <div class="engagements-quality__container">
+          <span class="engagements-quality__surtitle">Avocats à Évreux et Louviers</span>
+          <h2 class="engagements-quality__title">Nos engagements de qualité</h2>
+
+          <div class="engagements-quality__grid">
+            <div class="engagements-quality__item">
+              <div class="engagements-quality__icon">📘</div>
+              <h3>Écoute</h3>
+              <p>Une analyse attentive de votre situation pour vous proposer une stratégie adaptée.</p>
+            </div>
+
+            <div class="engagements-quality__item">
+              <div class="engagements-quality__icon">🏛️</div>
+              <h3>Rigueur</h3>
+              <p>Un suivi précis et sérieux de chaque dossier, dans le respect des règles déontologiques.</p>
+            </div>
+
+            <div class="engagements-quality__item">
+              <div class="engagements-quality__icon">🤝</div>
+              <h3>Proximité</h3>
+              <p>Un accompagnement humain et disponible, du premier contact à la conclusion du dossier.</p>
+            </div>
+
+            <div class="engagements-quality__item">
+              <div class="engagements-quality__icon">€</div>
+              <h3>Transparence</h3>
+              <p>Des honoraires clairement expliqués, sans surprise.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--  AFFAIRE -->
+
+      <section class="case-submit" id="affaire">
+        <div class="case-submit__bg">
+          <img src="@/assets/images/affaire.jpg" alt="Une affaire à soumettre à notre cabinet">
+        </div>
+        <div class="case-submit__content">
+          <span class="case-submit__subtitle">Avocats à Évreux et Louviers</span>
+          <h2>Une affaire à soumettre<br>à notre cabinet&nbsp;?</h2>
+          <p>
+            L’accueil téléphonique de Maître Evelyne Boyer est ouvert
+            du lundi au vendredi de 9h30 à 12h30 et de 13h30 à 17h.
+            <br>
+            Contactez-nous pour un rendez-vous.
+          </p>
+          <router-link to="/contact/form" class="case-submit__cta">Contactez-nous</router-link>
+        </div>
+      </section>
+
+      <!--  CONTACT CABINET -->
+
+      <section class="contact-quick">
+        <div class="contact-quick__container">
+
+          <div class="contact-quick__item">
+            <div class="contact-quick__icon">📍</div>
+            <h4>Adresse</h4>
+            <p>
+              1 Rue du Jardin Botanique<br />
+              27000 Évreux
+            </p>
+          </div>
+
+          <div class="contact-quick__item">
+            <div class="contact-quick__icon">📞</div>
+            <h4>Téléphone</h4>
+            <p>02 32 62 80 01</p>
+          </div>
+
+          <div class="contact-quick__item">
+            <div class="contact-quick__icon">✉️</div>
+            <h4>E-mail</h4>
+            <p>evreux@avocatsbhb.fr</p>
+          </div>
+
         </div>
       </section>
 
@@ -295,7 +370,6 @@ const toggle = async (index) => {
     backdrop-filter: blur(4px);
   }
 }
-
 .hero::before {
   content: '';
   position: absolute;
@@ -318,7 +392,6 @@ const toggle = async (index) => {
     color: var(--green-page);
     margin-bottom: 15px;
   }
-
   p {
     line-height: 1.6;
     margin-bottom: 20px;
@@ -328,12 +401,7 @@ const toggle = async (index) => {
     opacity: .75;
     font-size: 16px;
   }
-
-
-
-
 }
-
 
 /*===================
   TEAM
@@ -371,9 +439,6 @@ const toggle = async (index) => {
   }
 }
 
-
-
-
 .checks li::before {
   content: "✓ ";
   color: var(--green-page);
@@ -408,8 +473,9 @@ const toggle = async (index) => {
   }
 }
 
-
-// ENGUAGEMENTS
+/*===================
+  ENGUAGEMENTS
+===================*/
 
 .engagements {
   padding: 80px 20px;
@@ -437,13 +503,14 @@ const toggle = async (index) => {
   font-weight: 500;
 }
 
-
-// ACCORDIONS
-
+/*===================
+  ACCORDIONS
+===================*/
 
 .accordion {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 60px auto;
+  padding: 0 20px;
 }
 
 .accordion-item {
@@ -454,7 +521,7 @@ const toggle = async (index) => {
   width: 100%;
   background: none;
   border: none;
-  padding: 18px 0;
+  padding: 25px 0;
   font-size: 20px;
   color: #8dbf67;
   display: flex;
@@ -477,7 +544,6 @@ const toggle = async (index) => {
 }
 
 
-
 .accordion-content p {
   padding: 0 0 18px 0;
   line-height: 1.6;
@@ -491,17 +557,191 @@ const toggle = async (index) => {
   transform: rotate(45deg);
 }
 
-
-
-
-
-
-
-
 .accordion-content {
   overflow: hidden;
   height: 0;
   opacity: 0;
+}
+
+/*===================
+  ENGAGEMENTS QUALITY
+===================*/
+
+.engagements-quality {
+  background: #ffffff;
+  padding: 80px 24px;
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  &__surtitle {
+    font-size: 14px;
+    color: #7aa35a;
+    margin-bottom: 8px;
+    display: block;
+  }
+  &__title {
+    font-size: 32px;
+    margin-bottom: 48px;
+  }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 34px;
+  }
+  &__item {
+    background: #f9f9f9;
+    padding: 32px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  &__icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+}
+
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .engagements-quality__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .engagements-quality__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*===================
+  AFFAIRE
+===================*/
+
+.case-submit {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 80px 20px;
+}
+
+.case-submit__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.case-submit__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-submit__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.case-submit__content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffffff;
+  text-align: center;
+}
+
+.case-submit__subtitle {
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+
+.case-submit h2 {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.case-submit p {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto 28px;
+  opacity: 0.95;
+}
+
+.case-submit__cta {
+  align-self: center;
+  background: #ffffff;
+  color: #333;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.case-submit__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/*===================
+  CONTACT
+===================*/
+
+
+.contact-quick {
+  background: #ffffff;
+  padding: 80px 24px 60px;
+}
+
+.contact-quick__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.contact-quick__item h4 {
+  margin: 12px 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #7da85a; /* ton vert */
+}
+
+.contact-quick__item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.contact-quick__icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-quick__container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 
@@ -509,9 +749,9 @@ const toggle = async (index) => {
 
 
 
-
-
-// SCROLL TOP
+/*===================
+  SCROLL TOP
+===================*/
 
 .scroll-top {
   position: fixed;
