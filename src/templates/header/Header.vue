@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref, nextTick, watch, onUnmounted} from "vue";
-import gsap from "gsap";
 import { useRouter } from "vue-router";
 import Calc from "@/templates/calc/Calc.vue";
 import { useAuthStore } from "@/stores/authStore.ts";
+import gsap from "gsap";
 
 const authStore = useAuthStore();
 
@@ -56,9 +56,7 @@ const serviceMenu = ref<HTMLElement | null>(null);
 const isOpen = ref<boolean>(false);
 const isVisible = ref<boolean>(false);
 
-watch(
-  isOpen,
-  async (newVal) => {
+watch(isOpen, async (newVal) => {
     if (newVal) {
       isVisible.value = true;
 
@@ -126,7 +124,7 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <header class="header" :class="{'is-header-visible': isHeaderVisible}">
+  <header class="header" :class="{'is-scrolled': isHeaderVisible}">
     <div class="header__container" ref="headerRef">
       <!-- LOGO -->
       <div class="header__brand">
@@ -146,9 +144,7 @@ const closeMenu = () => {
       </div>
       <!-- NAV DESKTOP -->
       <div class="header__nav">
-        <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }"
-        >Accueil</RouterLink
-        >
+        <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
         <RouterLink to="/#equipe" :class="{ active: $route.hash === '#equipe' }"
         >Cabinet</RouterLink
         >
@@ -184,10 +180,9 @@ const closeMenu = () => {
         <button @click="redirectReservation()" class="header__cta">Prendre RDV</button>
       </div>
 
-
       <!-- BURGER (mobile) -->
       <button class="header__burger" @click="toggleMenu()">
-        <span></span><span></span><span></span>
+        <font-awesome-icon icon="fa-solid fa-bars" />
       </button>
     </div>
     <!-- MENU MOBILE -->
@@ -270,15 +265,16 @@ const closeMenu = () => {
     align-items: center;
     gap: 10px;
     p {
+      color: white;
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 2px;
     }
     span {
       font-size: 12px;
+      color: white;
     }
   }
-
   /* LOGO */
   &__logo {
     width: 34px;
@@ -312,6 +308,9 @@ const closeMenu = () => {
       font-size: 14px;
       color: white;
       transition: 0.2s;
+    }
+    a.is-header-visible {
+      color: red;
     }
     a:hover {
       color: var(--green-page);
@@ -372,43 +371,52 @@ const closeMenu = () => {
   &__burger {
     cursor: pointer;
     display: none;
-    width: 26px;
-    height: 26px;
-    flex-direction: column;
-    justify-content: space-between;
-    border: none;
     background: none;
     padding: 0;
-    span {
-      width: 100%;
-      background: #333;
-      border-radius: 10px;
-      transition: 0.3s;
-      height: 3px;
-    }
+  }
+  &__burger .fa-bars {
+    color: white;
+    font-size: 22px;
+    width: 23px;
+    height: 23px;
   }
 }
 
 /* Apparition de header */
 
-.header.is-header-visible {
+.header.is-scrolled {
   background: white;
   transition: all 180ms ease;
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.08),
-    0 12px 30px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 12px 30px rgba(0, 0, 0, 0.10);
 }
 
+.header.is-scrolled a {
+  color: #1a1a1a;
+}
 
+.header.is-scrolled .header__brand p {
+  color: #1a1a1a;
+}
+
+.header.is-scrolled .header__brand span {
+  color: #1a1a1a;
+}
+
+.header.is-scrolled a:hover {
+  color: var(--green-page);
+}
+
+.header.is-scrolled a.active {
+  color: var(--green-page);
+}
 
 /* MENU MOBILE */
+
 .mobile-menu {
   display: none;
   flex-direction: column;
   gap: 0.6rem;
-  padding: 2rem;
-  background: white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1rem;
   &__connected {
     display: flex;
     flex-direction: column;
@@ -418,7 +426,7 @@ const closeMenu = () => {
     font-size: 1.2rem;
   }
   .mobile-cta {
-    background: #ff4dd4;
+    background: var(--green-page);
     padding: 0.8rem 1rem;
     border-radius: 10px;
     color: white;
@@ -427,12 +435,20 @@ const closeMenu = () => {
   }
 }
 
+@media (max-width: 1600px) {
+  .header {
+    width: 100%;
+    max-width: 1100px;
+  }
+}
+
 /* RESPONSIVE */
 @media (max-width: 991.98px) {
   .header {
-    &__container {
-      padding: 0 1rem;
-    }
+    width: 100%;
+    max-width: 700px;
+    padding: 15px 1rem;
+    overflow: auto;
   }
   .header__brand p {
     font-size: 15px;
@@ -447,11 +463,19 @@ const closeMenu = () => {
   }
   .header__burger {
     display: flex;
+    background: black;
+    padding: 8px;
+    opacity: 0.7;
+    border: none;
+    border-radius: 10px;
+  }
+  .header__burger span {
+    color: white;
   }
   .mobile-menu {
     display: flex;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(192, 132, 252, 0.25);
+    background: white;
     a {
       color: #333;
       font-size: 14px;
@@ -471,15 +495,16 @@ const closeMenu = () => {
 
 @media (max-width: 767.98px) {
   .header {
+    width: 100%;
+    max-width: 500px;
     &__burger {
-      width: 22px;
-      height: 22px;
+      //width: 22px;
+      //height: 22px;
     }
   }
   .mobile-menu {
     display: flex;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(192, 132, 252, 0.25);
     a {
       color: #333;
       font-size: 13px;
@@ -491,6 +516,13 @@ const closeMenu = () => {
       margin: 10px auto 0 auto;
       font-size: 11px;
     }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .header {
+    width: 100%;
+    max-width: 330px;
   }
 }
 </style>

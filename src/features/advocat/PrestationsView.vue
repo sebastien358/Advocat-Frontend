@@ -384,22 +384,63 @@ const toggle = async (index) => {
 
 .intro {
   max-width: 900px;
-  margin: 4rem auto 2rem;
-  padding: 0 1.5rem;
+  margin: 4rem auto 4rem auto;
+  padding: 0 20px;
   text-align: center;
   h2 {
-    font-size: 30px;
+    font-size: 32px;
     color: var(--green-page);
     margin-bottom: 15px;
   }
   p {
     line-height: 1.6;
+    font-size: 16px;
     margin-bottom: 20px;
   }
 
   &__small {
     opacity: .75;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .intro {
+    margin: 3rem 20px 3rem 20px;
+    h2 {
+      font-size: 24px;
+      color: var(--green-page);
+      margin-bottom: 15px;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    &__small {
+      opacity: .75;
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .intro {
+    margin: 3rem 10px 0 10px;
+    h2 {
+      font-size: 19px;
+      color: var(--green-page);
+      margin-bottom: 15px;
+    }
+    p {
+      line-height: 1.5;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+    &__small {
+      opacity: .75;
+      font-size: 16px;
+    }
   }
 }
 
@@ -412,7 +453,7 @@ const toggle = async (index) => {
 }
 
 .block {
-  padding: 5rem 1.5rem;
+  padding: 5rem 20px;
   &__grid {
     max-width: 1800px;
     margin: auto;
@@ -424,9 +465,11 @@ const toggle = async (index) => {
   &__content h2 {
     color: var(--green-page);
     margin-bottom: 20px;
+    font-size: 28px;
   }
   &__content__subtitle {
-    margin-top: -10px;
+    margin-top: -15px;
+    font-size: 19px;
   }
   &__content ul li {
     margin-top: 20px;
@@ -464,43 +507,84 @@ const toggle = async (index) => {
 }
 
 /* responsive */
-@media (max-width: 900px) {
-  .block__grid {
-    grid-template-columns: 1fr;
+@media (max-width: 991.98px) {
+  .block {
+    padding: 5rem 10px;
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+    &__content h2 {
+      color: var(--green-page);
+      text-align: center;
+      font-size: 24px;
+    }
+    &__content__subtitle {
+      text-align: center;
+      margin-top: -12px;
+      font-size: 16px;
+    }
+    &__content ul li {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .values {
+      grid-template-columns: 1fr 1fr;
+    }
   }
-  .values {
-    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 767.98px) {
+  .block {
+    padding: 3rem 10px;
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+    &__content h2 {
+      color: var(--green-page);
+      text-align: center;
+      font-size: 19px;
+    }
+    &__content__subtitle {
+      margin-top: -14px;
+      text-align: center;
+      font-size: 14px;
+    }
+    &__content ul li {
+      margin-top: 17px;
+      font-size: 12px;
+    }
+    .values {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }
 
 /*===================
-  ENGUAGEMENTS
+  ENGAGEMENTS
 ===================*/
 
 .engagements {
   padding: 80px 20px;
   background: #fafafa;
   text-align: center;
-}
-
-.engagements h2 {
-  margin-bottom: 40px;
-}
-
-.engagements__grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.engagement {
-  background: #ffffff;
-  padding: 30px 20px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  font-weight: 500;
+  h2 {
+    margin-bottom: 40px;
+  }
+  &__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .engagement {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+  }
 }
 
 /*===================
@@ -626,7 +710,7 @@ const toggle = async (index) => {
   height: 420px;
   overflow: hidden;
   border-radius: 16px;
-  margin: 80px 20px;
+  margin: 80px 20px 0 20px;
 }
 
 .case-submit__bg {
@@ -706,7 +790,7 @@ const toggle = async (index) => {
 
 .contact-quick {
   background: #ffffff;
-  padding: 80px 24px 60px;
+  padding: 80px 60px;
 }
 
 .contact-quick__container {
