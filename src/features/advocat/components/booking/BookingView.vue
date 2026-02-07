@@ -362,10 +362,10 @@ watch(loadingPage, async (isLoading) => {
 <template>
   <main v-if="!loadingPage" class="page-wrapper">
     <div class="container">
-      <div v-if="isBookingIncomplete" class="booking" ref="bookingRef">
+      <div class="booking" ref="bookingRef">
         <div class="booking__description">
           <h1 class="booking__title">Préparez votre rendez-vous</h1>
-          <p class="booking__subtitle">Choisissez votre prestation et votre praticien·ne</p>
+          <p class="booking__subtitle">Choisissez votre prestation et Avocat</p>
         </div>
         <!-- Booking category -->
         <section class="booking-category" v-if="categoryStore.categories.length > 0">
@@ -428,11 +428,11 @@ watch(loadingPage, async (isLoading) => {
           </div>
         </section>
         <div class="booking__placeholder">
-          <p>👤 Sélectionnez un·e praticien·ne afin de consulter les disponibilités</p>
+          <p>👤 Veuillez sélectionner un avocat pour afficher les disponibilités</p>
         </div>
       </div>
       <!-- BOOKING RESERVATION -->
-      <section v-else class="booking-reservation container-reservation">
+      <section class="booking-reservation container-reservation">
         <h3 class="booking-reservation-title">Choisissez votre créneau 📅</h3>
         <div class="booking-reservation__items">
           <!-- JOURS TOUJOURS VISIBLES -->
@@ -483,6 +483,48 @@ watch(loadingPage, async (isLoading) => {
 /*=================
   LOADING PAGE
 =================*/
+
+.page-wrapper {
+  background: linear-gradient(
+      180deg,
+      #d2d6cf 0%,   /* très légèrement plus foncé */
+      #e6e8e2 35%,
+      #f7f8f6 100%
+  );
+  height: 100vh;
+  //padding-top: 260px;
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 20px;
+
+  @media (max-width: 767.98px) {
+    padding: 0 10px;
+  }
+}
+
+
+/*=================
+  CONTAINER
+=================*/
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+
+
+  background: white;
+
+  width: 100%;
+
+
+  border-radius: 20px;
+
+}
+
 
 .loading-overlay {
   background: #fff;
@@ -539,15 +581,9 @@ watch(loadingPage, async (isLoading) => {
   padding: 30px;
   margin: 0 auto;
   max-width: 1300px;
-}
 
-/*=================
-  CONTAINER
-=================*/
 
-.container {
-  margin: 0 auto;
-  max-width: 1100px;
+
 }
 
 /*=================
@@ -611,7 +647,7 @@ watch(loadingPage, async (isLoading) => {
 
 .booking-category
 {
-  margin: 90px 0 0 0;
+  margin: 70px 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -622,21 +658,21 @@ watch(loadingPage, async (isLoading) => {
     border-radius: 8px;
     font-weight: 500;
     transition: 0.2s ease;
-    background: #f9f9f9;
     border: 1px solid #e0e0e0;
+    background: white;
+
     color: #555;
     padding: 6px 18px;
     font-size: 14px;
   }
   .btn-category:hover {
-    background: #f3e8ff; /* violet pastel */
-    border-color: #c9b4ff;
+    background: var(--blue-reservation);
+    border: 1px solid var(--blue-border-reservation);
   }
   .btn-category.active {
     box-shadow: 0 4px 12px rgba(155, 92, 255, 0.12);
-    background: #f3e8ff; /* violet pastel */
-    border-color: #c9b4ff;
-    color: #a06bff; /* violet principal */
+    background: var(--blue-reservation);
+    border-color: var(--blue-border-reservation);
   }
 }
 
@@ -682,15 +718,21 @@ watch(loadingPage, async (isLoading) => {
     justify-content: center;
     background: white;
     padding: 12px 14px;
-    border: 1px solid #f3e8ff !important;
+    border: 1px solid var(--border-soft);
+
+
+
+
     font-size: 13.5px;
     font-weight: 500;
     color: #4b4b4b;
     gap: 7px;
   }
   .service-label:hover {
-    border-color: #f3e8ff !important;
-    background: #f3e8ff !important;
+
+    border-color: var(--blue-border-reservation);
+    background: var(--blue-reservation);
+
   }
   .service-label .service-icon .fa-angle-down {
     width: 12.5px;
@@ -700,11 +742,11 @@ watch(loadingPage, async (isLoading) => {
     background: white;
     width: 100%;
     position: absolute;
-    border-right: 1px solid #f3e8ff !important;
-    border-left: 1px solid #f3e8ff !important;
-    border-bottom: 1px solid #f3e8ff !important;
+    border-right: 1px solid var(--blue-border-reservation);
+    border-left: 1px solid var(--blue-border-reservation);
+    border-bottom: 1px solid var(--blue-border-reservation);
     border-top: none;
-    padding: 15px 10px;
+    padding: 15px 8px;
     max-height: 270px;
     overflow-y: auto;
     .service-items {
@@ -716,14 +758,14 @@ watch(loadingPage, async (isLoading) => {
       color: #47407a;
       padding: 8px;
       &:hover {
-        background: #f3e8ff !important;
+        background: var(--blue-reservation);
       }
       .service-name {
         font-weight: 600;
       }
     }
     .service-items.active-service {
-      background: #f3e8ff !important;
+      background: var(--blue-reservation);
     }
   }
 }
@@ -955,7 +997,7 @@ watch(loadingPage, async (isLoading) => {
 .booking__placeholder {
   margin: 0 auto;
   padding: 2rem 2.5rem 2rem 2.5rem;
-  background: #f7f0ff;
+  background: var(--blue-reservation);
   border-radius: 20px;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
   width: 600px;

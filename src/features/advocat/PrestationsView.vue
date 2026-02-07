@@ -78,10 +78,6 @@ const toggle = async (index) => {
 }
 </script>
 
-
-
-
-
 <template>
   <div class="salon-page">
     <!-- MAIN CONTENT -->
@@ -289,7 +285,6 @@ const toggle = async (index) => {
   HERO
 ==========================*/
 
-
 @keyframes heroPan {
   from {
     background-position: left center;
@@ -326,14 +321,10 @@ const toggle = async (index) => {
     position: absolute;
     inset: 0;
     background-image: url('/src/assets/images/tribunal.jpg');
-    background-size: cover;
+    background-size: 180% auto;
     background-repeat: no-repeat;
     z-index: 1;
     animation: heroPan 40s linear infinite alternate;
-
-
-
-
   }
   &__content {
     position: relative;
@@ -381,6 +372,11 @@ const toggle = async (index) => {
   z-index: 2;
 }
 
+@media (max-width: 1024px) {
+  .hero__bg {
+    background-size: cover;
+  }
+}
 
 @media (max-width: 991.98px) {
   .hero {
@@ -426,7 +422,6 @@ const toggle = async (index) => {
     }
   }
 }
-
 
 @media (max-width: 767.98px) {
   .hero {

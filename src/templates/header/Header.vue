@@ -166,12 +166,8 @@ const closeMenu = () => {
           >Espace pro</RouterLink
           >
         </div>
-        <div v-if="roleAdmin()" class="header__actions">
-          <font-awesome-icon icon="fa-solid fa-user" @click="toggleMenu()" />
-          <div v-show="isVisible" class="header__actions__menu" ref="serviceMenu">
-            <RouterLink to="/admin" :class="{ active: $route.path === '/admin' && !$route.hash }">Espace pro</RouterLink>
-            <a @click="logout()" href="#" class="logout">Déconnexion</a>
-          </div>
+        <div v-else>
+          <a @click="logout()" href="#">Déconnexion</a>
         </div>
       </div>
       <!-- CTA -->
@@ -314,13 +310,6 @@ const closeMenu = () => {
     }
     a:hover {
       color: var(--green-page);
-    }
-    a:last-child {
-      opacity: 0.25;
-      font-size: 13px;
-    }
-    a:last-child:hover {
-      opacity: 1;
     }
   }
   &__actions {
