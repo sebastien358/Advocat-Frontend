@@ -152,7 +152,6 @@ function goRedirectLegal() {
   }
   @media (max-width: 767.98px) {
     padding: 1.8rem 0 1.2rem 0;
-    border-radius: 18px 18px 0 0;
   }
 }
 
