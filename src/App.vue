@@ -59,14 +59,12 @@ onMounted(async () => {
 @media (max-width: 991.98px) {
   .app {
     height: 100vh;
-    grid-template-rows: auto 1fr auto;
   }
 }
 
 @media (max-width: 767.98px) {
   .app {
     height: 100vh;
-    grid-template-rows: auto 1fr auto;
   }
 }
 

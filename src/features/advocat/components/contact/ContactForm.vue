@@ -219,13 +219,24 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
+
+
 .contact-page {
   padding: 30px 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #faf7fd 0%, #ffffff 60%);
-  height: 100%;
+
+
+  background: linear-gradient(
+      180deg,
+      #d2d6cf 0%,   /* très légèrement plus foncé */
+      #e6e8e2 35%,
+      #f7f8f6 100%
+  );
+
+  min-height: 100vh;
+  height: auto;
   overflow: hidden;
 }
 
@@ -325,8 +336,6 @@ onMounted(async () => {
 @media (max-width: 991.98px) {
   .contact-page {
     padding: 2.5rem 1.5rem 2.5rem 1.5rem;
-    max-width: 100%;
-    height: 100%;
   }
   .contact__container {
     grid-template-columns: 400px auto;
@@ -356,8 +365,8 @@ onMounted(async () => {
 
 @media (max-width: 767.98px) {
   .contact-page {
-    padding: 1.5rem 1rem;
-    height: 100%;
+    padding: 7rem 1rem 2rem 1rem;
+    align-items: flex-end;
   }
   .contact__container {
     grid-template-columns: 1fr;
