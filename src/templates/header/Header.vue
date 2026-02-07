@@ -438,7 +438,7 @@ const closeMenu = () => {
 @media (max-width: 1600px) {
   .header {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1000px;
   }
 }
 
@@ -448,7 +448,6 @@ const closeMenu = () => {
     width: 100%;
     max-width: 700px;
     padding: 15px 1rem;
-    overflow: auto;
   }
   .header__brand p {
     font-size: 15px;
@@ -495,11 +494,13 @@ const closeMenu = () => {
 
 @media (max-width: 767.98px) {
   .header {
-    width: 100%;
-    max-width: 500px;
-    &__burger {
-      //width: 22px;
-      //height: 22px;
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    transform: none;
+    &__container {
+      width: 100%;
     }
   }
   .mobile-menu {
@@ -516,13 +517,6 @@ const closeMenu = () => {
       margin: 10px auto 0 auto;
       font-size: 11px;
     }
-  }
-}
-
-@media (max-width: 767.98px) {
-  .header {
-    width: 100%;
-    max-width: 330px;
   }
 }
 </style>

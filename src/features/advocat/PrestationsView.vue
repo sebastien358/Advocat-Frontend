@@ -76,10 +76,6 @@ const toggle = async (index) => {
     )
   }
 }
-
-
-
-
 </script>
 
 
@@ -92,7 +88,7 @@ const toggle = async (index) => {
     <main>
       <!-- HERO -->
       <section id="hero" class="hero">
-        <div class="hero__bg"></div>
+       <div class="hero__bg"></div>
         <div class="hero__content">
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
                xmlns="http://www.w3.org/2000/svg">
@@ -305,7 +301,7 @@ const toggle = async (index) => {
 
 .hero {
   position: relative;
-  height: 100vh;
+  min-height: 100vh; // mobile moderne
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -320,6 +316,7 @@ const toggle = async (index) => {
     font-weight: 500;
   }
   &__subtitle {
+    font-size: 18px;
     margin-top: 15px;
     font-style: italic;
     opacity: .9;
@@ -328,12 +325,15 @@ const toggle = async (index) => {
   &__bg {
     position: absolute;
     inset: 0;
-    background-image: url('/src/assets/images/tribunal.jpg'); /* ✅ */
-    background-size: 120% auto;     /* 👈 important */
-    background-position: left center;
+    background-image: url('/src/assets/images/tribunal.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
     z-index: 1;
     animation: heroPan 40s linear infinite alternate;
+
+
+
+
   }
   &__content {
     position: relative;
@@ -341,6 +341,7 @@ const toggle = async (index) => {
     color: #fff;
     text-align: center;
     svg {
+      width: 90px;
       color: #c7a44a;
     }
   }
@@ -351,7 +352,6 @@ const toggle = async (index) => {
     gap: 1rem;
   }
   &__logo {
-    width: 90px;
     margin-bottom: 1.5rem;
   }
   .btn {
@@ -362,20 +362,119 @@ const toggle = async (index) => {
   }
   .btn-primary {
     background: var(--green-page);
+    font-size: 15px;
     color: #fff;
   }
   .btn-ghost {
-    background: rgba(255,255,255,.25);
+    background: rgba(255, 255, 255, .25);
     color: #fff;
     backdrop-filter: blur(4px);
+    font-size: 15px;
   }
 }
+
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
   z-index: 2;
+}
+
+
+@media (max-width: 991.98px) {
+  .hero {
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    &__subtitle {
+      font-size: 17px;
+      margin-top: 10px;
+    }
+
+    &__content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      text-align: center;
+    }
+    &__content svg {
+      width: 50px;
+      margin-bottom: 0.3rem;
+      color: #c7a44a;
+    }
+    &__actions {
+      margin-top: 1.2rem;
+      gap: 1rem;
+    }
+    &__logo {
+      margin-bottom: 1rem;
+    }
+    .btn {
+      padding: .8rem 1.6rem;
+    }
+    .btn-primary {
+      font-size: 14px;
+    }
+    .btn-ghost {
+      font-size: 14px;
+    }
+  }
+}
+
+
+@media (max-width: 767.98px) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    &__subtitle {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    &__bg {
+      background-position: center 65%;
+    }
+    &__content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      text-align: center;
+    }
+    &__content svg {
+      width: 50px;
+      margin-bottom: 0.3rem;
+      color: #c7a44a;
+    }
+    &__actions {
+      margin-top: 1.2rem;
+      gap: 1rem;
+    }
+    &__logo {
+      margin-bottom: 1rem;
+    }
+    .btn {
+      padding: .8rem 1.6rem;
+    }
+    .btn-primary {
+      font-size: 14px;
+    }
+    .btn-ghost {
+      font-size: 14px;
+    }
+  }
 }
 
 /*===================
@@ -568,22 +667,57 @@ const toggle = async (index) => {
   padding: 80px 20px;
   background: #fafafa;
   text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
   h2 {
+    font-size: 25px;
     margin-bottom: 40px;
   }
   &__grid {
-    max-width: 1200px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
     gap: 20px;
+    .engagement {
+      font-size: 15px;
+      background: #ffffff;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      font-weight: 500;
+    }
   }
-  .engagement {
-    background: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+  .engagements {
+    padding: 50px 20px;
+    h2 {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    &__grid {
+      grid-template-columns: repeat(1, 1fr);
+      .engagement {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .engagements {
     padding: 30px 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    font-weight: 500;
+    h2 {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    &__grid {
+      gap: 15px;
+      .engagement {
+        font-size: 13px;
+      }
+    }
   }
 }
 
