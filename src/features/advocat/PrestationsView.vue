@@ -321,7 +321,7 @@ const toggle = async (index) => {
     position: absolute;
     inset: 0;
     background-image: url('/src/assets/images/tribunal.jpg');
-    background-size: 180% auto;
+    background-size: 140% auto;
     background-repeat: no-repeat;
     z-index: 1;
     animation: heroPan 40s linear infinite alternate;
@@ -372,7 +372,7 @@ const toggle = async (index) => {
   z-index: 2;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
   .hero__bg {
     background-size: cover;
   }

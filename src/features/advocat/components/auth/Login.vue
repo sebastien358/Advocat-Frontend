@@ -103,48 +103,51 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="login container" ref="loginRef">
-    <div class="login__form">
-      <h2 class="login-title">Se connecter</h2>
-      <p class="login-subtitle">Accéder à votre espace administrateur.</p>
-      <form @submit.prevent="onSubmit">
-        <div class="form-group">
-          <input v-model="email" type="email" placeholder="Email" />
-          <span v-if="errorEmail" class="error-field">
+  <div class="login">
+    <section class="container" ref="loginRef">
+      <div class="login__form">
+        <h2 class="login-title">Se connecter</h2>
+        <p class="login-subtitle">Accéder à votre espace administrateur.</p>
+        <form @submit.prevent="onSubmit">
+          <div class="form-group">
+            <input v-model="email" type="email" placeholder="Email" />
+            <span v-if="errorEmail" class="error-field">
             {{ errorEmail }}
           </span>
-        </div>
-        <div class="form-group">
-          <input v-model="password" type="password" placeholder="Mot de passe" />
-          <span v-if="errorPassword" class="error-field">
+          </div>
+          <div class="form-group">
+            <input v-model="password" type="password" placeholder="Mot de passe" />
+            <span v-if="errorPassword" class="error-field">
             {{ errorPassword }}
           </span>
-        </div>
-        <AlertMessage
-          v-if="successMessage"
-          :successMessage="successMessage"
-          type="success"
-          to="/admin"
-          class="alert"
-          @close="handleResetForm()"
-        />
-        <AlertMessage
-          v-if="errorMessage"
-          :errorMessage="errorMessage"
-          type="error"
-          to=""
-          class="alert"
-          @close="closeFields()"
-        />
-        <div class="form__actions">
-          <button class="btn-submit" :disabled="isSubmitting">
-            <span v-if="isSubmitting">Chargement...</span>
-            <span v-else>Envoyer</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </section>
+          </div>
+          <AlertMessage
+            v-if="successMessage"
+            :successMessage="successMessage"
+            type="success"
+            to="/admin"
+            class="alert"
+            @close="handleResetForm()"
+          />
+          <AlertMessage
+            v-if="errorMessage"
+            :errorMessage="errorMessage"
+            type="error"
+            to=""
+            class="alert"
+            @close="closeFields()"
+          />
+          <div class="form__actions">
+            <button class="btn-submit" :disabled="isSubmitting">
+              <span v-if="isSubmitting">Chargement...</span>
+              <span v-else>Envoyer</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
 </template>
 
 <style scoped lang="scss">
@@ -166,7 +169,13 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 100px);
+  background: linear-gradient(
+      180deg,
+      #d2d6cf 0%,   /* très légèrement plus foncé */
+      #e6e8e2 35%,
+      #f7f8f6 100%
+  );
+  height: 100vh;
   &__form {
     background: #ffffff;
     padding: 2.5rem;
