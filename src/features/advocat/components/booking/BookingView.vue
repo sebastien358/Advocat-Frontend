@@ -492,17 +492,13 @@ watch(loadingPage, async (isLoading) => {
       #f7f8f6 100%
   );
   height: 100vh;
-  //padding-top: 260px;
-
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  padding: 0 20px;
-
+  padding: 0 20px 0 20px;
   @media (max-width: 767.98px) {
-    padding: 0 10px;
+    padding: 110px 10px 30px 10px;
+    height: 100%;
   }
 }
 
@@ -513,16 +509,10 @@ watch(loadingPage, async (isLoading) => {
 
 .container {
   margin: 0 auto;
-  max-width: 900px;
-
-
+  max-width: 700px;
   background: white;
-
   width: 100%;
-
-
   border-radius: 20px;
-
 }
 
 
@@ -719,10 +709,6 @@ watch(loadingPage, async (isLoading) => {
     background: white;
     padding: 12px 14px;
     border: 1px solid var(--border-soft);
-
-
-
-
     font-size: 13.5px;
     font-weight: 500;
     color: #4b4b4b;
@@ -996,14 +982,14 @@ watch(loadingPage, async (isLoading) => {
 
 .booking__placeholder {
   margin: 0 auto;
-  padding: 2rem 2.5rem 2rem 2.5rem;
+  padding: 25px;
   background: var(--blue-reservation);
   border-radius: 20px;
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
   width: 600px;
   p {
     text-align: center;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -1018,8 +1004,9 @@ watch(loadingPage, async (isLoading) => {
 
 @media (max-width: 767.98px) {
   .booking__placeholder {
-    padding: 1.2rem 1rem;
+    padding: 20px;
     width: 100%;
+    border-radius: 10px;
     p {
       font-size: 12px;
       line-height: 21px;
@@ -1091,9 +1078,9 @@ watch(loadingPage, async (isLoading) => {
     }
   }
   &__items .day-item.active {
-    background: #f5f3ff;
-    color: #7c3aed;
-    border-color: #c4b5fd;
+    background: var(--blue-reservation);
+
+    border-color: var(--blue-border-reservation);
     box-shadow: none;
   }
   &__pagination {
@@ -1146,7 +1133,8 @@ watch(loadingPage, async (isLoading) => {
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
     }
     .btn-reservation.active {
-      background: #f5f3ff;
+      background: var(--blue-reservation);
+      border-color: var(--blue-border-reservation);
     }
     .btn-reservation:disabled {
       opacity: 0.4;
