@@ -67,7 +67,7 @@ function goRedirectLegal() {
             <p class="footer__subtitle">Consultations sur rendez-vous</p>
           </div>
         </div>
-        <p class="footer__desc">Un espace dédié à votre bien-être et à votre sérénité.</p>
+        <p class="footer__desc">Un accompagnement juridique rigoureux et personnalisé.</p>
         <div class="footer__socials">
           <a href="https://www.instagram.com" target="_blank"
             ><font-awesome-icon icon="fa-brands fa-instagram"
@@ -91,7 +91,7 @@ function goRedirectLegal() {
         <p>📞 01 42 56 78 90</p>
         <span>
           <font-awesome-icon icon="fa-regular fa-message icon-footer" />✉️
-          contact@salon-bien-etre.fr
+          contact@advocat.fr
         </span>
       </div>
       <!-- COLONNE 3 -->
@@ -101,9 +101,9 @@ function goRedirectLegal() {
           <h4 class="footer__col__title">🕒 Horaires</h4>
         </div>
         <ul>
-          <li>Lun - Vendredi : 9h - 18h</li>
-          <li>Sam: sur rendez-vous</li>
-          <li>Dimanche : fermé</li>
+          <li>Du lundi au vendredi</li>
+          <li>Horaires variables selon disponibilité</li>
+          <li>Sur rendez-vous</li>
         </ul>
         <div class="footer__badge" :class="isOpen ? 'isOpen' : 'isClosed'">
           <div class="d-flex align-items-center">
@@ -123,10 +123,10 @@ function goRedirectLegal() {
       <div class="footer__col">
         <h4 class="footer__col__title">Services</h4>
         <ul>
-          <li>Accompagnement bien-être</li>
-          <li>Stress & émotions</li>
-          <li>Développement personnel</li>
-          <li>Consultations personnalisées</li>
+          <li>Consultations juridiques</li>
+          <li>Prise de rendez-vous en ligne</li>
+          <li>Accompagnement personnalisé</li>
+          <li>Suivi des dossiers</li>
         </ul>
         <button @click="goRedirectReservation()" class="footer__cta">Prendre rendez-vous</button>
       </div>
