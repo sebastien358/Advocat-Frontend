@@ -41,11 +41,11 @@ const formattedDate = computed(() => {
 const router = useRouter();
 
 onMounted(() => {
-  setTimeout(async () => {
-    bookingStore.resetBookingDraft();
-    bookingStore.slots = [];
-    await router.push("/");
-  }, 4000);
+  //setTimeout(async () => {
+    //bookingStore.resetBookingDraft();
+    //bookingStore.slots = [];
+    //await router.push("/");
+  //}, 4000);
 });
 
 /*===============
@@ -66,28 +66,39 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="booking container" ref="bookingRef">
-    <!-- Booking text -->
-    <div class="booking__title">
-      <h1>Votre rendez-vous est confirmé</h1>
+  <div class="container">
+  <div class="booking" ref="bookingRef">
+
+      <!-- Booking text -->
+      <div class="booking__title">
+        <h1>Votre rendez-vous est confirmé</h1>
+      </div>
+      <!-- Booking date -->
+      <div class="booking__date">
+        <p class="date">📅 {{ formattedDate }}</p>
+      </div>
+      <!-- Booking icon -->
+      <div class="booking__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+          <path d="M6 13c2-2 4-2 6 0s4 2 6 0" stroke="currentColor" stroke-width="2" fill="none" />
+        </svg>
+      </div>
+      <!-- Booking text -->
+    <div class="booking_text">
+      <p class="booking_text--main">
+        Votre rendez-vous est bien enregistré.
+      </p>
+      <p class="booking_text--secondary">
+        Vous recevrez prochainement une confirmation par email.
+      </p>
+      <p class="booking_text--hint">
+        Le cabinet vous contactera si des informations complémentaires sont nécessaires.
+      </p>
     </div>
-    <!-- Booking date -->
-    <div class="booking__date">
-      <p class="date">📅 {{ formattedDate }}</p>
-    </div>
-    <!-- Booking icon -->
-    <div class="booking__icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-        <path d="M6 13c2-2 4-2 6 0s4 2 6 0" stroke="currentColor" stroke-width="2" fill="none" />
-      </svg>
-    </div>
-    <!-- Booking text -->
-    <div class="booking__text">
-      <p>Un email de confirmation vous a été envoyé.</p>
-      <p>À très bientôt au salon.</p>
     </div>
   </div>
+
 </template>
 
 <style scoped lang="scss">
@@ -96,8 +107,20 @@ onMounted(async () => {
 ===============*/
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 100vh;
+  background: linear-gradient(
+      180deg,
+      #d2d6cf 0%,   /* très légèrement plus foncé */
+      #e6e8e2 35%,
+      #f7f8f6 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  @media (max-width: 767.98px) {
+    padding: 0 10px;
+  }
 }
 
 /*===============
@@ -105,14 +128,17 @@ onMounted(async () => {
 ===============*/
 
 .booking {
-  min-height: calc(100dvh - 100px);
-  padding: 50px 2rem;
+  padding: 30px 0;
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 20px;
   &__title h1 {
     text-align: center;
     margin-bottom: 15px;
-    color: #ad46ffff;
+    color: #1F2937;
     font-family: "Playfair Display", serif;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
     letter-spacing: 0.2px;
   }
@@ -120,32 +146,84 @@ onMounted(async () => {
     text-align: center;
     font-size: 18px;
     opacity: 0.65;
-    margin: 40px;
+    margin: 30px 0 20px 0;
   }
-  &__text {
-    margin: 32px auto 0 auto;
+  .booking_text {
     text-align: center;
-    font-size: 15px;
-    opacity: 0.5;
-    line-height: 30px;
+    margin-top: 8px;
+    &--main {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2f2f2f;
+      margin-bottom: 6px;
+    }
+
+    &--secondary {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.55);
+      margin-bottom: 8px;
+    }
+
+    &--hint {
+      color: rgba(0, 0, 0, 0.4);
+      line-height: 1.4;
+      font-size: 11.5px;
+      opacity: 0.6;
+    }
   }
-  &__date {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 30px auto 0 auto;
-    text-align: center;
-    width: 100%;
-    max-width: 310px;
-    background: #f7f1ff;
-    border: 1px solid #e1ccff;
-    color: #6f4ccf;
-    padding: 12px 14px;
-    border-radius: 8px;
-    font-weight: 500;
-    gap: 15px;
+}
+
+@media (max-width: 991.98px) {
+  .booking {
+    padding: 30px 1.2rem;
+    &__title h1 {
+      margin-bottom: 10px;
+      font-size: 19px;
+    }
+    &__icon {
+      font-size: 18px;
+      margin: 30px 0;
+    }
+    &__text {
+      line-height: 24px;
+      font-size: 14px;
+    }
   }
-  &__date .date {
+}
+
+@media (max-width: 767.98px) {
+  .booking {
+    padding: 20px 1.2rem;
+    &__title h1 {
+      margin-bottom: 15px;
+      font-size: 17px;
+    }
+    &__icon {
+      margin: 20px 0 10px 0;
+    }
+    &__text {
+      line-height: 22px;
+      font-size: 13px;
+    }
+  }
+}
+
+/*===============
+  BOOKING DATE
+===============*/
+
+.booking__date {
+  margin: 20px auto 0 auto;
+  text-align: center;
+  width: 240px;
+  padding: 11px;
+  border-radius: 8px;
+  font-weight: 500;
+  gap: 6px;
+  background: #D7EAF2;
+  border: 1px solid #BFD6E2;
+  color: #1F2937;
+  .date {
     border-radius: 999px;
     display: inline-block;
     font-size: 13px;
@@ -153,45 +231,22 @@ onMounted(async () => {
 }
 
 @media (max-width: 991.98px) {
-  .booking {
-    padding: 40px 1.2rem;
-    &__title h1 {
-      font-size: 19px;
-    }
-    &__icon {
-      margin: 30px 0 30px 0;
-    }
-    &__text {
-      line-height: 26px;
-      font-size: 14px;
-    }
-    &__date {
-      width: 240px;
-      .date {
-        font-size: 12px;
-      }
+  .booking__date {
+    gap: 0;
+    width: 240px;
+    .date {
+      font-size: 12px;
     }
   }
 }
 
 @media (max-width: 767.98px) {
-  .booking {
-    padding: 30px 1.2rem;
-    &__title h1 {
-      font-size: 17px;
-    }
-    &__icon {
-      margin: 30px 0 20px 0;
-    }
-    &__text {
-      line-height: 22px;
-      font-size: 13px;
-    }
-    &__date {
-      width: 240px;
-      .date {
-        font-size: 11px;
-      }
+  .booking__date {
+    margin: 10px auto 0 auto;
+    gap: 0;
+    width: 240px;
+    .date {
+      font-size: 11px;
     }
   }
 }

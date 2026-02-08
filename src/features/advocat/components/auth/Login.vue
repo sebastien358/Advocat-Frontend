@@ -272,11 +272,11 @@ onMounted(() => {
       padding: 1.6rem 1.3rem 1rem 1.3rem;
       width: 300px;
       .login-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         margin-bottom: 0.4rem;
       }
       .login-subtitle {
-        font-size: 12px;
+        font-size: 11px;
       }
       input,
       textarea {

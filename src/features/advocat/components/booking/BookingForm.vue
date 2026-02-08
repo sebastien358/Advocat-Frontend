@@ -176,11 +176,6 @@ onMounted(async () => {
         <div class="booking__date">
           <p class="date">📅 {{ formattedDate }}</p>
         </div>
-        <div class="error-wrapper">
-          <p v-if="errorDatetime" class="error-field">
-            {{ errorDatetime }}
-          </p>
-        </div>
         <!-- Booking icon -->
         <div class="booking__icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -465,7 +460,9 @@ onMounted(async () => {
   }
   .btn {
     margin-top: 10px;
-    //color: #1F2937;
+    background: #D7EAF2;
+    border: 1px solid #BFD6E2;
+    color: #6b6d78;
   }
   .alert {
     margin-top: 10px;
