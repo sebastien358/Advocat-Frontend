@@ -93,14 +93,14 @@ const toggle = async (index) => {
             <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
             <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
           </svg>
-          <h1>Maître Evelyne BOYER</h1>
-          <h2>Maître Delphine BERGERON-DURAND</h2>
+          <h1>Maître Julien Morel</h1>
+          <h2>Maître Claire Dumas</h2>
           <p class="hero__subtitle">
-            Avocats installés à Évreux et Louviers
+            Avocats installés à Évreux et Bernay
           </p>
           <div class="hero__actions">
             <a href="tel:0780468148" class="btn btn-primary">07 80 46 81 48</a>
-            <a href="/contact" class="btn btn-ghost">Contactez-nous</a>
+            <router-link to="/contact/form" class="btn btn-ghost">Contactez-nous</router-link>
           </div>
         </div>
       </section>
@@ -108,7 +108,7 @@ const toggle = async (index) => {
       <section id="cabinet-intro" class="intro">
         <h2>Une équipe dynamique à votre écoute</h2>
         <p>
-          Installé à <strong>Évreux</strong> et <strong>Louviers</strong>, notre cabinet
+          Installé à <strong>Évreux</strong> et <strong>Bernay</strong>, notre cabinet
           offre une proximité et une facilité d’accueil.
         </p>
         <p class="intro__small">
@@ -124,12 +124,12 @@ const toggle = async (index) => {
           <div class="block__grid">
             <div class="block__content">
               <h2>Une équipe dynamique à votre écoute</h2>
-              <p class="block__content__subtitle">Cabinet implanté à Évreux et Louviers.</p>
+              <p class="block__content__subtitle">Cabinet implanté à Évreux et Bernay.</p>
               <ul>
-                <li>Maître Evelyne BOYER</li>
-                <li>Maître Delphine BERGERON-DURAND</li>
-                <li>Emmanuelle PATTINEZ</li>
-                <li>Cécile BARON</li>
+                <li>Maître Julien Morel</li>
+                <li>Maître Claire Dumas</li>
+                <li>Élodie Martin</li>
+                <li>Nicolas Renaud</li>
               </ul>
             </div>
             <img src="@/assets/images/team.jpg" alt="">
@@ -179,7 +179,7 @@ const toggle = async (index) => {
 
       <section id="engagements-quality" class="engagements-quality">
         <div class="engagements-quality__container">
-          <span class="engagements-quality__surtitle">Avocats à Évreux et Louviers</span>
+          <span class="engagements-quality__surtitle">Avocats à Évreux et Bernay</span>
           <h2 class="engagements-quality__title">Nos engagements de qualité</h2>
           <div class="engagements-quality__grid">
             <div class="engagements-quality__item">
@@ -213,10 +213,10 @@ const toggle = async (index) => {
           <img src="@/assets/images/affaire.jpg" alt="Une affaire à soumettre à notre cabinet">
         </div>
         <div class="case-submit__content">
-          <span class="case-submit__subtitle">Avocats à Évreux et Louviers</span>
+          <span class="case-submit__subtitle">Avocats à Évreux et Bernay</span>
           <h2>Une affaire à soumettre<br>à notre cabinet&nbsp;?</h2>
           <p>
-            L’accueil téléphonique de Maître Evelyne Boyer est ouvert
+            L’accueil téléphonique de Maître Julien Morel  est ouvert
             du lundi au vendredi de 9h30 à 12h30 et de 13h30 à 17h.
             <br>
             Contactez-nous pour un rendez-vous.
@@ -234,7 +234,7 @@ const toggle = async (index) => {
             <div class="contact-quick__icon">📍</div>
             <h4>Adresse</h4>
             <p>
-              1 Rue du Jardin Botanique<br />
+              18 Rue de la Sérénité<br />
               27000 Évreux
             </p>
           </div>
@@ -242,13 +242,13 @@ const toggle = async (index) => {
           <div class="contact-quick__item">
             <div class="contact-quick__icon">📞</div>
             <h4>Téléphone</h4>
-            <p>02 32 62 80 01</p>
+            <p>07 80 46 81 48</p>
           </div>
 
           <div class="contact-quick__item">
             <div class="contact-quick__icon">✉️</div>
             <h4>E-mail</h4>
-            <p>evreux@avocatsbhb.fr</p>
+            <p>contact@advocat.fr</p>
           </div>
 
         </div>
@@ -316,7 +316,7 @@ const toggle = async (index) => {
   &__bg {
     position: absolute;
     inset: 0;
-    background-image: url('/src/assets/images/tribunal.jpg');
+    background-image: url('@/assets/images/tribunal.jpg');
     background-size: 140% auto;
     background-repeat: no-repeat;
     z-index: 1;

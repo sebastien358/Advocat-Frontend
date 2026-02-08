@@ -485,9 +485,7 @@ watch(loadingPage, async (isLoading) => {
 </template>
 
 <style scoped lang="scss">
-/*=================
-  LOADING PAGE
-=================*/
+
 
 .page-wrapper {
   background: linear-gradient(
@@ -496,12 +494,18 @@ watch(loadingPage, async (isLoading) => {
       #e6e8e2 35%,
       #f7f8f6 100%
   );
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 20px 0 20px;
+  @media (max-width: 1600px) {
+    align-items: center;
+    padding: 160px 20px 100px 20px;
+    height: 100%;
+  }
   @media (max-width: 767.98px) {
+    align-items: center;
     padding: 110px 10px 40px 10px;
     height: 100%;
   }
@@ -519,6 +523,9 @@ watch(loadingPage, async (isLoading) => {
   border-radius: 20px;
 }
 
+/*=================
+  LOADING PAGE
+=================*/
 
 .loading-overlay {
   background: #fff;

@@ -163,7 +163,11 @@ const closeMenu = () => {
       <div class="header__nav">
         <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
         <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
+        <RouterLink to="/#expertises" :class="{ active: $route.path === '/#expertises' && $route.path }">Expertises</RouterLink>
+        <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }">Engagements</RouterLink>
         <RouterLink to="#procedures" :class="{ active: $route.path === '#procedures' && $route.hash }">Procédures</RouterLink>
+        <RouterLink to="/#engagements-quality" :class="{ active: $route.path === '/#engagements-quality' && $route.path }">Qualité & déontologie</RouterLink>
+        <RouterLink to="/#affaire" :class="{ active: $route.path === '/#affaire' && $route.path }">Affaires</RouterLink>
         <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
         <div v-if="!roleAdmin()">
           <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Espace pro</RouterLink>
@@ -185,7 +189,11 @@ const closeMenu = () => {
     <div v-show="isVisible" class="mobile-menu" ref="serviceMenu">
       <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
       <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
+      <RouterLink to="/#expertises" :class="{ active: $route.path === '/#expertises' && $route.path }">Expertises</RouterLink>
+      <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }">Engagements</RouterLink>
       <RouterLink to="#procedures" :class="{ active: $route.path === '#procedures' && $route.hash }">Procédures</RouterLink>
+      <RouterLink to="/#engagements-quality" :class="{ active: $route.path === '/#engagements-quality' && $route.path }">Qualité & déontologie</RouterLink>
+      <RouterLink to="/#affaire" :class="{ active: $route.path === '/#affaire' && $route.path }">Affaires</RouterLink>
       <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
       <div v-if="!roleAdmin()">
         <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Connexion</RouterLink>
@@ -374,6 +382,18 @@ const closeMenu = () => {
   .header {
     margin: 0 20px 0 20px;
   }
+  .header__nav,
+  .header__cta {
+    display: none;
+  }
+  .header__burger {
+    display: flex;
+    background: black;
+    padding: 8px;
+    opacity: 0.7;
+    border: none;
+    border-radius: 10px;
+  }
 }
 
 /* RESPONSIVE */
@@ -433,6 +453,7 @@ const closeMenu = () => {
 /* MENU MOBILE */
 
 .mobile-menu {
+
   position: fixed;
 
   overflow: hidden;
@@ -469,8 +490,30 @@ const closeMenu = () => {
   }
 }
 
-
 /* RESPONSIVE */
+
+@media (max-width: 1600px) {
+  .mobile-menu {
+    display: flex;
+    text-align: center;
+    background: white;
+    a {
+      color: #333;
+      font-size: 14px;
+      padding: 8px 0;
+    }
+    .mobile-cta {
+      border: 0;
+      width: 30%;
+      margin: 10px auto 0 auto;
+      font-size: 12px;
+    }
+    .logout-mobile {
+      color: red;
+    }
+  }
+}
+
 @media (max-width: 1200px) {
   .mobile-menu {
     display: flex;
