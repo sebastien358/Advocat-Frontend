@@ -124,7 +124,7 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <header class="header" :class="{'is-scrolled': isHeaderVisible}">
+  <header class="header" :class="{'is-scrolled': isHeaderVisible, 'menu-open': isOpen }">
     <div class="header__container" ref="headerRef">
       <!-- LOGO -->
       <div class="header__brand">
@@ -145,12 +145,7 @@ const closeMenu = () => {
       <!-- NAV DESKTOP -->
       <div class="header__nav">
         <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
-        <RouterLink to="/#equipe" :class="{ active: $route.hash === '#equipe' }"
-        >Cabinet</RouterLink
-        >
-        <RouterLink to="/#expertises" :class="{ active: $route.hash === '#expertises' }"
-        >Expertises</RouterLink
-        >
+        <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }"></RouterLink>
         <RouterLink
           to="#procedures"
           :class="{ active: $route.path === '#procedures' && !$route.hash }"
@@ -238,18 +233,23 @@ const closeMenu = () => {
 
 <style scoped lang="scss">
 .header {
+  //left: 0;
+  right: 0;
   position: fixed;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 1200px;
+
+
+  //transform: translateX(-50%);
+  //max-width: 1200px;
   background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  //backdrop-filter: none;
+  //-webkit-backdrop-filter: none;
   border-radius: 12px;
   z-index: 100;
   padding: 15px 2rem;
+
+  margin: 0 20px;
+
   &__container {
     display: flex;
     align-items: center;
@@ -371,6 +371,12 @@ const closeMenu = () => {
   }
 }
 
+/* Suppression border radios du header avec le menu mobile  */
+
+.header.menu-open {
+  border-radius: 12px 12px 0 0;
+}
+
 /* Apparition de header */
 
 .header.is-scrolled {
@@ -399,13 +405,100 @@ const closeMenu = () => {
   color: var(--green-page);
 }
 
+
+
+@media (max-width: 1600px) {
+  .header {
+    width: 100%;
+    max-width: 1300px;
+
+    //margin: 0 20px 0 20px;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1300px) {
+  .header {
+    width: 100%;
+    //max-width: 1000px;
+
+
+    //margin: 0 20px 0 20px;
+
+  }
+  .header__brand p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .header__brand span {
+    font-size: 12px;
+  }
+  .header__nav,
+  .header__cta {
+    display: none;
+  }
+  .header__burger {
+    display: flex;
+    background: black;
+    padding: 8px;
+    opacity: 0.7;
+    border: none;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .header {
+
+
+
+
+
+    padding: 15px 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .header {
+
+    padding: 15px 10px;
+    &__container {
+      width: 100%;
+    }
+    .header__burger {
+      padding: 8px;
+    }
+    &__burger .fa-bars {
+      color: white;
+      font-size: 22px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
 /* MENU MOBILE */
 
 .mobile-menu {
+
+  width: 100%;
+  max-width: 1300px;
+  position: fixed;
+  top: 69px;
+  left: 0;
+  padding: 20px;
+
+
   display: none;
   flex-direction: column;
   gap: 0.6rem;
-  padding: 1rem;
   &__connected {
     display: flex;
     flex-direction: column;
@@ -433,37 +526,10 @@ const closeMenu = () => {
 
 /* RESPONSIVE */
 @media (max-width: 1200px) {
-  .header {
-    width: 100%;
-    max-width: 1000px;
-    padding: 15px 1rem;
-  }
-  .header__brand p {
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .header__brand span {
-    font-size: 12px;
-  }
-  .header__nav,
-  .header__cta {
-    display: none;
-  }
-  .header__burger {
-    display: flex;
-    background: black;
-    padding: 8px;
-    opacity: 0.7;
-    border: none;
-    border-radius: 10px;
-  }
   .mobile-menu {
     display: flex;
     text-align: center;
     background: white;
-
-    position: relative;
-    top: 20px;
     a {
       color: #333;
       font-size: 14px;
@@ -481,36 +547,7 @@ const closeMenu = () => {
   }
 }
 
-@media (max-width: 991.98px) {
-  .header {
-    width: 100%;
-    max-width: 700px;
-    padding: 15px 1rem;
-  }
-}
-
 @media (max-width: 767.98px) {
-  .header {
-    position: fixed;
-    left: 6px;
-    right: 6px;
-    width: auto;
-    transform: none;
-    padding: 15px 10px;
-    &__container {
-      width: 100%;
-    }
-    .header__burger {
-      padding: 8px;
-    }
-    &__burger .fa-bars {
-      color: white;
-      font-size: 22px;
-      width: 20px;
-      height: 20px;
-    }
-  }
-
   .mobile-menu {
     display: flex;
     text-align: center;
