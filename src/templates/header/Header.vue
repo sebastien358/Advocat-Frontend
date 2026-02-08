@@ -56,35 +56,51 @@ const serviceMenu = ref<HTMLElement | null>(null);
 const isOpen = ref<boolean>(false);
 const isVisible = ref<boolean>(false);
 
-watch(isOpen, async (newVal) => {
+
+
+watch(
+  isOpen,
+  async (newVal) => {
+    if (!serviceMenu.value) return;
+
+    const el = serviceMenu.value;
+
     if (newVal) {
       isVisible.value = true;
-
       await nextTick();
 
-      if (!serviceMenu.value) return;
+      const height = el.scrollHeight;
+
+      gsap.set(el, { height: 0 });
 
       gsap.fromTo(
-        serviceMenu.value,
+        el,
         { opacity: 0, y: -12 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        {
+          opacity: 1,
+          y: 0,
+          height: height,
+          duration: 0.45,
+          ease: "power3.out",
+        }
       );
     } else {
-      if (!serviceMenu.value) return;
-
-      gsap.to(serviceMenu.value, {
+      gsap.to(el, {
         opacity: 0,
         y: -12,
-        duration: 0.5,
-        ease: "power3.out",
+        height: 0,
+        duration: 0.35,
+        ease: "power3.in",
         onComplete: () => {
           isVisible.value = false;
         },
       });
     }
   },
-  { flush: "post" },
+  { flush: "post" }
 );
+
+
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
@@ -125,6 +141,7 @@ const closeMenu = () => {
 
 <template>
   <header class="header" :class="{'is-scrolled': isHeaderVisible, 'menu-open': isOpen }">
+    <div class="header__inner">
     <div class="header__container" ref="headerRef">
       <!-- LOGO -->
       <div class="header__brand">
@@ -145,32 +162,20 @@ const closeMenu = () => {
       <!-- NAV DESKTOP -->
       <div class="header__nav">
         <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
-        <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }"></RouterLink>
-        <RouterLink
-          to="#procedures"
-          :class="{ active: $route.path === '#procedures' && !$route.hash }"
-        >Procédures</RouterLink
-        >
-        <RouterLink
-          to="/contact/form"
-          :class="{ active: $route.path === '/contact/form' && !$route.hash }"
-        >Contact</RouterLink
-        >
+        <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
+        <RouterLink to="#procedures" :class="{ active: $route.path === '#procedures' && $route.hash }">Procédures</RouterLink>
+        <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
         <div v-if="!roleAdmin()">
-          <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }"
-          >Espace pro</RouterLink
-          >
+          <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Espace pro</RouterLink>
         </div>
         <div v-else>
           <a @click="logout()" href="#">Déconnexion</a>
         </div>
       </div>
       <!-- CTA -->
-
       <div>
         <button @click="redirectReservation()" class="header__cta">Prendre RDV</button>
       </div>
-
       <!-- BURGER (mobile) -->
       <button class="header__burger" @click="toggleMenu()">
         <font-awesome-icon icon="fa-solid fa-bars" />
@@ -178,78 +183,36 @@ const closeMenu = () => {
     </div>
     <!-- MENU MOBILE -->
     <div v-show="isVisible" class="mobile-menu" ref="serviceMenu">
-      <RouterLink
-        to="/"
-        @click="closeMenu"
-        :class="{ active: $route.path === '/' && !$route.hash }"
-      >
-        Accueil
-      </RouterLink>
-      <RouterLink to="/#about" @click="closeMenu" :class="{ active: $route.hash === '#about' }">
-        À propos
-      </RouterLink>
-      <RouterLink
-        to="/#services"
-        @click="closeMenu"
-        :class="{ active: $route.hash === '#services' }"
-      >
-        Services
-      </RouterLink>
-      <RouterLink
-        to="/#testimonials"
-        @click="closeMenu"
-        :class="{ active: $route.hash === '#testimonials' }"
-      >
-        Témoignages
-      </RouterLink>
-      <RouterLink
-        to="/contact/form"
-        @click="closeMenu"
-        :class="{ active: $route.path === '/contact/form' && !$route.hash }"
-      >Contact
-      </RouterLink>
+      <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
+      <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
+      <RouterLink to="#procedures" :class="{ active: $route.path === '#procedures' && $route.hash }">Procédures</RouterLink>
+      <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
       <div v-if="!roleAdmin()">
-        <RouterLink
-          to="/login"
-          @click="closeMenu()"
-          :class="{ active: $route.path === '/login' && !$route.hash }"
-        >Connexion</RouterLink
-        >
+        <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Connexion</RouterLink>
       </div>
       <div v-else class="mobile-menu__connected">
-        <RouterLink
-          to="/admin"
-          @click="closeMenu()"
-          :class="{ active: $route.path === '/admin' && !$route.hash }"
-        >Espace pro</RouterLink
-        >
+        <RouterLink to="/admin" :class="{ active: $route.path === '/admin' && !$route.hash }">Espace pro</RouterLink>
         <a @click="logout()" href="#" class="logout-mobile">Déconnexion</a>
       </div>
       <button @click="redirectReservation()" class="mobile-cta">Prendre RDV</button>
     </div>
+    </div>
+    <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
   </header>
-  <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
+
 </template>
 
 <style scoped lang="scss">
 .header {
-  //left: 0;
-  right: 0;
   position: fixed;
   top: 20px;
-
-
-  //transform: translateX(-50%);
-  //max-width: 1200px;
-  background: transparent;
-  //backdrop-filter: none;
-  //-webkit-backdrop-filter: none;
+  left: 0;
+  right: 0;
+  z-index: 9999 !important;
+  padding: 20px;
   border-radius: 12px;
-  z-index: 100;
-  padding: 15px 2rem;
-
+  pointer-events: auto !important;
   margin: 0 20px;
-
   &__container {
     display: flex;
     align-items: center;
@@ -409,22 +372,14 @@ const closeMenu = () => {
 
 @media (max-width: 1600px) {
   .header {
-    width: 100%;
-    max-width: 1300px;
-
-    //margin: 0 20px 0 20px;
+    margin: 0 20px 0 20px;
   }
 }
 
 /* RESPONSIVE */
 @media (max-width: 1300px) {
   .header {
-    width: 100%;
-    //max-width: 1000px;
-
-
-    //margin: 0 20px 0 20px;
-
+    margin: 0 20px 0 20px;
   }
   .header__brand p {
     font-size: 15px;
@@ -449,25 +404,23 @@ const closeMenu = () => {
 
 @media (max-width: 991.98px) {
   .header {
-
-
-
-
-
+    margin: 0 8px;
     padding: 15px 1rem;
   }
 }
 
 @media (max-width: 767.98px) {
   .header {
-
     padding: 15px 10px;
+
     &__container {
       width: 100%;
     }
+
     .header__burger {
       padding: 8px;
     }
+
     &__burger .fa-bars {
       color: white;
       font-size: 22px;
@@ -477,27 +430,26 @@ const closeMenu = () => {
   }
 }
 
-
-
-
-
-
-
-
 /* MENU MOBILE */
 
 .mobile-menu {
-
-  width: 100%;
-  max-width: 1300px;
   position: fixed;
-  top: 69px;
-  left: 0;
+
+  overflow: hidden;
   padding: 20px;
 
 
+  margin: 20px 0;
+
+  top: 78px;
+
+
+  left: 20px;
+  right: 20px;
+  width: auto;
   display: none;
   flex-direction: column;
+  align-items: center;
   gap: 0.6rem;
   &__connected {
     display: flex;
@@ -517,12 +469,6 @@ const closeMenu = () => {
   }
 }
 
-@media (max-width: 1600px) {
-  .header {
-    width: 100%;
-    max-width: 1300px;
-  }
-}
 
 /* RESPONSIVE */
 @media (max-width: 1200px) {
@@ -547,10 +493,19 @@ const closeMenu = () => {
   }
 }
 
+@media (max-width: 991.98px) {
+  .mobile-menu {
+    top: 69px;
+    left: 8px;
+    right: 8px;
+  }
+}
+
 @media (max-width: 767.98px) {
   .mobile-menu {
-    display: flex;
-    text-align: center;
+    top: 66px;
+    left: 8px;
+    right: 8px;
     a {
       color: #333;
       font-size: 13px;

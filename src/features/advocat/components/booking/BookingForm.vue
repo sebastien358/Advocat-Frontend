@@ -266,7 +266,7 @@ onMounted(async () => {
     height: 100%;
   }
   @media (max-width: 767.98px) {
-    padding: 110px 10px 30px 10px;
+    padding: 110px 10px 40px 10px;
     height: 100%;
   }
 }

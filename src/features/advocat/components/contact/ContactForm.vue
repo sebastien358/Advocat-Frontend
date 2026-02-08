@@ -2,7 +2,7 @@
 import AlertMessage from "@/templates/alert-message/AlertMessage.vue";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
-import { onMounted, ref } from "vue";
+import {nextTick, onMounted, ref} from "vue";
 import * as z from "zod";
 import { gsap } from "gsap";
 import { useContactStore } from "@/stores/contactStore.ts";
@@ -95,7 +95,7 @@ function handleResetForm() {
 const contactFormRef = ref<HTMLElement | null>(null);
 const contactInfoRef = ref<HTMLElement | null>(null);
 
-function animationContact() {
+function launchAnimation() {
   const isDesktop = window.innerWidth > 575.98;
 
   gsap.from(contactFormRef.value, {
@@ -104,10 +104,6 @@ function animationContact() {
     duration: isDesktop ? 0.7 : 0.6,
     ease: "power2.out",
     filter: "blur(8px)",
-    scrollTrigger: {
-      trigger: contactFormRef.value,
-      start: "top 80%",
-    },
   });
 
   gsap.from(contactInfoRef.value, {
@@ -116,15 +112,18 @@ function animationContact() {
     duration: isDesktop ? 0.7 : 0.6,
     ease: "power2.out",
     filter: "blur(8px)",
-    scrollTrigger: {
-      trigger: contactInfoRef.value,
-      start: "top 80%",
-    },
   });
 }
 
+
 onMounted(async () => {
-  animationContact();
+  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+  await nextTick();
+
+  requestAnimationFrame(() => {
+    launchAnimation()
+  })
 });
 </script>
 
