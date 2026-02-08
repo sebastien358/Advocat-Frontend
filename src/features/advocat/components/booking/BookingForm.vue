@@ -164,83 +164,87 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="booking container" ref="bookingFormRef">
-    <!-- Booking text -->
-    <div class="booking__text">
-      <h1>Votre rendez-vous</h1>
-      <p>Indiquez vos coordonnées pour confirmer ce créneau.</p>
-    </div>
-    <!-- Booking date -->
-    <div class="booking__date">
-      <p class="date">📅 {{ formattedDate }}</p>
-    </div>
-    <div class="error-wrapper">
-      <p v-if="errorDatetime" class="error-field">
-        {{ errorDatetime }}
-      </p>
-    </div>
-    <!-- Booking icon -->
-    <div class="booking__icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-        <path d="M6 13c2-2 4-2 6 0s4 2 6 0" stroke="currentColor" stroke-width="2" fill="none" />
-      </svg>
-    </div>
-    <!-- Booking form -->
-    <div class="booking__form">
-      <h2>Finaliser votre rendez-vous</h2>
-      <form @submit.prevent="onSubmit">
-        <div class="form-group">
-          <input v-model="firstname" type="text" placeholder="Prénom" />
-          <span v-if="errorFirstname" class="error-field">
+  <div class="page">
+    <div class="container" ref="bookingFormRef">
+      <div class="booking">
+        <!-- Booking text -->
+        <div class="booking__text">
+          <h1>Votre rendez-vous</h1>
+          <p>Indiquez vos coordonnées pour confirmer ce créneau.</p>
+        </div>
+        <!-- Booking date -->
+        <div class="booking__date">
+          <p class="date">📅 {{ formattedDate }}</p>
+        </div>
+        <div class="error-wrapper">
+          <p v-if="errorDatetime" class="error-field">
+            {{ errorDatetime }}
+          </p>
+        </div>
+        <!-- Booking icon -->
+        <div class="booking__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+            <path d="M6 13c2-2 4-2 6 0s4 2 6 0" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+        </div>
+        <!-- Booking form -->
+        <div class="booking__form">
+          <h2>Finaliser votre rendez-vous</h2>
+          <form @submit.prevent="onSubmit">
+            <div class="form-group">
+              <input v-model="firstname" type="text" placeholder="Prénom" />
+              <span v-if="errorFirstname" class="error-field">
             {{ errorFirstname }}
           </span>
-        </div>
-        <div class="form-group">
-          <input v-model="lastname" type="text" placeholder="Nom" />
-          <span v-if="errorLastname" class="error-field">
+            </div>
+            <div class="form-group">
+              <input v-model="lastname" type="text" placeholder="Nom" />
+              <span v-if="errorLastname" class="error-field">
             {{ errorLastname }}
           </span>
-        </div>
-        <div class="form-group">
-          <input v-model="email" type="email" placeholder="Email" />
-          <span v-if="errorEmail" class="error-field">
+            </div>
+            <div class="form-group">
+              <input v-model="email" type="email" placeholder="Email" />
+              <span v-if="errorEmail" class="error-field">
             {{ errorEmail }}
           </span>
+            </div>
+            <div class="form-group">
+              <input v-model="phone" type="tel" placeholder="Téléphone" />
+              <span v-if="errorPhone" class="error-field">{{ errorPhone }}</span>
+            </div>
+            <AlertMessage
+              v-if="successMessage"
+              :successMessage="successMessage"
+              type="success"
+              to="/confirmation"
+              class="alert"
+              @close="handleResetForm()"
+            />
+            <AlertMessage
+              v-if="errorMessage"
+              :errorMessage="errorMessage"
+              type="error"
+              to=""
+              class="alert"
+              @close="closeFields()"
+            />
+            <AlertMessage
+              v-if="errorDate"
+              :errorMessage="errorDate"
+              type="error"
+              to=""
+              class="alert"
+              @close="closeFields()"
+            />
+            <button class="btn btn-submit" :disabled="isSubmitting">
+              <span v-if="isSubmitting">Envoi en cours…</span>
+              <span v-else>Confirmer le rendez-vous</span>
+            </button>
+          </form>
         </div>
-        <div class="form-group">
-          <input v-model="phone" type="tel" placeholder="Téléphone" />
-          <span v-if="errorPhone" class="error-field">{{ errorPhone }}</span>
-        </div>
-        <AlertMessage
-          v-if="successMessage"
-          :successMessage="successMessage"
-          type="success"
-          to="/confirmation"
-          class="alert"
-          @close="handleResetForm()"
-        />
-        <AlertMessage
-          v-if="errorMessage"
-          :errorMessage="errorMessage"
-          type="error"
-          to=""
-          class="alert"
-          @close="closeFields()"
-        />
-        <AlertMessage
-          v-if="errorDate"
-          :errorMessage="errorDate"
-          type="error"
-          to=""
-          class="alert"
-          @close="closeFields()"
-        />
-        <button class="btn btn-submit" :disabled="isSubmitting">
-          <span v-if="isSubmitting">Envoi en cours…</span>
-          <span v-else>Confirmer le rendez-vous</span>
-        </button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -250,9 +254,38 @@ onMounted(async () => {
   CONTAINER
 ===============*/
 
+.page {
+  background: linear-gradient(
+      180deg,
+      #d2d6cf 0%,   /* très légèrement plus foncé */
+      #e6e8e2 35%,
+      #f7f8f6 100%
+  );
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px 0 20px;
+  @media (max-width: 991.98px) {
+    padding: 150px 10px 60px 10px;
+    height: 100%;
+  }
+  @media (max-width: 767.98px) {
+    padding: 110px 10px 30px 10px;
+    height: 100%;
+  }
+}
+
+/*=================
+  CONTAINER
+=================*/
+
 .container {
-  max-width: 1200px;
   margin: 0 auto;
+  max-width: 600px;
+  background: white;
+  width: 100%;
+  border-radius: 20px;
 }
 
 /*===============
@@ -260,27 +293,27 @@ onMounted(async () => {
 ===============*/
 
 .booking {
-  min-height: calc(100vh - 100px);
-  padding: 50px 2rem;
+  padding: 40px 0;
   &__text {
     text-align: center;
     h1 {
-      margin-bottom: 15px;
-      color: #ad46ffff;
+      margin-bottom: 6px;
+      color: #5a4e6a;
       font-family: "Playfair Display", serif;
-      font-size: 28px;
+      font-size: 23px;
       font-weight: 600;
       letter-spacing: 0.2px;
     }
     p {
-      font-size: 15px;
+      color: #5a4e6a;
+      font-size: 14px;
     }
   }
 }
 
 @media (max-width: 991.98px) {
   .booking {
-    padding: 40px 20px;
+    padding: 30px 0;
     min-height: 100%;
     &__text {
       h1 {
@@ -296,8 +329,8 @@ onMounted(async () => {
 
 @media (max-width: 767.98px) {
   .booking {
-    padding: 30px 20px;
     min-height: 100%;
+    padding: 20px 0;
     &__text {
       h1 {
         margin-bottom: 10px;
@@ -317,14 +350,14 @@ onMounted(async () => {
 .booking__date {
   margin: 30px auto 0 auto;
   text-align: center;
-  width: 280px;
-  background: #f7f1ff;
-  border: 1px solid #e1ccff;
-  color: #6f4ccf;
-  padding: 12px 14px;
+  width: 240px;
+  padding: 11px;
   border-radius: 8px;
   font-weight: 500;
   gap: 6px;
+  background: #D7EAF2;
+  border: 1px solid #BFD6E2;
+  color: #1F2937;
   .date {
     border-radius: 999px;
     display: inline-block;
@@ -358,7 +391,7 @@ onMounted(async () => {
 ===============*/
 
 .booking__icon {
-  margin: 30px 0 45px 0;
+  margin: 30px 0 30px 0;
   text-align: center;
   opacity: 0.5;
   @media (max-width: 767.98px) {
@@ -371,33 +404,28 @@ onMounted(async () => {
  ===============*/
 
 .booking__form {
+  padding: 30px 20px 15px 20px;
+  margin: 0 90px;
   background: #fff;
   border-radius: 18px;
   max-width: 600px;
-  padding: 5rem 2rem;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   text-align: center;
-  margin: 0 auto;
   h2 {
-    font-size: 27px;
-    color: #ad46ffff;
+    font-size: 20px;
+    color: #5a4e6a;
     font-family: "Playfair Display", serif;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
   .form-group {
-    max-width: 420px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
+    align-items: flex-start;
+    margin-top: 16px;
     .error-field {
-      font-size: 12px;
-      padding-left: 5px;
+      font-size: 11px;
       color: var(--error-field);
-      margin-left: 6px;
-      margin-top: 6px;
     }
     .inputs-row {
       display: grid;
@@ -406,14 +434,11 @@ onMounted(async () => {
     }
     input {
       width: 100%;
-      font-size: 13px;
+      font-size: 12px;
       border-radius: 12px;
       border: 1px solid #ddd;
       background: #f9fafb;
-      max-width: 420px;
-      padding: 14px 14px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 14px;
       transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
@@ -440,6 +465,7 @@ onMounted(async () => {
   }
   .btn {
     margin-top: 10px;
+    //color: #1F2937;
   }
   .alert {
     margin-top: 10px;
@@ -449,11 +475,10 @@ onMounted(async () => {
 
 @media (max-width: 991.98px) {
   .booking__form {
-    max-width: 450px;
-    padding: 3rem 1.5rem 2rem 1.5rem;
+    padding: 30px 20px 15px 20px;
+    margin: 0 90px;
     h2 {
       font-size: 17px;
-      color: #ad46ffff;
       font-family: "Playfair Display", serif;
       margin-bottom: 22px;
     }
@@ -469,10 +494,10 @@ onMounted(async () => {
 
 @media (max-width: 767.98px) {
   .booking__form {
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    padding: 30px 20px 15px 20px;
+    margin: 0 20px;
     h2 {
       font-size: 15px;
-      color: #ad46ffff;
       font-family: "Playfair Display", serif;
       margin-bottom: 15px;
     }
@@ -481,6 +506,7 @@ onMounted(async () => {
       .error-field {
         font-size: 9px;
         padding-left: 2px;
+        margin-left: 3px;
       }
     }
     .form-group input {

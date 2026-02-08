@@ -181,26 +181,22 @@ const toggle = async (index) => {
         <div class="engagements-quality__container">
           <span class="engagements-quality__surtitle">Avocats à Évreux et Louviers</span>
           <h2 class="engagements-quality__title">Nos engagements de qualité</h2>
-
           <div class="engagements-quality__grid">
             <div class="engagements-quality__item">
               <div class="engagements-quality__icon">📘</div>
               <h3>Écoute</h3>
               <p>Une analyse attentive de votre situation pour vous proposer une stratégie adaptée.</p>
             </div>
-
             <div class="engagements-quality__item">
               <div class="engagements-quality__icon">🏛️</div>
               <h3>Rigueur</h3>
               <p>Un suivi précis et sérieux de chaque dossier, dans le respect des règles déontologiques.</p>
             </div>
-
             <div class="engagements-quality__item">
               <div class="engagements-quality__icon">🤝</div>
               <h3>Proximité</h3>
               <p>Un accompagnement humain et disponible, du premier contact à la conclusion du dossier.</p>
             </div>
-
             <div class="engagements-quality__item">
               <div class="engagements-quality__icon">€</div>
               <h3>Transparence</h3>

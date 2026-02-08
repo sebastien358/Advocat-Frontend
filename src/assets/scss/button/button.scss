@@ -20,7 +20,6 @@
   &-submit {
     font-size: 11px;
     margin-top: 10px;
-    background: var(--green-page);
     color: white;
     padding: 10px 22px;
     border-radius: 8px;
@@ -28,11 +27,10 @@
     transition: 0.2s ease;
     cursor: pointer;
     width: auto;
+    border: none;
+    background: var(--green-page);
     &:hover {
-      background: #ead6ff;
-      border-color: #d3b6ff;
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(168, 85, 247, 0.25);
     }
   }
   &-reply {

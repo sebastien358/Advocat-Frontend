@@ -267,15 +267,31 @@ watch([() => bookingCategoryId.value, () => bookingServiceId.value, () => bookin
   { immediate: true },
 );
 
+
+/*=================
+  REDIRECTION DU FORMULAIRE
+=================*/
+
+const isBookingIncomplete = computed(() => {
+  return (
+    !bookingCategoryId.value ||
+    !bookingServiceId.value ||
+    !bookingStaffId.value ||
+    !bookingSelectedDate.value
+  );
+});
+
 function selectSlot(slot: Slot) {
   bookingStore.setBookingDraft({
     ...bookingStore.bookingDraft,
     datetime: slot.start,
   });
 
-  setTimeout(() => {
-    router.push({ path: "/booking/form" });
-  }, 300);
+  if (!isBookingIncomplete.value) {
+    setTimeout(() => {
+      router.push({ path: "/booking/form" });
+    }, 300);
+  }
 }
 
 // 1. loading réel (store)
@@ -295,17 +311,6 @@ watch(rawLoading, (isLoading) => {
     }, 500);
   }
 });
-
-/*=================
-  AFFICHAGE DU FORMULAIRE
-=================*/
-
-const isBookingIncomplete = computed(() =>
-    !bookingCategoryId.value ||
-    !bookingServiceId.value ||
-    !bookingStaffId.value,
-  !bookingSelectedDate.value
-);
 
 /*===============
   ANIMATION BOOKING PAGE
@@ -414,7 +419,7 @@ watch(loadingPage, async (isLoading) => {
                 <div class="booking-staff__card__content" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">
                   <div class="booking-staff__card__content__avatar">
                     <img v-if="staff.picture" :src="staff.picture.filename" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }" />
-                    <span class="name" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">{{ staff.firstname }}</span>
+                    <span class="name" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">Maître {{ staff.firstname }}</span>
                   </div>
                   <input
                     @click="selectStaff(staff.id)"
@@ -792,6 +797,7 @@ watch(loadingPage, async (isLoading) => {
     &__grid {
       display: flex;
       justify-content: center;
+      flex-direction: column;
       gap: 10px;
     }
     &__label {
@@ -847,18 +853,20 @@ watch(loadingPage, async (isLoading) => {
         border-radius: 50%;
       }
       .name {
-        font-size: 14px;
+        color: #6f7a86;
+        font-size: 12px;
       }
       .name.one-card {
         font-size: 15px;
         font-weight: 500;
+        color: #6f7a86;
       }
     }
     &__card__content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 12px;
+      padding: 9px 12px;
       border-radius: 12px;
       border: 1px solid var(--border-soft);
       background: white;
@@ -907,7 +915,8 @@ watch(loadingPage, async (isLoading) => {
         font-size: 13px;
       }
       &__card__content {
-        width: 220px;
+        width: 340px;
+        padding: 9px 12px;
       }
       &__card__content.one-card {
         width: 340px;
@@ -946,7 +955,8 @@ watch(loadingPage, async (isLoading) => {
         font-size: 12px;
       }
       &__card__content {
-        width: 300px;
+        max-width: 300px;
+        padding: 8px 12px;
       }
       &__card__content.one-card {
         width: 300px;

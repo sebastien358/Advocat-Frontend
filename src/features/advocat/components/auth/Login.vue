@@ -147,7 +147,6 @@ onMounted(() => {
       </div>
     </section>
   </div>
-
 </template>
 
 <style scoped lang="scss">
@@ -157,8 +156,6 @@ onMounted(() => {
 
 .container {
   padding: 30px 20px 30px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 /*===============
@@ -181,11 +178,10 @@ onMounted(() => {
     padding: 2.5rem;
     border-radius: 1.2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    max-width: 400px;
+    width: 380px;
     .login-title {
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 26px;
       margin-bottom: 0.3rem;
       font-weight: 700;
       font-family: "Playfair Display", serif;
@@ -194,7 +190,7 @@ onMounted(() => {
       text-align: center;
       margin-bottom: 1rem;
       color: #777;
-      font-size: 15px;
+      font-size: 14px;
     }
     .form-group {
       display: flex;
@@ -240,6 +236,9 @@ onMounted(() => {
 }
 
 @media (max-width: 991.98px) {
+  .container {
+    padding: 100px 1rem 70px 1rem;
+  }
   .login {
     height: 100%;
     &__form {
@@ -265,12 +264,13 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .container {
-    padding: 70px 1rem 70px 1rem;
+    padding: 140px 1rem 70px 1rem;
   }
   .login {
     height: 100%;
     &__form {
       padding: 1.6rem 1.3rem 1rem 1.3rem;
+      width: 300px;
       .login-title {
         font-size: 1.3rem;
         margin-bottom: 0.4rem;
