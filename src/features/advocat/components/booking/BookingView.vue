@@ -363,6 +363,29 @@ watch(loadingPage, async (isLoading) => {
     animationOverlayPage();
   }
 });
+
+
+const progress = ref<number>(1)
+
+const consultationType = ref<'Au cabinet' | 'En visio'>('Au cabinet')
+
+watch([bookingCategoryId, bookingServiceId, bookingStaffId], () => {
+    if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value) {
+      progress.value = 2
+    } else {
+      progress.value = 1
+    }
+  }, { immediate: true }
+)
+
+
+watch(() => categoryStore.categories, (categories) => {
+    if (categories.length && !bookingCategoryId.value) {
+      bookingCategoryId.value = categories[0].id
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -370,7 +393,7 @@ watch(loadingPage, async (isLoading) => {
     <div class="container">
       <section v-if="isBookingIncomplete" class="booking" ref="bookingRef">
         <div class="booking__description">
-          <p>Préparez votre rendez-vous avec <strong>Maitre</strong></p>
+          <p>Préparez votre rendez-vous<strong></strong></p>
           <font-awesome-icon icon="fa-solid fa-xmark" />
         </div>
         <!-- Separator -->
@@ -382,15 +405,15 @@ watch(loadingPage, async (isLoading) => {
 
         <!-- Barre de progression -->
 
-        <ProgressBooking />
+        <ProgressBooking :progress="progress" />
 
         <!-- Booking category -->
         <section class="booking-category" v-if="categoryStore.categories.length > 0">
           <button
-            @click="selectCategory(cat.id)"
             v-for="cat in categoryStore.categories"
             :key="cat.id"
-            :class="{ active: cat.id === bookingCategoryId }"
+            @click="selectCategory(cat.id)"
+            :class="{ active: bookingCategoryId === cat.id }"
             class="btn btn-category"
           >
             {{ cat.name }}
@@ -464,8 +487,12 @@ watch(loadingPage, async (isLoading) => {
           <h1>JuriSlots</h1>
         </div>
         <!-- BARRE DE PROGRESSION -->
-        <ProgressBooking />
+        <ProgressBooking :progress="progress" />
         <!-- CRÉNEAUX HORAIRES -->
+
+
+
+
         <h3 class="booking-reservation-title">Choisissez votre créneau 📅</h3>
         <div class="booking-reservation__items">
           <!-- JOURS TOUJOURS VISIBLES -->
@@ -687,15 +714,18 @@ watch(loadingPage, async (isLoading) => {
   gap: 12px;
   .btn-category {
     width: 100%;
-    max-width: 120px;
+    max-width: 160px;
     border-radius: 8px;
     font-weight: 500;
     transition: 0.2s ease;
     border: 1px solid #e0e0e0;
     background: white;
     color: #555;
-    padding: 6px 18px;
+    //padding: 6px 18px;
+    padding: 15px 20px;
+
     font-size: 14px;
+    white-space: nowrap;
   }
   .btn-category:hover {
     background: var(--blue-reservation);
