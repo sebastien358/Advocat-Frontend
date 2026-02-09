@@ -400,7 +400,13 @@ watch(() => categoryStore.categories, (categories) => {
         <div class="separator-top"></div>
 
         <div class="booking__title">
-          <h1>JuriSlots</h1>
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+            <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+            <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+            <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
+          </svg>
         </div>
 
         <!-- Barre de progression -->
@@ -484,15 +490,17 @@ watch(() => categoryStore.categories, (categories) => {
         <!-- SEPARATOR -->
         <div class="separator-top"></div>
         <div class="booking-reservation__title">
-          <h1>JuriSlots</h1>
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+            <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+            <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+            <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
+          </svg>
         </div>
         <!-- BARRE DE PROGRESSION -->
         <ProgressBooking :progress="progress" />
         <!-- CRÉNEAUX HORAIRES -->
-
-
-
-
         <h3 class="booking-reservation-title">Choisissez votre créneau 📅</h3>
         <div class="booking-reservation__items">
           <!-- JOURS TOUJOURS VISIBLES -->
@@ -643,8 +651,9 @@ watch(() => categoryStore.categories, (categories) => {
   &__description .fa-xmark {
     cursor: pointer;
     color: red;
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
+    font-weight: 900;
   }
   .separator-top {
     border-bottom: 1px solid #e0e0e0;
@@ -655,17 +664,12 @@ watch(() => categoryStore.categories, (categories) => {
     display: flex;
     justify-content: center;
     align-items: center;
+    svg {
+      height: 26px;
+      width: 26px;
+      color: #2A7B9B;
+    }
   }
-  &__title h1 {
-    font-size: 23px;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #2A7B9B;
-    letter-spacing: 0.2px;
-  }
-
-
   &__subtitle {
     color: rgba(0, 0, 0, 0.55);
     font-size: 14px;
@@ -721,9 +725,7 @@ watch(() => categoryStore.categories, (categories) => {
     border: 1px solid #e0e0e0;
     background: white;
     color: #555;
-    //padding: 6px 18px;
     padding: 15px 20px;
-
     font-size: 14px;
     white-space: nowrap;
   }
@@ -1182,20 +1184,12 @@ watch(() => categoryStore.categories, (categories) => {
     display: flex;
     justify-content: center;
     align-items: center;
+    svg {
+      height: 26px;
+      width: 26px;
+      color: #2A7B9B;
+    }
   }
-  &__title h1 {
-    font-size: 23px;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #2A7B9B;
-    letter-spacing: 0.2px;
-  }
-
-
-
-
-
   .booking-reservation-title {
     margin-bottom: 20px;
     font-size: 15px;
