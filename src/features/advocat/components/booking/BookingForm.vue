@@ -261,18 +261,6 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   padding: 0 20px 0 20px;
-  @media (max-width: 1600px) {
-    padding: 160px 20px 100px 20px;
-    height: 100%;
-  }
-  @media (max-width: 991.98px) {
-    padding: 150px 10px 60px 10px;
-    height: 100%;
-  }
-  @media (max-width: 767.98px) {
-    padding: 110px 10px 40px 10px;
-    height: 100%;
-  }
 }
 
 /*=================

@@ -1,13 +1,11 @@
 import "../src/assets/scss/index.scss";
-
+import App from "./App.vue";
+import router from "./router";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
 const pinia = createPinia();
-
-import App from "./App.vue";
-import router from "./router";
 pinia.use(piniaPluginPersistedstate);
 
 /* import the fontawesome core */
@@ -27,6 +25,9 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
+import {faRectangleXmark} from "@fortawesome/free-solid-svg-icons/faRectangleXmark";
+
 
 library.add(
   faUserSecret,
@@ -40,6 +41,8 @@ library.add(
   faPhone,
   faMessage,
   faUser,
+
+  faXmark,
 );
 
 const app = createApp(App);

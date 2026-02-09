@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import Calc from "@/templates/calc/Calc.vue";
 import { useAuthStore } from "@/stores/authStore.ts";
 import gsap from "gsap";
+import BookingView from "@/features/advocat/components/booking/BookingView.vue";
 
 const authStore = useAuthStore();
 
@@ -129,9 +130,10 @@ onMounted(async () => {
 
 const router = useRouter();
 
-function redirectReservation() {
-  router.push({ path: "/booking" });
-  closeMenu();
+const isOpenReservation = ref<boolean>(false)
+
+function modalReservation() {
+  isOpenReservation.value = !isOpenReservation.value
 }
 
 const closeMenu = () => {
@@ -140,7 +142,9 @@ const closeMenu = () => {
 </script>
 
 <template>
+  <BookingView v-if="isOpenReservation" />
   <header class="header" :class="{'is-scrolled': isHeaderVisible, 'menu-open': isOpen }">
+
     <div class="header__inner">
     <div class="header__container" ref="headerRef">
       <!-- LOGO -->
@@ -178,7 +182,7 @@ const closeMenu = () => {
       </div>
       <!-- CTA -->
       <div>
-        <button @click="redirectReservation()" class="header__cta">Prendre RDV</button>
+        <button @click="modalReservation()" class="header__cta">Prendre RDV</button>
       </div>
       <!-- BURGER (mobile) -->
       <button class="header__burger" @click="toggleMenu()">

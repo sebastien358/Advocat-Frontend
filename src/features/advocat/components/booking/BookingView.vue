@@ -7,6 +7,7 @@ import { computed, onMounted, ref, watch, nextTick, type Slot } from "vue";
 import Calc from "@/templates/calc/Calc.vue";
 import { gsap } from "gsap/gsap-core";
 import { useRouter } from "vue-router";
+import ProgressBooking from "@/templates/progress-bar/ProgressBooking.vue";
 
 const bookingServiceId = ref<number | null>(null);
 const bookingServiceText = ref<string | null>(null);
@@ -22,10 +23,12 @@ const router = useRouter();
 const staffStore = useStaffStore();
 
 const bookingStaffId = ref<number | null>(null);
+const bookingStaffText = ref<string | null>(null);
 const errorStaff = ref<string | null>(null);
 
-function selectStaff(id: number) {
+function selectStaff(id: number, name: string) {
   bookingStaffId.value = id;
+  bookingStaffText.value = name
   errorStaff.value = null;
 }
 
@@ -221,8 +224,6 @@ function selectDay(day: { value: string; label: string }) {
 /*====================================================
   WATCHER DE RÉSERVATION
   Ce watcher :
-
-
   - écoute les dépendances clés de la réservation
   - déclenche un rechargement des créneaux dès qu’un
     paramètre change
@@ -365,13 +366,24 @@ watch(loadingPage, async (isLoading) => {
 </script>
 
 <template>
-  <main v-if="!loadingPage" class="page-wrapper">
+  <main class="page-wrapper">
     <div class="container">
-      <div class="booking" ref="bookingRef">
+      <section v-if="isBookingIncomplete" class="booking" ref="bookingRef">
         <div class="booking__description">
-          <h1 class="booking__title">Préparez votre rendez-vous</h1>
-          <p class="booking__subtitle">Choisissez votre prestation et Avocat</p>
+          <p>Préparez votre rendez-vous avec <strong>Maitre</strong></p>
+          <font-awesome-icon icon="fa-solid fa-xmark" />
         </div>
+        <!-- Separator -->
+        <div class="separator-top"></div>
+
+        <div class="booking__title">
+          <h1>JuriSlots</h1>
+        </div>
+
+        <!-- Barre de progression -->
+
+        <ProgressBooking />
+
         <!-- Booking category -->
         <section class="booking-category" v-if="categoryStore.categories.length > 0">
           <button
@@ -422,7 +434,7 @@ watch(loadingPage, async (isLoading) => {
                     <span class="name" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">Maître {{ staff.firstname }}</span>
                   </div>
                   <input
-                    @click="selectStaff(staff.id)"
+                    @click="selectStaff(staff.id, staff.firstname)"
                     type="radio"
                     name="staff"
                     :value="staff.id"
@@ -435,9 +447,25 @@ watch(loadingPage, async (isLoading) => {
         <div class="booking__placeholder">
           <p>👤 Veuillez sélectionner un avocat pour afficher les disponibilités</p>
         </div>
-      </div>
+      </section>
       <!-- BOOKING RESERVATION -->
-      <section class="booking-reservation container-reservation">
+      <section v-else class="booking-reservation container-reservation">
+        <div class="booking-reservation__summary">
+          <div class="booking-reservation__description">
+            <span>{{ bookingServiceText }}</span>
+            <span>• Maître {{ bookingStaffText }}</span>
+            <span>• {{ bookingServiceDuration }} min</span>
+          </div>
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </div>
+        <!-- SEPARATOR -->
+        <div class="separator-top"></div>
+        <div class="booking-reservation__title">
+          <h1>JuriSlots</h1>
+        </div>
+        <!-- BARRE DE PROGRESSION -->
+        <ProgressBooking />
+        <!-- CRÉNEAUX HORAIRES -->
         <h3 class="booking-reservation-title">Choisissez votre créneau 📅</h3>
         <div class="booking-reservation__items">
           <!-- JOURS TOUJOURS VISIBLES -->
@@ -479,48 +507,38 @@ watch(loadingPage, async (isLoading) => {
       </section>
     </div>
   </main>
-  <main v-else class="loading-overlay">
-    <span class="loading-overlay__loader"></span>
-  </main>
 </template>
 
 <style scoped lang="scss">
 
-
 .page-wrapper {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
   background: linear-gradient(
       180deg,
       #d2d6cf 0%,   /* très légèrement plus foncé */
       #e6e8e2 35%,
       #f7f8f6 100%
   );
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px 0 20px;
-  @media (max-width: 1600px) {
-    align-items: center;
-    padding: 160px 20px 100px 20px;
-    height: 100%;
-  }
-  @media (max-width: 767.98px) {
-    align-items: center;
-    padding: 110px 10px 40px 10px;
-    height: 100%;
-  }
+
+
+  z-index: 20000;
+
+  background: rgba(0, 0, 0, 0.43);
 }
 
 /*=================
   CONTAINER
 =================*/
-
 .container {
-  margin: 0 auto;
-  max-width: 600px;
   background: white;
-  width: 100%;
-  border-radius: 20px;
 }
 
 /*=================
@@ -581,28 +599,56 @@ watch(loadingPage, async (isLoading) => {
 =================*/
 
 .booking {
-  padding: 40px 20px 0 20px;
+  padding: 20px 0 20px 0;
   &__description {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 12px 0 15px;
   }
-  &__title {
+  &__description p {
     font-family: "Playfair Display", serif;
-    font-size: 22px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.2px;
-    color: #5a4e6a;
-    text-align: center;
-    margin: auto;
+    color: #2F2F2F;
   }
+  &__description .fa-xmark {
+    cursor: pointer;
+    color: red;
+    width: 17px;
+    height: 17px;
+  }
+  .separator-top {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 20px;
+  }
+  &__title {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__title h1 {
+    font-size: 23px;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #2A7B9B;
+    letter-spacing: 0.2px;
+  }
+
+
   &__subtitle {
     color: rgba(0, 0, 0, 0.55);
     font-size: 14px;
     letter-spacing: 0.2px;
     margin-top: 8px;
   }
+
+
+
+
 }
 
 @media (max-width: 991.98px) {
@@ -619,8 +665,7 @@ watch(loadingPage, async (isLoading) => {
 
 @media (max-width: 767.98px) {
   .booking {
-    padding: 30px 15px 5px 15px;
-    height: 100%;
+
     &__title {
       font-size: 17px;
     }
@@ -636,7 +681,6 @@ watch(loadingPage, async (isLoading) => {
 ===============*/
 
 .booking-category {
-  margin: 40px 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -698,8 +742,10 @@ watch(loadingPage, async (isLoading) => {
   z-index: 3;
   position: relative;
   max-width: 450px;
-  margin: 16px auto 30px auto;
+  margin: 16px auto 20px auto;
   cursor: pointer;
+
+  padding: 0 15px;
   .service-label {
     display: flex;
     align-items: center;
@@ -791,11 +837,12 @@ watch(loadingPage, async (isLoading) => {
 .booking-staff-wrapper {
   display: flex;
   justify-content: center;
+  padding: 0 15px;
   .booking-staff.active-booking-staff {
-    margin: -5px auto 25px auto;
+    //margin: -5px auto 25px auto;
   }
   .booking-staff {
-    margin: 0 auto 25px auto;
+    margin: 0 auto 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -803,7 +850,6 @@ watch(loadingPage, async (isLoading) => {
     &__grid {
       display: flex;
       justify-content: center;
-      flex-direction: column;
       gap: 10px;
     }
     &__label {
@@ -876,7 +922,7 @@ watch(loadingPage, async (isLoading) => {
       border-radius: 12px;
       border: 1px solid var(--border-soft);
       background: white;
-      width: 340px;
+      width: 230px;
     }
     &__card__content.one-card {
       padding: 18px 20px;
@@ -921,11 +967,11 @@ watch(loadingPage, async (isLoading) => {
         font-size: 13px;
       }
       &__card__content {
-        width: 340px;
+
         padding: 9px 12px;
       }
       &__card__content.one-card {
-        width: 340px;
+        //width: 340px;
         padding: 18px;
       }
       &__card__content__avatar img.one-card {
@@ -961,11 +1007,11 @@ watch(loadingPage, async (isLoading) => {
         font-size: 12px;
       }
       &__card__content {
-        max-width: 300px;
+        //max-width: 300px;
         padding: 8px 12px;
       }
       &__card__content.one-card {
-        width: 300px;
+        //width: 300px;
         padding: 16px;
       }
       &__card__content__avatar img.one-card {
@@ -981,13 +1027,13 @@ watch(loadingPage, async (isLoading) => {
 ===============*/
 
 .booking__placeholder {
-  margin: 0 auto;
-  padding: 25px;
-  border-radius: 20px;
-  width: 100%;
+  padding: 20px 10px;
+  border-radius: 3px;
+  width: auto;
   background: #F5F6F7;
   border: 1px solid #E5E7EB;
   color: #6B7280;
+  margin: 0 15px;
   p {
     text-align: center;
     font-size: 14px;
@@ -1006,7 +1052,6 @@ watch(loadingPage, async (isLoading) => {
 @media (max-width: 767.98px) {
   .booking__placeholder {
     padding: 20px;
-    width: 100%;
     border-radius: 10px;
     p {
       font-size: 12px;
@@ -1042,19 +1087,94 @@ watch(loadingPage, async (isLoading) => {
 }
 
 .container-reservation {
-  padding: 40px;
   margin: 0 auto;
+  height: auto;
 }
 
 .booking-reservation {
+
+  padding: 10px 0 15px 0;
   display: flex;
   flex-direction: column;
+  &__summary {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6b7280; // gris lisible, moderne
+    text-align: center;
+    letter-spacing: 0.2px;
+
+    span {
+      white-space: nowrap;
+    }
+
+
+
+
+
+    padding: 0 12px 0 15px;
+
+
+  }
+  &__summary .fa-xmark {
+    cursor: pointer;
+    color: red;
+    width: 17px;
+    height: 17px;
+  }
+  &__description {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    row-gap: 5px;
+  }
+  &__description p {
+    font-family: "Playfair Display", serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #2F2F2F;
+  }
+  .separator-top {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 20px;
+  }
+  .separator-top {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 20px;
+  }
+  &__title {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__title h1 {
+    font-size: 23px;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #2A7B9B;
+    letter-spacing: 0.2px;
+  }
+
+
+
+
+
   .booking-reservation-title {
     margin-bottom: 20px;
     font-size: 15px;
     font-weight: 600;
     text-align: center;
     color: #5a4e6a;
+  }
+  &__items {
+    padding: 0 15px;
   }
   &__items .day-item {
     padding: 7px 12px;
