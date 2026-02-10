@@ -1445,46 +1445,4 @@ watch(() => categoryStore.categories, (categories) => {
     height: 100px;
   }
 }
-
-/*=================
-  BOOKING NO RÉSERVATION
-=================*/
-
-.booking {
-  &__items {
-    .days-list {
-      gap: 10px;
-    }
-  }
-  //&__no__reservation {
-  //  margin-top: 50px;
-  //  p {
-  //    color: #6b7280;
-  //    font-size: 15px;
-  //    text-align: center;
-  //  }
-  //}
-}
-
-@media (max-width: 991.98px) {
-  .booking {
-    //&__no__reservation {
-    //  margin-top: 30px;
-    //  p {
-    //    font-size: 14px;
-    //  }
-    //}
-  }
-}
-
-@media (max-width: 767.98px) {
-  .booking {
-    //&__no__reservation {
-    //  margin-top: 30px;
-    //  p {
-    //    font-size: 13px;
-    //  }
-    //}
-  }
-}
 </style>

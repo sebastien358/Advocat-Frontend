@@ -218,15 +218,11 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-
-
 .contact-page {
   padding: 30px 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
-
   background: linear-gradient(
       180deg,
       #d2d6cf 0%,   /* très légèrement plus foncé */
@@ -239,11 +235,20 @@ onMounted(async () => {
   overflow: hidden;
 }
 
-
+/* LAYOUT PRINCIPAL */
+.contact__container {
+  display: grid;
+  grid-template-columns: 440px 400px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
 
 @media (max-width: 1600px) {
   .contact-page {
-    //padding: 8rem 4rem 2rem;
     height: 100%;
   }
 }
@@ -316,17 +321,6 @@ onMounted(async () => {
   }
 }
 
-/* LAYOUT PRINCIPAL */
-.contact__container {
-  display: grid;
-  grid-template-columns: 440px 400px;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1.6rem;
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-}
 
 /*=====================
   FORM
