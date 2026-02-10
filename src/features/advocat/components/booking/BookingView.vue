@@ -330,30 +330,19 @@ function animationOverlayPage() {
     },
   });
 
-  tl.from(bookingRef.value, {
-    opacity: 0,
-    duration: 1,
-  });
-
-  tl.from(
-    logoRef.value,
-    {
+  tl.from(logoRef.value, {
       opacity: 0,
       rotate: -90,
-      transformOrigin: "50% 50%",
       duration: 0.6,
-    },
-    "-=0.3", // 👈 léger overlap = plus naturel
+    }
   );
 
-  tl.from(
-    staffLabel.value,
-    {
+  tl.from(staffLabel.value, {
       opacity: 0,
       x: -80,
       duration: 0.5,
-    },
-    "-=0.3", // 👈 léger overlap = plus naturel
+      delay: 0.3
+    }
   );
 }
 
@@ -366,8 +355,6 @@ watch(loadingPage, async (isLoading) => {
 
 
 const progress = ref<number>(1)
-
-const consultationType = ref<'Au cabinet' | 'En visio'>('Au cabinet')
 
 watch([bookingCategoryId, bookingServiceId, bookingStaffId], () => {
     if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value) {
@@ -390,29 +377,24 @@ watch(() => categoryStore.categories, (categories) => {
 
 <template>
   <main class="page-wrapper">
-    <div class="container">
-      <section v-if="isBookingIncomplete" class="booking" ref="bookingRef">
+    <div class="container" ref="bookingRef">
+      <section v-if="isBookingIncomplete" class="booking" >
         <div class="booking__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
           <font-awesome-icon icon="fa-solid fa-xmark" />
         </div>
         <!-- Separator -->
         <div class="separator-top"></div>
-
         <div class="booking__title">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
-               xmlns="http://www.w3.org/2000/svg">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
             <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
             <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
             <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
           </svg>
         </div>
-
         <!-- Barre de progression -->
-
         <ProgressBooking :progress="progress" />
-
         <!-- Booking category -->
         <section class="booking-category" v-if="categoryStore.categories.length > 0">
           <button
@@ -427,6 +409,9 @@ watch(() => categoryStore.categories, (categories) => {
         </section>
         <!-- Booking services -->
         <section class="booking-service" v-if="filteredService">
+          <div class="booking-service__description">
+            <p class="booking-service__description-text"><span>📋</span>Type de consultation</p>
+          </div>
           <div @click="toggleMenu()" class="service-label">
             {{ bookingServiceText || "Choisissez votre prestation" }}
             <span class="service-icon" ref="logoRef">
@@ -516,7 +501,6 @@ watch(() => categoryStore.categories, (categories) => {
               >
                 {{ day.label }}
               </button>
-
             </div>
             <button @click="nextDays" :disabled="carouselIndex === maxIndex" class="next-day">›</button>
           </div>
@@ -562,10 +546,7 @@ watch(() => categoryStore.categories, (categories) => {
   display: flex;
   align-items: center;
   justify-content: center;
-
-
   z-index: 20000;
-
   background: rgba(0, 0, 0, 0.43);
 }
 
@@ -574,6 +555,7 @@ watch(() => categoryStore.categories, (categories) => {
 =================*/
 .container {
   background: white;
+  border-radius: 3px;
 }
 
 /*=================
@@ -650,7 +632,6 @@ watch(() => categoryStore.categories, (categories) => {
   }
   &__description .fa-xmark {
     cursor: pointer;
-    color: red;
     width: 16px;
     height: 16px;
     font-weight: 900;
@@ -665,9 +646,9 @@ watch(() => categoryStore.categories, (categories) => {
     justify-content: center;
     align-items: center;
     svg {
-      height: 26px;
-      width: 26px;
-      color: #2A7B9B;
+      height: 27px;
+      width: 27px;
+      color: black;
     }
   }
   &__subtitle {
@@ -676,10 +657,6 @@ watch(() => categoryStore.categories, (categories) => {
     letter-spacing: 0.2px;
     margin-top: 8px;
   }
-
-
-
-
 }
 
 @media (max-width: 991.98px) {
@@ -696,7 +673,6 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 767.98px) {
   .booking {
-
     &__title {
       font-size: 17px;
     }
@@ -722,21 +698,21 @@ watch(() => categoryStore.categories, (categories) => {
     border-radius: 8px;
     font-weight: 500;
     transition: 0.2s ease;
-    border: 1px solid #e0e0e0;
-    background: white;
+
+    background: #f1f2f6;
     color: #555;
     padding: 15px 20px;
-    font-size: 14px;
+    font-size: 18px;
     white-space: nowrap;
   }
   .btn-category:hover {
-    background: var(--blue-reservation);
-    border: 1px solid var(--blue-border-reservation);
+    background: #08d8ea;
+    color: white;
   }
   .btn-category.active {
     box-shadow: 0 4px 12px rgba(155, 92, 255, 0.12);
-    background: var(--blue-reservation);
-    border-color: var(--blue-border-reservation);
+    background: #08d8ea;
+    color: white;
   }
 }
 
@@ -774,25 +750,48 @@ watch(() => categoryStore.categories, (categories) => {
   z-index: 3;
   position: relative;
   max-width: 450px;
-  margin: 16px auto 20px auto;
+  margin: 22px auto 22px auto;
   cursor: pointer;
+  &__description {
 
+
+
+
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  &__description-text {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+  }
+  &__description-text span {
+
+    font-size: 15px;
+  }
   padding: 0 15px;
   .service-label {
+
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
     padding: 12px 14px;
-    border: 1px solid var(--border-soft);
-    font-size: 13.5px;
+    border: 1px solid #dfe4ea;
     font-weight: 500;
     color: #4b4b4b;
     gap: 7px;
+
+
+    font-size: 17px;
+
   }
   .service-label:hover {
-    border-color: var(--blue-border-reservation);
-    background: var(--blue-reservation);
+    border-color: #08d8ea;
+    color: white;
+    background: #08d8ea;
   }
   .service-label .service-icon .fa-angle-down {
     width: 12.5px;
@@ -802,13 +801,18 @@ watch(() => categoryStore.categories, (categories) => {
     background: white;
     width: 100%;
     position: absolute;
-    border-right: 1px solid var(--blue-border-reservation);
-    border-left: 1px solid var(--blue-border-reservation);
-    border-bottom: 1px solid var(--blue-border-reservation);
+    border-right: 1px solid #dfe4ea;
+    border-left: 1px solid #dfe4ea;
+    border-bottom: 1px solid #dfe4ea;
     border-top: none;
     padding: 15px 8px;
     max-height: 270px;
     overflow-y: auto;
+
+
+
+
+
     .service-items {
       display: flex;
       align-items: center;
@@ -818,7 +822,7 @@ watch(() => categoryStore.categories, (categories) => {
       color: #47407a;
       padding: 8px;
       &:hover {
-        background: var(--blue-reservation);
+        background: #08d8ea;
       }
       .service-name {
         font-weight: 600;
@@ -913,7 +917,7 @@ watch(() => categoryStore.categories, (categories) => {
         appearance: none;
         width: 15px;
         height: 15px;
-        border: 2px solid #BFD6E2;
+        border: 2px solid #dfe4ea;
         border-radius: 50%;
         display: inline-block;
         position: relative;
@@ -922,10 +926,9 @@ watch(() => categoryStore.categories, (categories) => {
       }
       /* Effet quand sélectionné */
       input[type="radio"]:checked {
-        border-color: #E5E7EB;
-        background-color: #D7EAF2;
+        border-color: #08d8ea;
+        background: #08d8ea;
       }
-      /* Petit point intérieur (optionnel pour encore plus premium) */
       input[type="radio"]:checked::after {
         content: "";
         position: absolute;
@@ -950,9 +953,9 @@ watch(() => categoryStore.categories, (categories) => {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 9px 12px;
+      padding: 15px 12px;
       border-radius: 12px;
-      border: 1px solid var(--border-soft);
+      border: 1px solid #dfe4ea;
       background: white;
       width: 230px;
     }
@@ -1068,7 +1071,7 @@ watch(() => categoryStore.categories, (categories) => {
   margin: 0 15px;
   p {
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -1124,39 +1127,28 @@ watch(() => categoryStore.categories, (categories) => {
 }
 
 .booking-reservation {
-
-  padding: 10px 0 15px 0;
+  padding: 10px 0 20px 0;
   display: flex;
   flex-direction: column;
   &__summary {
-
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-
     margin-top: 4px;
     font-size: 13px;
     color: #6b7280; // gris lisible, moderne
     text-align: center;
     letter-spacing: 0.2px;
-
     span {
       white-space: nowrap;
     }
-
-
-
-
-
     padding: 0 12px 0 15px;
-
-
   }
   &__summary .fa-xmark {
     cursor: pointer;
-    color: red;
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
+    color: black;
   }
   &__description {
     display: flex;
@@ -1187,12 +1179,14 @@ watch(() => categoryStore.categories, (categories) => {
     svg {
       height: 26px;
       width: 26px;
-      color: #2A7B9B;
+      color: black;
     }
   }
+
   .booking-reservation-title {
+    //margin-top: -5px;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
     text-align: center;
     color: #5a4e6a;
@@ -1201,25 +1195,37 @@ watch(() => categoryStore.categories, (categories) => {
     padding: 0 15px;
   }
   &__items .day-item {
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: #F3F4F6;
+    padding: 17px 0;
+    border-radius: 20px;
+
+    outline: none;
+
     border: 1px solid #E5E7EB;
     color: #6B7280;
-    font-size: 13px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+
+    font-size: 15px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s ease;
     width: 150px;
+    //width: auto;
     &:hover {
-      background: #EEF1F5;
-      border-color: #D1D5DB;
+      background: #08d8ea;
+
+      font-weight: 500;
+      color: white;
+      border-color: #08d8ea;
+
     }
   }
   &__items .day-item.active {
-    background: #D7EAF2;          /* ton bleu */
-    border: 1px solid #BFD6E2;    /* bleu un peu plus foncé */
-    color: #1F2937;
+    background: #08d8ea;
+
+    font-weight: 500;
+    color: white;
+    border-color: #08d8ea;
   }
   &__pagination {
     display: flex;
@@ -1251,36 +1257,62 @@ watch(() => categoryStore.categories, (categories) => {
     }
   }
   &__slots {
-    margin-top: 23px;
+    margin: 23px 70px 0 70px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 11px;
     animation: fadeIn 0.25s ease;
+    @media (max-width: 767.98px) {
+      margin: 23px 0 0 0;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    }
     .btn-reservation {
-      font-size: 13px;
-      background: #F3F4F6;
+      font-size: 14px;
+
+
       border: 1px solid #E5E7EB;
       color: #6B7280;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
       border-radius: 6px;
       transition: all 120ms ease;
+
+      background:#f1f2f6;
+
+
+      padding: 12px 0;
+
       &:hover {
-        transform: translateY(-1px);
-        background: #EEF1F5;
-        border-color: #D1D5DB;
+        background: #D7EAF2;
+        border: 1px solid #BFD6E2;
+        color: #1F2937;
+
       }
     }
+
     .btn-reservation.active {
       background: #D7EAF2;
       border: 1px solid #BFD6E2;
       color: #1F2937;
+
     }
     .btn-reservation:disabled {
       opacity: 0.4;
       cursor: not-allowed;
     }
+
+
+  }
+
+}
+
+.booking__no__reservation {
+  margin-top: 20px;
+  text-align: center;
+  p {
+    font-size: 15px;
   }
 }
+
 
 @media (max-width: 991.98px) {
   .booking-reservation {
@@ -1316,7 +1348,7 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 767.98px) {
   .container-reservation {
-    padding: 30px 1rem;
+    padding: 20px 0;
   }
 
   .booking-reservation {
@@ -1384,7 +1416,7 @@ watch(() => categoryStore.categories, (categories) => {
   &__loader {
     width: 30px;
     height: 30px;
-    border: 5px solid #716b6b;
+    border: 5px solid #08d8ea;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
@@ -1424,35 +1456,35 @@ watch(() => categoryStore.categories, (categories) => {
       gap: 10px;
     }
   }
-  &__no__reservation {
-    margin-top: 50px;
-    p {
-      color: #6b7280;
-      font-size: 15px;
-      text-align: center;
-    }
-  }
+  //&__no__reservation {
+  //  margin-top: 50px;
+  //  p {
+  //    color: #6b7280;
+  //    font-size: 15px;
+  //    text-align: center;
+  //  }
+  //}
 }
 
 @media (max-width: 991.98px) {
   .booking {
-    &__no__reservation {
-      margin-top: 30px;
-      p {
-        font-size: 14px;
-      }
-    }
+    //&__no__reservation {
+    //  margin-top: 30px;
+    //  p {
+    //    font-size: 14px;
+    //  }
+    //}
   }
 }
 
 @media (max-width: 767.98px) {
   .booking {
-    &__no__reservation {
-      margin-top: 30px;
-      p {
-        font-size: 13px;
-      }
-    }
+    //&__no__reservation {
+    //  margin-top: 30px;
+    //  p {
+    //    font-size: 13px;
+    //  }
+    //}
   }
 }
 </style>
