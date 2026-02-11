@@ -1,28 +1,28 @@
 <script setup lang="ts">
 
-defineProps<{
+const props = defineProps<{
   progress: number
 }>()
 </script>
 
 <template>
   <section class="booking-progress">
-    <div class="separator-progress-left" :class="{active: $props.progress >= 1}"></div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: $props.progress >= 1}">
+    <div class="separator-progress-left" :class="{active: props.progress >= 1}"></div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: props.progress >= 1}">
       <rect x="3" y="4" width="18" height="4" rx="2" fill="#ffffff"/>
       <rect x="3" y="10" width="12" height="4" rx="2" fill="#ffffff"/>
       <rect x="3" y="16" width="8" height="4" rx="2" fill="#ffffff"/>
     </svg>
-    <div class="separator-progress" :class="{active: $props.progress === 2}"></div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: $props.progress === 2}">
+    <div class="separator-progress" :class="{active: props.progress >= 2}"></div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: props.progress >= 2}">
       <rect x="3" y="5" width="18" height="16" rx="2" stroke="#ffffff" stroke-width="2"/>
       <line x1="3" y1="9" x2="21" y2="9" stroke="#ffffff" stroke-width="2"/>
       <rect x="7" y="12" width="4" height="4" rx="1" fill="#ffffff"/>
     </svg>
 
 
-    <div class="separator-progress"></div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <div class="separator-progress" :class="{active: props.progress >= 3}"></div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: props.progress >= 3}">
       <!-- feuille -->
       <rect
         x="5"
@@ -47,8 +47,6 @@ defineProps<{
         stroke-width="2"
       />
     </svg>
-
-
 
     <div class="separator-progress"></div>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

@@ -192,6 +192,7 @@ const nextDays = () => {
 ====================================================*/
 
 const todayLocal = new Date();
+
 const bookingSelectedDate = ref(todayLocal.toLocaleDateString("fr-CA"));
 
 watch(
@@ -209,6 +210,8 @@ watch(
 
 const bookingStore = useBookingStore();
 
+const bookingSelectDay = ref<HTMLElement | string>('')
+
 function selectDay(day: { value: string; label: string }) {
   bookingSelectedDate.value = day.value;
 
@@ -218,6 +221,7 @@ function selectDay(day: { value: string; label: string }) {
     datetime: null,
   });
 
+  bookingSelectDay.value = day.value
   bookingStore.slots = [];
 }
 
@@ -273,14 +277,22 @@ watch([() => bookingCategoryId.value, () => bookingServiceId.value, () => bookin
   REDIRECTION DU FORMULAIRE
 =================*/
 
-const isBookingIncomplete = computed(() => {
+const isStep1Complete = computed(() => {
   return (
-    !bookingCategoryId.value ||
-    !bookingServiceId.value ||
-    !bookingStaffId.value ||
-    !bookingSelectedDate.value
-  );
-});
+    bookingCategoryId.value &&
+    bookingServiceId.value &&
+    bookingStaffId.value
+  )
+})
+
+const isStep2Complete = computed(() => {
+  return (
+    bookingSelectedSlot.value &&
+    bookingSelectedDate.value
+  )
+})
+
+const bookingSelectedSlot = ref('')
 
 function selectSlot(slot: Slot) {
   bookingStore.setBookingDraft({
@@ -288,11 +300,7 @@ function selectSlot(slot: Slot) {
     datetime: slot.start,
   });
 
-  //if (!isBookingIncomplete.value) {
-    //setTimeout(() => {
-      //router.push({ path: "/booking/form" });
-    //}, 300);
-  //}
+  bookingSelectedSlot.value = slot.start
 }
 
 // 1. loading réel (store)
@@ -353,18 +361,34 @@ watch(loadingPage, async (isLoading) => {
   }
 });
 
-
 const progress = ref<number>(1)
 
-watch([bookingCategoryId, bookingServiceId, bookingStaffId], () => {
-    if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value) {
+watch(
+  [bookingCategoryId, bookingServiceId, bookingStaffId, bookingSelectedDate, bookingSelectedDate, bookingSelectedSlot],
+  () => {
+    if (
+      bookingCategoryId.value &&
+      bookingServiceId.value &&
+      bookingStaffId.value &&
+      bookingSelectedDate.value &&
+      bookingSelectedSlot.value
+    ) {
+      progress.value = 3
+    }
+    else if (
+      bookingCategoryId.value &&
+      bookingServiceId.value &&
+      bookingSelectedDate.value &&
+      bookingStaffId.value
+    ) {
       progress.value = 2
-    } else {
+    }
+    else {
       progress.value = 1
     }
-  }, { immediate: true }
+  },
+  { immediate: true }
 )
-
 
 watch(() => categoryStore.categories, (categories) => {
     if (categories.length && !bookingCategoryId.value) {
@@ -378,7 +402,7 @@ watch(() => categoryStore.categories, (categories) => {
 <template>
   <main class="page-wrapper">
     <div class="container" ref="bookingRef">
-      <section v-if="isBookingIncomplete" class="booking" >
+      <section v-if="!isStep1Complete" class="booking" >
         <div class="booking__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
           <font-awesome-icon icon="fa-solid fa-xmark" />
@@ -465,7 +489,7 @@ watch(() => categoryStore.categories, (categories) => {
         </div>
       </section>
       <!-- BOOKING RESERVATION -->
-      <section v-else class="booking-reservation container-reservation">
+      <section v-else-if="!isStep2Complete" class="booking-reservation container-reservation">
         <div class="booking-reservation__summary">
           <div class="booking-reservation__description">
             <span>{{ bookingServiceText }}</span>
@@ -525,6 +549,17 @@ watch(() => categoryStore.categories, (categories) => {
             <p>Aucun créneau disponible.</p>
           </div>
         </div>
+      </section>
+
+      <section v-else class="booking-form">
+        <div class="booking__description">
+          <p>Préparez votre rendez-vous<strong></strong></p>
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </div>
+        <!-- Separator -->
+        <div class="separator-top"></div>
+        <ProgressBooking :progress="progress" />
+        <p>xsusdjsjscbjskbqkdvbjkqvbsqkdvbqskvbks</p>
       </section>
     </div>
   </main>
@@ -803,9 +838,6 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 991.98px) {
   .booking-service {
-    .service-label {
-      //font-size: 12px;
-    }
     .service-menu {
       .service-items {
         gap: 13px;
@@ -821,18 +853,12 @@ watch(() => categoryStore.categories, (categories) => {
     &__description-text {
       justify-content: center;
     }
-    &__description-text span {
-      //font-size: 12px;
-
-    }
     .service-label {
       font-size: 16px;
-
       width: 100%;
     }
     .service-menu {
       padding: 10px 0;
-
       width: 100%;
       .service-items {
         gap: 10px;
@@ -858,9 +884,6 @@ watch(() => categoryStore.categories, (categories) => {
       display: flex;
       justify-content: center;
       gap: 10px;
-
-
-
     }
     &__label {
       margin-bottom: 7px;
@@ -966,20 +989,10 @@ watch(() => categoryStore.categories, (categories) => {
       &__label {
         margin-bottom: 10px;
       }
-      &__label p {
-
-      }
       &__grid {
         flex-direction: column;
       }
-      &__cards .name {
-
-      }
-      &__cards .name.one-card {
-
-      }
       &__card__content {
-
         width: 250px;
       }
       &__card__content.one-card {
@@ -1181,33 +1194,20 @@ watch(() => categoryStore.categories, (categories) => {
     }
   }
   &__slots {
-
-
     margin: 19px 40px 0 40px;
-
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     gap: 10px;
     animation: fadeIn 0.25s ease;
-    @media (max-width: 767.98px) {
-      margin: 23px 0 0 0;
-      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-    }
     .btn-reservation {
       font-size: 13px;
-
-
       border: 1px solid #E5E7EB;
       color: #6B7280;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
       border-radius: 6px;
       transition: all 120ms ease;
-
-      background:#f1f2f6;
-
-
+      background: #f1f2f6;
       padding: 12px 0;
-
       &:hover {
         background: #D7EAF2;
         border: 1px solid #BFD6E2;
@@ -1215,7 +1215,6 @@ watch(() => categoryStore.categories, (categories) => {
 
       }
     }
-
     .btn-reservation.active {
       background: #D7EAF2;
       border: 1px solid #BFD6E2;
@@ -1226,10 +1225,7 @@ watch(() => categoryStore.categories, (categories) => {
       opacity: 0.4;
       cursor: not-allowed;
     }
-
-
   }
-
 }
 
 .booking__no__reservation {
@@ -1250,21 +1246,12 @@ watch(() => categoryStore.categories, (categories) => {
       .day-item {
         font-size: 13px;
       }
-      .days-list .prev-day,
-      .next-day {
-        //padding: 0;
-      }
     }
     &__pagination {
       display: flex;
       align-items: center;
-      .prev-day,
-      .next-day {
-        //padding: 0 8px;
-      }
     }
     &__slots {
-      margin-top: 10px;
       .btn-reservation {
         font-size: 12px;
       }
@@ -1279,17 +1266,13 @@ watch(() => categoryStore.categories, (categories) => {
 
   .booking-reservation {
     .booking-reservation-title {
-
       margin-bottom: 20px;
     }
     &__items {
       .days-list {
-
         gap: 8px;
       }
       .day-item {
-        //padding: 14px 0;
-
         font-size: 13px;
       }
     }
@@ -1338,6 +1321,44 @@ watch(() => categoryStore.categories, (categories) => {
   }
 }
 
+
+
+
+
+
+.booking__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__description p {
+    font-family: "Playfair Display", serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #2F2F2F;
+  }
+  &__description .fa-xmark {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    font-weight: 900;
+  }
+  .separator-top {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 20px;
+  }
+
+}
+
+
+.booking-form {
+
+}
+
+
+
+
+
 /*=================
   LOADING SLOT
 =================*/
@@ -1379,4 +1400,5 @@ watch(() => categoryStore.categories, (categories) => {
     height: 100px;
   }
 }
+
 </style>
