@@ -167,11 +167,6 @@ onMounted(async () => {
   <div class="page">
     <div class="container" ref="bookingFormRef">
       <div class="booking">
-        <!-- Booking text -->
-        <div class="booking__text">
-          <h1>Votre rendez-vous</h1>
-          <p>Indiquez vos coordonnées pour confirmer ce créneau.</p>
-        </div>
         <!-- Booking date -->
         <div class="booking__date">
           <p class="date">📅 {{ formattedDate }}</p>
@@ -243,114 +238,58 @@ onMounted(async () => {
   BOOKING
 ===============*/
 
-.booking {
-  &__text {
-    text-align: center;
-    h1 {
-      margin-bottom: 6px;
-      color: #5a4e6a;
-      font-family: "Playfair Display", serif;
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-    }
-    p {
-      color: #5a4e6a;
-      font-size: 15px;
-    }
-  }
-}
 
-@media (max-width: 991.98px) {
-  .booking {
-    height: 100%;
-    &__text {
-      h1 {
-        margin-bottom: 10px;
-        font-size: 19px;
-      }
-      p {
-        font-size: 14px;
-      }
-    }
-  }
-}
-
-@media (max-width: 767.98px) {
-  .booking {
-    height: 100%;
-    &__text {
-      h1 {
-        margin-bottom: 10px;
-        font-size: 17px;
-      }
-      p {
-        font-size: 13px;
-      }
-    }
-  }
-}
 
 /*===============
   BOOKING DATE
 ===============*/
 
 .booking__date {
-  margin: 30px auto 0 auto;
+  margin: 0 auto 0 auto;
   text-align: center;
   width: 240px;
-  padding: 11px;
+  padding: 10px;
   border-radius: 8px;
   font-weight: 500;
   gap: 6px;
   background: #D7EAF2;
   border: 1px solid #BFD6E2;
   color: #1F2937;
-  .date {
-    border-radius: 999px;
-    display: inline-block;
-    font-size: 13px;
+  @media (max-width: 991.98px) {
+    margin: 10px auto 0 auto;
+    padding: 8px;
   }
-}
-
-@media (max-width: 991.98px) {
-  .booking__date {
-    gap: 0;
-    width: 240px;
-    .date {
+  @media (max-width: 767.98px) {
+    margin: 10px auto 0 auto;
+    padding: 7px;
+  }
+  .date {
+    font-size: 13px;
+    @media (max-width: 991.98px) {
+     font-size: 13px;
+    }
+    @media (max-width: 767.98px) {
       font-size: 12px;
     }
   }
 }
 
-@media (max-width: 767.98px) {
-  .booking__date {
-    margin: 25px auto 0 auto;
-    gap: 0;
-    width: 240px;
-    .date {
-      font-size: 11px;
-    }
-  }
-}
+
 
 /*===============
   BOOKING FORM
  ===============*/
 
 .booking__form {
-  margin: 30px 0 20px 0;
+  margin: 40px 0 20px 0;
   padding: 30px 20px 15px 20px;
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   text-align: center;
-
-  //width: 100%;
-
   width: 480px;
   h2 {
-    font-size: 20px;
+    font-size: 18px;
     color: #5a4e6a;
     font-family: "Playfair Display", serif;
     margin-bottom: 20px;
@@ -407,6 +346,7 @@ onMounted(async () => {
     border: 1px solid #BFD6E2;
     color: #6b6d78;
     padding: 14px;
+    font-size: 11px;
   }
   .alert {
     margin-top: 10px;
@@ -416,7 +356,6 @@ onMounted(async () => {
 
 @media (max-width: 991.98px) {
   .booking__form {
-
     h2 {
       font-size: 17px;
       font-family: "Playfair Display", serif;
@@ -429,16 +368,18 @@ onMounted(async () => {
         padding-left: 4px;
       }
     }
+    .btn {
+      padding: 12px;
+    }
   }
 }
 
 @media (max-width: 767.98px) {
   .booking__form {
 
-
     width: 100%;
     h2 {
-      font-size: 15px;
+      font-size: 14px;
       font-family: "Playfair Display", serif;
       margin-bottom: 15px;
     }
@@ -449,6 +390,10 @@ onMounted(async () => {
         padding-left: 2px;
         margin-left: 3px;
       }
+    }
+    .btn {
+      font-size: 10px;
+      padding: 10px;
     }
     .form-group input {
       font-size: 13px;

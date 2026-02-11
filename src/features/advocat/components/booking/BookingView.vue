@@ -1116,11 +1116,6 @@ watch(() => categoryStore.categories, (categories) => {
   }
 }
 
-.container-reservation {
-  margin: 0 auto;
-  height: auto;
-}
-
 .booking-reservation {
   padding: 10px 0 30px 0;
   display: flex;
@@ -1177,7 +1172,6 @@ watch(() => categoryStore.categories, (categories) => {
       color: black;
     }
   }
-
   .booking-reservation-title {
     margin-top: -8px;
     margin-bottom: 20px;
@@ -1291,11 +1285,13 @@ watch(() => categoryStore.categories, (categories) => {
 @media (max-width: 991.98px) {
   .booking-reservation {
     .booking-reservation-title {
-      margin-bottom: 25px;
+
+      display: none;
     }
     &__items {
       .day-item {
         font-size: 13px;
+        padding: 10px 0;
       }
     }
     &__pagination {
@@ -1316,9 +1312,6 @@ watch(() => categoryStore.categories, (categories) => {
   }
 
   .booking-reservation {
-    .booking-reservation-title {
-      margin-bottom: 20px;
-    }
     &__items {
       .days-list {
         gap: 8px;
@@ -1340,6 +1333,8 @@ watch(() => categoryStore.categories, (categories) => {
       gap: 8px;
       .btn-reservation {
         font-size: 12px;
+
+        padding: 10px 0;
       }
     }
   }
@@ -1348,8 +1343,7 @@ watch(() => categoryStore.categories, (categories) => {
 @media (max-width: 575.98px) {
   .booking-reservation {
     .booking-reservation-title {
-      font-size: 19px;
-      margin-bottom: 20px;
+
     }
     &__items {
       .days-list {
@@ -1361,7 +1355,8 @@ watch(() => categoryStore.categories, (categories) => {
       }
     }
     &__slots {
-      margin-top: 18px;
+      margin: 18px 0 0 0;
+
     }
     &__pagination {
       .prev-day,
