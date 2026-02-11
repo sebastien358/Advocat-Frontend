@@ -168,7 +168,6 @@ const closeMenu = () => {
         <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
         <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
         <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }">Engagements</RouterLink>
-        <RouterLink to="#procedures" :class="{ active: $route.path === '#procedures' && $route.hash }">Procédures</RouterLink>
         <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
         <div v-if="!roleAdmin()">
           <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Espace pro</RouterLink>
@@ -191,7 +190,6 @@ const closeMenu = () => {
       <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
       <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
       <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }">Engagements</RouterLink>
-      <RouterLink to="#procedures" :class="{ active: $route.path === '#procedures' && $route.hash }">Procédures</RouterLink>
       <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
       <div v-if="!roleAdmin()">
         <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Connexion</RouterLink>

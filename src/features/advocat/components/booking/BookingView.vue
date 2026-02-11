@@ -148,10 +148,10 @@ const availableDays = computed(() => {
 
     days.push({
       label: d.toLocaleDateString("fr-FR", {
-        weekday: "long",
+        weekday: "short",
         day: "2-digit",
-        month: "long",
-      }),
+        month: "short",
+      }).replace(/\./g, ""),
       value: d.toLocaleDateString("fr-CA"), // YYYY-MM-DD
     });
 
@@ -288,11 +288,11 @@ function selectSlot(slot: Slot) {
     datetime: slot.start,
   });
 
-  if (!isBookingIncomplete.value) {
-    setTimeout(() => {
-      router.push({ path: "/booking/form" });
-    }, 300);
-  }
+  //if (!isBookingIncomplete.value) {
+    //setTimeout(() => {
+      //router.push({ path: "/booking/form" });
+    //}, 300);
+  //}
 }
 
 // 1. loading réel (store)
@@ -409,29 +409,31 @@ watch(() => categoryStore.categories, (categories) => {
         </section>
         <!-- Booking services -->
         <section class="booking-service" v-if="filteredService">
-          <div class="booking-service__description">
-            <p class="booking-service__description-text"><span>📋</span>Type de consultation</p>
-          </div>
-          <div @click="toggleMenu()" class="service-label">
-            {{ bookingServiceText || "Choisissez votre prestation" }}
-            <span class="service-icon" ref="logoRef">
-              <font-awesome-icon icon="fa-solid fa-angle-down" />
-            </span>
-          </div>
-          <div class="service-menu" v-show="isVisible" ref="serviceMenu">
-            <div
-              @click="selectService(service.id, service.duration, service.name)"
-              v-for="service in filteredService"
-              :key="service.id"
-              class="service-items"
-              :class="{ 'active-service': service.id === bookingServiceId }"
-            >
-              <span class="name">{{ service.name }}</span>
-              <span>{{ service.duration }} min</span>
-              <span>{{ service.price }}€</span>
+          <div>
+            <div class="booking-service__description">
+              <p class="booking-service__description-text"><span>📋</span>Type de consultation</p>
             </div>
+            <div @click="toggleMenu()" class="service-label">
+              {{ bookingServiceText || "Choisissez votre prestation" }}
+              <span class="service-icon" ref="logoRef">
+                <font-awesome-icon icon="fa-solid fa-angle-down" />
+              </span>
+            </div>
+            <div class="service-menu" v-show="isVisible" ref="serviceMenu">
+              <div
+                @click="selectService(service.id, service.duration, service.name)"
+                v-for="service in filteredService"
+                :key="service.id"
+                class="service-items"
+                :class="{ 'active-service': service.id === bookingServiceId }"
+              >
+                <span class="name">{{ service.name }}</span>
+                <span>{{ service.duration }} min</span>
+                <span>{{ service.price }}€</span>
+              </div>
+            </div>
+            <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
           </div>
-          <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
         </section>
         <!-- Booking staff -->
         <section class="booking-staff-wrapper" v-if="staffStore.filteredStaff.length > 0">
@@ -548,6 +550,10 @@ watch(() => categoryStore.categories, (categories) => {
   justify-content: center;
   z-index: 20000;
   background: rgba(0, 0, 0, 0.43);
+
+
+
+  padding: 0 10px;
 }
 
 /*=================
@@ -556,6 +562,11 @@ watch(() => categoryStore.categories, (categories) => {
 .container {
   background: white;
   border-radius: 3px;
+  padding: 0 15px;
+  overflow: hidden;
+  @media (max-width: 767.98px) {
+    width: 100%;
+  }
 }
 
 /*=================
@@ -603,15 +614,6 @@ watch(() => categoryStore.categories, (categories) => {
 }
 
 /*=================
-  CONTAINER
-=================*/
-
-.container-reservation {
-  margin: 0 auto;
-  max-width: 1300px;
-}
-
-/*=================
   BOOKING
 =================*/
 
@@ -621,7 +623,6 @@ watch(() => categoryStore.categories, (categories) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px 0 15px;
   }
   &__description p {
     font-family: "Playfair Display", serif;
@@ -661,10 +662,6 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 991.98px) {
   .booking {
-    height: 100%;
-    &__title {
-      font-size: 19px;
-    }
     &__subtitle {
       font-size: 13px;
     }
@@ -673,9 +670,6 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 767.98px) {
   .booking {
-    &__title {
-      font-size: 17px;
-    }
     &__subtitle {
       font-size: 12px;
       text-align: center;
@@ -698,7 +692,6 @@ watch(() => categoryStore.categories, (categories) => {
     border-radius: 8px;
     font-weight: 500;
     transition: 0.2s ease;
-
     background: #f1f2f6;
     color: #555;
     padding: 15px 20px;
@@ -716,28 +709,12 @@ watch(() => categoryStore.categories, (categories) => {
   }
 }
 
-@media (max-width: 1600px) {
-  .booking-category {
-    height: 100%;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .booking-category {
-   margin: 35px 0 0 0;
-    gap: 10px;
-    .btn-category {
-      font-size: 13px;
-    }
-  }
-}
-
 @media (max-width: 767.98px) {
   .booking-category {
     margin: 30px 0 0 0;
     gap: 10px;
     .btn-category {
-      font-size: 13px;
+      font-size: 16px;
     }
   }
 }
@@ -752,11 +729,10 @@ watch(() => categoryStore.categories, (categories) => {
   max-width: 450px;
   margin: 22px auto 22px auto;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &__description {
-
-
-
-
     margin-bottom: 10px;
     font-weight: 500;
   }
@@ -768,12 +744,9 @@ watch(() => categoryStore.categories, (categories) => {
     letter-spacing: 0.3px;
   }
   &__description-text span {
-
     font-size: 15px;
   }
-  padding: 0 15px;
   .service-label {
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -783,10 +756,9 @@ watch(() => categoryStore.categories, (categories) => {
     font-weight: 500;
     color: #4b4b4b;
     gap: 7px;
-
-
     font-size: 17px;
-
+    transition: 0.2s ease;
+    width: 380px;
   }
   .service-label:hover {
     border-color: #08d8ea;
@@ -799,7 +771,7 @@ watch(() => categoryStore.categories, (categories) => {
   }
   .service-menu {
     background: white;
-    width: 100%;
+    width: 380px;
     position: absolute;
     border-right: 1px solid #dfe4ea;
     border-left: 1px solid #dfe4ea;
@@ -808,11 +780,6 @@ watch(() => categoryStore.categories, (categories) => {
     padding: 15px 8px;
     max-height: 270px;
     overflow-y: auto;
-
-
-
-
-
     .service-items {
       display: flex;
       align-items: center;
@@ -836,10 +803,8 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 991.98px) {
   .booking-service {
-    margin: 20px auto 20px auto;
-    max-width: 450px;
     .service-label {
-      font-size: 12px;
+      //font-size: 12px;
     }
     .service-menu {
       .service-items {
@@ -850,14 +815,25 @@ watch(() => categoryStore.categories, (categories) => {
   }
 }
 
-@media (max-width: 576.98px) {
+@media (max-width: 767.98px) {
   .booking-service {
-    max-width: 100%;
+    display: block;
+    &__description-text {
+      justify-content: center;
+    }
+    &__description-text span {
+      //font-size: 12px;
+
+    }
     .service-label {
-      font-size: 12px;
+      font-size: 16px;
+
+      width: 100%;
     }
     .service-menu {
       padding: 10px 0;
+
+      width: 100%;
       .service-items {
         gap: 10px;
         font-size: 11px;
@@ -873,20 +849,18 @@ watch(() => categoryStore.categories, (categories) => {
 .booking-staff-wrapper {
   display: flex;
   justify-content: center;
-  padding: 0 15px;
   .booking-staff.active-booking-staff {
     //margin: -5px auto 25px auto;
   }
   .booking-staff {
     margin: 0 auto 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     &__grid {
       display: flex;
       justify-content: center;
       gap: 10px;
+
+
+
     }
     &__label {
       margin-bottom: 7px;
@@ -967,7 +941,6 @@ watch(() => categoryStore.categories, (categories) => {
     &__card__content__avatar {
       display: flex;
       align-items: center;
-      flex-direction: row;
       gap: 10px;
     }
     &__card__content__avatar img {
@@ -983,71 +956,34 @@ watch(() => categoryStore.categories, (categories) => {
   }
 }
 
-@media (max-width: 991.98px) {
-  .booking-staff-wrapper {
-    .booking-staff.active-booking-staff {
-      margin: 5px auto 25px auto;
-    }
-    .booking-staff {
-      &__grid {
-        gap: 10px;
-      }
-      &__label p {
-        font-size: 13px;
-      }
-      &__cards .name {
-        font-size: 13px;
-      }
-      &__cards .name.one-card {
-        font-size: 13px;
-      }
-      &__card__content {
-
-        padding: 9px 12px;
-      }
-      &__card__content.one-card {
-        //width: 340px;
-        padding: 18px;
-      }
-      &__card__content__avatar img.one-card {
-        width: 50px;
-        height: 50px;
-      }
-    }
-  }
-}
-
 @media (max-width: 767.98px) {
   .booking-staff-wrapper {
     .booking-staff.active-booking-staff {
       margin: 5px auto 25px auto;
     }
+
     .booking-staff {
-      display: flex;
-      justify-content: center;
-      margin: 0 auto 15px auto;
       &__label {
         margin-bottom: 10px;
       }
       &__label p {
-        font-size: 12px;
+
       }
       &__grid {
         flex-direction: column;
       }
       &__cards .name {
-        font-size: 12px;
+
       }
       &__cards .name.one-card {
-        font-size: 12px;
+
       }
       &__card__content {
-        //max-width: 300px;
-        padding: 8px 12px;
+
+        width: 250px;
       }
       &__card__content.one-card {
-        //width: 300px;
-        padding: 16px;
+        width: 230px;
       }
       &__card__content__avatar img.one-card {
         width: 50px;
@@ -1086,12 +1022,7 @@ watch(() => categoryStore.categories, (categories) => {
 
 @media (max-width: 767.98px) {
   .booking__placeholder {
-    padding: 20px;
-    border-radius: 10px;
-    p {
-      font-size: 12px;
-      line-height: 21px;
-    }
+    display: none;
   }
 }
 
@@ -1127,7 +1058,7 @@ watch(() => categoryStore.categories, (categories) => {
 }
 
 .booking-reservation {
-  padding: 10px 0 20px 0;
+  padding: 10px 0 30px 0;
   display: flex;
   flex-direction: column;
   &__summary {
@@ -1136,13 +1067,13 @@ watch(() => categoryStore.categories, (categories) => {
     justify-content: space-between;
     margin-top: 4px;
     font-size: 13px;
-    color: #6b7280; // gris lisible, moderne
+    color: #6b7280;
     text-align: center;
     letter-spacing: 0.2px;
     span {
       white-space: nowrap;
     }
-    padding: 0 12px 0 15px;
+
   }
   &__summary .fa-xmark {
     cursor: pointer;
@@ -1184,7 +1115,7 @@ watch(() => categoryStore.categories, (categories) => {
   }
 
   .booking-reservation-title {
-    //margin-top: -5px;
+    margin-top: -8px;
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 600;
@@ -1195,34 +1126,25 @@ watch(() => categoryStore.categories, (categories) => {
     padding: 0 15px;
   }
   &__items .day-item {
-    padding: 17px 0;
-    border-radius: 20px;
-
+    padding: 17px 17px;
+    border-radius: 15px;
     outline: none;
-
     border: 1px solid #E5E7EB;
     color: #6B7280;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-
-
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s ease;
-    width: 150px;
-    //width: auto;
     &:hover {
       background: #08d8ea;
-
       font-weight: 500;
       color: white;
       border-color: #08d8ea;
-
     }
   }
   &__items .day-item.active {
     background: #08d8ea;
-
     font-weight: 500;
     color: white;
     border-color: #08d8ea;
@@ -1236,17 +1158,17 @@ watch(() => categoryStore.categories, (categories) => {
       background: transparent;
       border: none;
       padding: 0 10px;
-      color: #b1a8e6;
-      font-size: 20px;
+      color: black;
+      font-size: 26px;
       cursor: pointer;
       transition: color 0.2s ease, transform 0.2s ease;
     }
     .prev-day:hover {
-      color: #5a46d6;
+      color: #08d8ea;
       transform: translateX(-2px);
     }
     .next-day:hover {
-      color: #5a46d6;
+      color: #08d8ea;
       transform: translateX(2px);
     }
     .days-list {
@@ -1257,10 +1179,13 @@ watch(() => categoryStore.categories, (categories) => {
     }
   }
   &__slots {
-    margin: 23px 70px 0 70px;
+
+
+    margin: 23px 10px 0 10px;
+
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-    gap: 11px;
+    gap: 10px;
     animation: fadeIn 0.25s ease;
     @media (max-width: 767.98px) {
       margin: 23px 0 0 0;
@@ -1326,7 +1251,7 @@ watch(() => categoryStore.categories, (categories) => {
       }
       .days-list .prev-day,
       .next-day {
-        padding: 0;
+        //padding: 0;
       }
     }
     &__pagination {
@@ -1334,7 +1259,7 @@ watch(() => categoryStore.categories, (categories) => {
       align-items: center;
       .prev-day,
       .next-day {
-        padding: 0 8px;
+        //padding: 0 8px;
       }
     }
     &__slots {
@@ -1358,14 +1283,13 @@ watch(() => categoryStore.categories, (categories) => {
     }
     &__items {
       .days-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+
+        gap: 8px;
       }
       .day-item {
-        width: 150px;
-        font-size: 12px;
-        padding: 8px 12px;
+        //padding: 14px 0;
+
+        font-size: 13px;
       }
     }
     &__pagination {
@@ -1374,14 +1298,13 @@ watch(() => categoryStore.categories, (categories) => {
       .prev-day,
       .next-day {
         padding: 0 20px;
-        font-size: 22px;
       }
     }
     &__slots {
       margin-top: 18px;
-      gap: 10px;
+      gap: 8px;
       .btn-reservation {
-        font-size: 11px;
+        font-size: 12px;
       }
     }
   }
@@ -1394,12 +1317,18 @@ watch(() => categoryStore.categories, (categories) => {
         gap: 10px;
       }
       .day-item {
-        width: 170px;
-        font-size: 11px;
+        width: 140px;
+        font-size: 13px;
       }
     }
     &__slots {
       margin-top: 18px;
+    }
+    &__pagination {
+      .prev-day,
+      .next-day {
+        font-size: 24px;
+      }
     }
   }
 }
