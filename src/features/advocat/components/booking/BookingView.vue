@@ -8,6 +8,7 @@ import Calc from "@/templates/calc/Calc.vue";
 import { gsap } from "gsap/gsap-core";
 import { useRouter } from "vue-router";
 import ProgressBooking from "@/templates/progress-bar/ProgressBooking.vue";
+import BookingForm from "@/features/advocat/components/booking/BookingForm.vue";
 
 const bookingServiceId = ref<number | null>(null);
 const bookingServiceText = ref<string | null>(null);
@@ -552,20 +553,70 @@ watch(() => categoryStore.categories, (categories) => {
       </section>
 
       <section v-else class="booking-form">
-        <div class="booking__description">
+        <div class="booking-form__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
           <font-awesome-icon icon="fa-solid fa-xmark" />
         </div>
         <!-- Separator -->
         <div class="separator-top"></div>
+        <div class="booking__title">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+            <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+            <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+            <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
+          </svg>
+        </div>
         <ProgressBooking :progress="progress" />
-        <p>xsusdjsjscbjskbqkdvbjkqvbsqkdvbqskvbks</p>
+        <BookingForm />
       </section>
     </div>
   </main>
 </template>
 
 <style scoped lang="scss">
+
+
+.booking-form {
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+  }
+  &__description p {
+    font-family: "Playfair Display", serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #2F2F2F;
+  }
+  &__description .fa-xmark {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    font-weight: 900;
+  }
+  .separator-top {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 20px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .page-wrapper {
   position: fixed;
@@ -1326,34 +1377,6 @@ watch(() => categoryStore.categories, (categories) => {
 
 
 
-.booking__description {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &__description p {
-    font-family: "Playfair Display", serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    color: #2F2F2F;
-  }
-  &__description .fa-xmark {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    font-weight: 900;
-  }
-  .separator-top {
-    border-bottom: 1px solid #e0e0e0;
-    padding-top: 20px;
-  }
-
-}
-
-
-.booking-form {
-
-}
 
 
 

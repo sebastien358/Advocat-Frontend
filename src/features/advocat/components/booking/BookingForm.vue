@@ -176,13 +176,6 @@ onMounted(async () => {
         <div class="booking__date">
           <p class="date">📅 {{ formattedDate }}</p>
         </div>
-        <!-- Booking icon -->
-        <div class="booking__icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-            <path d="M6 13c2-2 4-2 6 0s4 2 6 0" stroke="currentColor" stroke-width="2" fill="none" />
-          </svg>
-        </div>
         <!-- Booking form -->
         <div class="booking__form">
           <h2>Finaliser votre rendez-vous</h2>
@@ -245,63 +238,32 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-/*===============
-  CONTAINER
-===============*/
-
-.page {
-  background: linear-gradient(
-      180deg,
-      #d2d6cf 0%,   /* très légèrement plus foncé */
-      #e6e8e2 35%,
-      #f7f8f6 100%
-  );
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px 0 20px;
-}
-
-/*=================
-  CONTAINER
-=================*/
-
-.container {
-  margin: 0 auto;
-  max-width: 600px;
-  background: white;
-  width: 100%;
-  border-radius: 20px;
-}
 
 /*===============
   BOOKING
 ===============*/
 
 .booking {
-  padding: 40px 0;
   &__text {
     text-align: center;
     h1 {
       margin-bottom: 6px;
       color: #5a4e6a;
       font-family: "Playfair Display", serif;
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 600;
       letter-spacing: 0.2px;
     }
     p {
       color: #5a4e6a;
-      font-size: 14px;
+      font-size: 15px;
     }
   }
 }
 
 @media (max-width: 991.98px) {
   .booking {
-    padding: 30px 0;
-    min-height: 100%;
+    height: 100%;
     &__text {
       h1 {
         margin-bottom: 10px;
@@ -316,8 +278,7 @@ onMounted(async () => {
 
 @media (max-width: 767.98px) {
   .booking {
-    min-height: 100%;
-    padding: 20px 0;
+    height: 100%;
     &__text {
       h1 {
         margin-bottom: 10px;
@@ -374,30 +335,20 @@ onMounted(async () => {
 }
 
 /*===============
-  BOOKING ICON
-===============*/
-
-.booking__icon {
-  margin: 30px 0 30px 0;
-  text-align: center;
-  opacity: 0.5;
-  @media (max-width: 767.98px) {
-    margin: 25px 0 25px 0;
-  }
-}
-
-/*===============
   BOOKING FORM
  ===============*/
 
 .booking__form {
+  margin: 30px 0 20px 0;
   padding: 30px 20px 15px 20px;
-  margin: 0 90px;
   background: #fff;
   border-radius: 18px;
-  max-width: 600px;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   text-align: center;
+
+  //width: 100%;
+
+  width: 480px;
   h2 {
     font-size: 20px;
     color: #5a4e6a;
@@ -455,6 +406,7 @@ onMounted(async () => {
     background: #D7EAF2;
     border: 1px solid #BFD6E2;
     color: #6b6d78;
+    padding: 14px;
   }
   .alert {
     margin-top: 10px;
@@ -464,8 +416,7 @@ onMounted(async () => {
 
 @media (max-width: 991.98px) {
   .booking__form {
-    padding: 30px 20px 15px 20px;
-    margin: 0 90px;
+
     h2 {
       font-size: 17px;
       font-family: "Playfair Display", serif;
@@ -483,8 +434,9 @@ onMounted(async () => {
 
 @media (max-width: 767.98px) {
   .booking__form {
-    padding: 30px 20px 15px 20px;
-    margin: 0 20px;
+
+
+    width: 100%;
     h2 {
       font-size: 15px;
       font-family: "Playfair Display", serif;
