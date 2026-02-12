@@ -48,8 +48,8 @@ const props = defineProps<{
       />
     </svg>
 
-    <div class="separator-progress"></div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <div class="separator-progress" :class="{active: props.progress >= 4}"></div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: props.progress >= 4}">
       <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="2"/>
       <path d="M7 12l3 3 7-7" stroke="#ffffff" stroke-width="2" fill="none"/>
     </svg>

@@ -6,7 +6,7 @@ const PrestationsView = () => import('@/features/advocat/PrestationsView.vue')
 const ContactForm = () => import('@/features/advocat/components/contact/ContactForm.vue')
 const BookingView = () => import('@/features/advocat/components/booking/BookingView.vue')
 const BookingForm = () => import('@/features/advocat/components/booking/BookingForm.vue')
-const BookingConfirmation = () => import('@/features/advocat/components/booking/BookingConfirmation.vue')
+//const BookingConfirmation = () => import('@/features/advocat/components/booking/BookingConfirmation.vue')
 const TestimonialView = () => import('@/features/advocat/components/testimonials/TestimonialView.vue')
 const Legal = () => import('../templates/mentions-legales/Legal.vue')
 const Login = () => import('@/features/advocat/components/auth/Login.vue')
@@ -19,7 +19,7 @@ const routes = [
   { path: '/contact/form', component: ContactForm },
   { path: '/booking', component: BookingView },
   { path: '/booking/form', component: BookingForm },
-  { path: '/confirmation', component: BookingConfirmation },
+  //{ path: '/confirmation', component: BookingConfirmation },
   { path: '/testimonials', component: TestimonialView },
   { path: '/legal-notices', component: Legal },
   { path: '/login', component: Login },

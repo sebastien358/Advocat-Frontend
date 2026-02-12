@@ -235,48 +235,6 @@ onMounted(async () => {
 <style scoped lang="scss">
 
 /*===============
-  BOOKING
-===============*/
-
-
-
-/*===============
-  BOOKING DATE
-===============*/
-
-.booking__date {
-  margin: 0 auto 0 auto;
-  text-align: center;
-  width: 240px;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 500;
-  gap: 6px;
-  background: #D7EAF2;
-  border: 1px solid #BFD6E2;
-  color: #1F2937;
-  @media (max-width: 991.98px) {
-    margin: 10px auto 0 auto;
-    padding: 8px;
-  }
-  @media (max-width: 767.98px) {
-    margin: 10px auto 0 auto;
-    padding: 7px;
-  }
-  .date {
-    font-size: 13px;
-    @media (max-width: 991.98px) {
-     font-size: 13px;
-    }
-    @media (max-width: 767.98px) {
-      font-size: 12px;
-    }
-  }
-}
-
-
-
-/*===============
   BOOKING FORM
  ===============*/
 
@@ -401,6 +359,40 @@ onMounted(async () => {
     }
     .form-group input::placeholder {
       font-size: 11px;
+    }
+  }
+}
+
+/*===============
+  BOOKING DATE
+===============*/
+
+.booking__date {
+  margin: 0 auto 0 auto;
+  text-align: center;
+  width: 240px;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  gap: 6px;
+  background: #D7EAF2;
+  border: 1px solid #BFD6E2;
+  color: #1F2937;
+  @media (max-width: 991.98px) {
+    margin: 10px auto 0 auto;
+    padding: 8px;
+  }
+  @media (max-width: 767.98px) {
+    margin: 10px auto 0 auto;
+    padding: 7px;
+  }
+  .date {
+    font-size: 13px;
+    @media (max-width: 991.98px) {
+     font-size: 13px;
+    }
+    @media (max-width: 767.98px) {
+      font-size: 12px;
     }
   }
 }

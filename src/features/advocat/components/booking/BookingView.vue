@@ -9,6 +9,7 @@ import { gsap } from "gsap/gsap-core";
 import { useRouter } from "vue-router";
 import ProgressBooking from "@/templates/progress-bar/ProgressBooking.vue";
 import BookingForm from "@/features/advocat/components/booking/BookingForm.vue";
+import BookingConfirmation from "@/features/advocat/components/booking/BookingConfirmation.vue";
 
 const bookingServiceId = ref<number | null>(null);
 const bookingServiceText = ref<string | null>(null);
@@ -273,7 +274,6 @@ watch([() => bookingCategoryId.value, () => bookingServiceId.value, () => bookin
   { immediate: true },
 );
 
-
 /*=================
   REDIRECTION DU FORMULAIRE
 =================*/
@@ -291,6 +291,10 @@ const isStep2Complete = computed(() => {
     bookingSelectedSlot.value &&
     bookingSelectedDate.value
   )
+})
+
+const isStep3Complete = computed(() => {
+  return bookingStore.success
 })
 
 const bookingSelectedSlot = ref('')
@@ -364,24 +368,12 @@ watch(loadingPage, async (isLoading) => {
 
 const progress = ref<number>(1)
 
-watch(
-  [bookingCategoryId, bookingServiceId, bookingStaffId, bookingSelectedDate, bookingSelectedDate, bookingSelectedSlot],
-  () => {
-    if (
-      bookingCategoryId.value &&
-      bookingServiceId.value &&
-      bookingStaffId.value &&
-      bookingSelectedDate.value &&
-      bookingSelectedSlot.value
-    ) {
+watch([bookingCategoryId, bookingServiceId, bookingStaffId, bookingSelectedDate, bookingSelectedSlot, () => bookingStore.success], () => {
+    if (bookingStore.success) {
+      progress.value = 4
+    } else if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value && bookingSelectedDate.value && bookingSelectedSlot.value) {
       progress.value = 3
-    }
-    else if (
-      bookingCategoryId.value &&
-      bookingServiceId.value &&
-      bookingSelectedDate.value &&
-      bookingStaffId.value
-    ) {
+    } else if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value) {
       progress.value = 2
     }
     else {
@@ -390,6 +382,15 @@ watch(
   },
   { immediate: true }
 )
+
+console.log({
+  success: bookingStore.success,
+  category: bookingCategoryId.value,
+  service: bookingServiceId.value,
+  staff: bookingStaffId.value,
+  date: bookingSelectedDate.value,
+  slot: bookingSelectedSlot.value
+})
 
 watch(() => categoryStore.categories, (categories) => {
     if (categories.length && !bookingCategoryId.value) {
@@ -552,7 +553,7 @@ watch(() => categoryStore.categories, (categories) => {
         </div>
       </section>
 
-      <section v-else class="booking-form">
+      <section v-else-if="isStep3Complete" class="booking-form">
         <div class="booking-form__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
           <font-awesome-icon icon="fa-solid fa-xmark" />
@@ -570,12 +571,15 @@ watch(() => categoryStore.categories, (categories) => {
         <ProgressBooking :progress="progress" />
         <BookingForm />
       </section>
+
+      <section v-else>
+        <BookingConfirmation />
+      </section>
     </div>
   </main>
 </template>
 
 <style scoped lang="scss">
-
 
 .booking-form {
   &__description {
@@ -1184,7 +1188,7 @@ watch(() => categoryStore.categories, (categories) => {
     padding: 0 15px;
   }
   &__items .day-item {
-    padding: 16px 0;
+    padding: 13px 0;
     border-radius: 15px;
     outline: none;
     border: 1px solid #E5E7EB;
@@ -1195,7 +1199,7 @@ watch(() => categoryStore.categories, (categories) => {
     cursor: pointer;
     transition: all 0.15s ease;
 
-    width: 110px;
+    width: 120px;
     &:hover {
       background: #08d8ea;
       font-weight: 500;
@@ -1239,7 +1243,7 @@ watch(() => categoryStore.categories, (categories) => {
     }
   }
   &__slots {
-    margin: 19px 40px 0 40px;
+    margin: 22px 40px 0 40px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     gap: 10px;
@@ -1366,16 +1370,6 @@ watch(() => categoryStore.categories, (categories) => {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 /*=================
   LOADING SLOT

@@ -21,7 +21,9 @@ export interface Slot {
 
 export interface BookingState {
   bookingDraft: BookingDraft
-  slots: Slot[]
+  slots: Slot[],
+  success: boolean,
+  error: string | null
 }
 
 export const useBookingStore = defineStore('booking', {
@@ -34,8 +36,9 @@ export const useBookingStore = defineStore('booking', {
       datetime: null
     },
     slots: [],
+    success: false,
+    error: null
   }),
-
   actions: {
     setBookingDraft(payload: Partial<BookingDraft>) {
       this.bookingDraft = {
@@ -69,10 +72,24 @@ export const useBookingStore = defineStore('booking', {
       }
     },
     async createBooking(dataBooking: BookingFormInterface) {
-      return await axiosCreateBooking(dataBooking)
+
+      try {
+        const response = await axiosCreateBooking(dataBooking)
+        if (response) {
+          this.success = true
+          return response
+        }
+
+      } catch (e: any) {
+        this.error = e?.message || 'Erreur réservation'
+        this.success = false
+        throw e
+      }
     }
   },
 
-  persist: true
+  persist: {
+    paths: ['bookingDraft', 'slots']
+  }
 })
 
