@@ -5,6 +5,7 @@ import Calc from "@/templates/calc/Calc.vue";
 import { useAuthStore } from "@/stores/authStore.ts";
 import gsap from "gsap";
 import BookingView from "@/features/advocat/components/booking/BookingView.vue";
+import {useUiStore} from "@/stores/uiStore.ts";
 
 const authStore = useAuthStore();
 
@@ -56,8 +57,6 @@ const serviceMenu = ref<HTMLElement | null>(null);
 
 const isOpen = ref<boolean>(false);
 const isVisible = ref<boolean>(false);
-
-
 
 watch(
   isOpen,
@@ -128,12 +127,12 @@ onMounted(async () => {
   REDIRECTION RÉSERVATION
 ===============*/
 
+const uiStore = useUiStore()
+
 const router = useRouter();
 
-const isOpenReservation = ref<boolean>(false)
-
 function modalReservation() {
-  isOpenReservation.value = !isOpenReservation.value
+  return uiStore.openBooking()
 }
 
 const closeMenu = () => {
@@ -142,7 +141,7 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <BookingView v-if="isOpenReservation" />
+  <BookingView v-if="uiStore.isBookingOpen" />
   <header class="header" :class="{'is-scrolled': isHeaderVisible, 'menu-open': isOpen }">
 
     <div class="header__inner">

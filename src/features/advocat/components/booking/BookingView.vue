@@ -10,6 +10,7 @@ import { useRouter } from "vue-router";
 import ProgressBooking from "@/templates/progress-bar/ProgressBooking.vue";
 import BookingForm from "@/features/advocat/components/booking/BookingForm.vue";
 import BookingConfirmation from "@/features/advocat/components/booking/BookingConfirmation.vue";
+import {useUiStore} from "@/stores/uiStore.ts";
 
 const bookingServiceId = ref<number | null>(null);
 const bookingServiceText = ref<string | null>(null);
@@ -303,9 +304,7 @@ const isConfirmed = computed(() => {
   return bookingStore.success
 })
 
-
 const progress = computed(() => {
-
   if (bookingStore.success) return 4
 
   if (
@@ -404,6 +403,12 @@ watch(() => categoryStore.categories, (categories) => {
   },
   { immediate: true }
 )
+
+const uiStore = useUiStore()
+
+function closeModal() {
+  return uiStore.closeBooking()
+}
 </script>
 
 <template>
@@ -412,7 +417,7 @@ watch(() => categoryStore.categories, (categories) => {
       <section v-if="!isStep1Complete" class="booking" >
         <div class="booking__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
-          <font-awesome-icon icon="fa-solid fa-xmark" />
+          <font-awesome-icon icon="fa-solid fa-xmark" @click="closeModal()" />
         </div>
         <!-- Separator -->
         <div class="separator-top"></div>
@@ -503,7 +508,7 @@ watch(() => categoryStore.categories, (categories) => {
             <span>• Maître {{ bookingStaffText }}</span>
             <span>• {{ bookingServiceDuration }} min</span>
           </div>
-          <font-awesome-icon icon="fa-solid fa-xmark" />
+          <font-awesome-icon icon="fa-solid fa-xmark" @click="closeModal()" />
         </div>
         <!-- SEPARATOR -->
         <div class="separator-top"></div>
@@ -561,7 +566,7 @@ watch(() => categoryStore.categories, (categories) => {
       <section v-else-if="!isConfirmed" class="booking-form">
         <div class="booking-form__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
-          <font-awesome-icon icon="fa-solid fa-xmark" />
+          <font-awesome-icon icon="fa-solid fa-xmark" @click="closeModal()" />
         </div>
         <!-- Separator -->
         <div class="separator-top"></div>
@@ -580,7 +585,7 @@ watch(() => categoryStore.categories, (categories) => {
       <section v-else class="booking-confirmation">
         <div class="booking-confirmation__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
-          <font-awesome-icon icon="fa-solid fa-xmark" />
+          <font-awesome-icon icon="fa-solid fa-xmark" @click="closeModal()" />
         </div>
         <!-- Separator -->
         <div class="separator-top"></div>
