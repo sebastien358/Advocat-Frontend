@@ -1,10 +1,10 @@
+
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from "vue";
+import {computed, nextTick, onMounted, onUnmounted, ref} from "vue";
 import { useBookingStore } from "@/stores/bookingStore.ts";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import { useRouter } from "vue-router";
-import ProgressBooking from "@/templates/progress-bar/ProgressBooking.vue";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,6 +41,17 @@ const formattedDate = computed(() => {
 
 const router = useRouter();
 
+onMounted(() => {
+  const timer = setTimeout(() => {
+    bookingStore.resetBookingDraft()
+    router.replace('/') // mieux que push ici
+  }, 3000)
+
+  onUnmounted(() => {
+    clearTimeout(timer)
+  })
+})
+
 /*===============
   ANIMATION CONFIRMATION
 ===============*/
@@ -56,29 +67,11 @@ onMounted(async () => {
     ease: "power2.out",
   });
 });
-
-const progress = ref<number>(4)
 </script>
 
 <template>
   <div class="container">
   <div class="booking" ref="bookingRef">
-    <div class="booking__description">
-      <p>Préparez votre rendez-vous<strong></strong></p>
-      <font-awesome-icon icon="fa-solid fa-xmark" />
-    </div>
-    <!-- Separator -->
-    <div class="separator-top"></div>
-    <div class="booking__title">
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
-        <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
-        <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
-        <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
-      </svg>
-    </div>
-    <!-- Barre de progression -->
-    <ProgressBooking :progress="progress" />
       <!-- Booking date -->
       <div class="booking__date">
         <p class="date">📅 {{ formattedDate }}</p>

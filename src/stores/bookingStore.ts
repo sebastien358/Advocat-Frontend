@@ -55,6 +55,7 @@ export const useBookingStore = defineStore('booking', {
         datetime: null,
       }
       this.slots = []
+      this.success = false
     },
     async axiosSlots() {
       const { categoryId, serviceId, staffId, date } = this.bookingDraft

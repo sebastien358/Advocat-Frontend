@@ -275,8 +275,10 @@ watch([() => bookingCategoryId.value, () => bookingServiceId.value, () => bookin
 );
 
 /*=================
-  REDIRECTION DU FORMULAIRE
+ Progression
 =================*/
+
+// Categorie, service, staff
 
 const isStep1Complete = computed(() => {
   return (
@@ -286,15 +288,41 @@ const isStep1Complete = computed(() => {
   )
 })
 
+// Form
+
 const isStep2Complete = computed(() => {
   return (
-    bookingSelectedSlot.value &&
-    bookingSelectedDate.value
-  )
+    bookingSelectedDate.value &&
+    bookingSelectedSlot.value
+    )
 })
 
-const isStep3Complete = computed(() => {
+// Confirmation
+
+const isConfirmed = computed(() => {
   return bookingStore.success
+})
+
+
+const progress = computed(() => {
+
+  if (bookingStore.success) return 4
+
+  if (
+    bookingCategoryId.value &&
+    bookingServiceId.value &&
+    bookingStaffId.value &&
+    bookingSelectedDate.value &&
+    bookingSelectedSlot.value
+  ) return 3
+
+  if (
+    bookingCategoryId.value &&
+    bookingServiceId.value &&
+    bookingStaffId.value
+  ) return 2
+
+  return 1
 })
 
 const bookingSelectedSlot = ref('')
@@ -366,31 +394,8 @@ watch(loadingPage, async (isLoading) => {
   }
 });
 
-const progress = ref<number>(1)
+//const progress = ref<number>(1)
 
-watch([bookingCategoryId, bookingServiceId, bookingStaffId, bookingSelectedDate, bookingSelectedSlot, () => bookingStore.success], () => {
-    if (bookingStore.success) {
-      progress.value = 4
-    } else if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value && bookingSelectedDate.value && bookingSelectedSlot.value) {
-      progress.value = 3
-    } else if (bookingCategoryId.value && bookingServiceId.value && bookingStaffId.value) {
-      progress.value = 2
-    }
-    else {
-      progress.value = 1
-    }
-  },
-  { immediate: true }
-)
-
-console.log({
-  success: bookingStore.success,
-  category: bookingCategoryId.value,
-  service: bookingServiceId.value,
-  staff: bookingStaffId.value,
-  date: bookingSelectedDate.value,
-  slot: bookingSelectedSlot.value
-})
 
 watch(() => categoryStore.categories, (categories) => {
     if (categories.length && !bookingCategoryId.value) {
@@ -553,7 +558,7 @@ watch(() => categoryStore.categories, (categories) => {
         </div>
       </section>
 
-      <section v-else-if="isStep3Complete" class="booking-form">
+      <section v-else-if="!isConfirmed" class="booking-form">
         <div class="booking-form__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
           <font-awesome-icon icon="fa-solid fa-xmark" />
@@ -572,7 +577,22 @@ watch(() => categoryStore.categories, (categories) => {
         <BookingForm />
       </section>
 
-      <section v-else>
+      <section v-else class="booking-confirmation">
+        <div class="booking-confirmation__description">
+          <p>Préparez votre rendez-vous<strong></strong></p>
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </div>
+        <!-- Separator -->
+        <div class="separator-top"></div>
+        <div class="booking__title">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+            <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+            <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+            <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
+          </svg>
+        </div>
+        <ProgressBooking :progress="progress" />
         <BookingConfirmation />
       </section>
     </div>
@@ -605,7 +625,6 @@ watch(() => categoryStore.categories, (categories) => {
     border-bottom: 1px solid #e0e0e0;
     padding-top: 20px;
   }
-
 }
 
 
@@ -614,7 +633,31 @@ watch(() => categoryStore.categories, (categories) => {
 
 
 
-
+.booking-confirmation {
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+  }
+  &__description p {
+    font-family: "Playfair Display", serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #2F2F2F;
+  }
+  &__description .fa-xmark {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    font-weight: 900;
+  }
+  .separator-top {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 20px;
+  }
+}
 
 
 

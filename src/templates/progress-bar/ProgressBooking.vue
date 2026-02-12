@@ -20,7 +20,6 @@ const props = defineProps<{
       <rect x="7" y="12" width="4" height="4" rx="1" fill="#ffffff"/>
     </svg>
 
-
     <div class="separator-progress" :class="{active: props.progress >= 3}"></div>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :class="{active: props.progress >= 3}">
       <!-- feuille -->
@@ -99,5 +98,4 @@ const props = defineProps<{
     background: #08d8ea;
   }
 }
-
 </style>

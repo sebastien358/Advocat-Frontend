@@ -201,7 +201,6 @@ onMounted(async () => {
               v-if="successMessage"
               :successMessage="successMessage"
               type="success"
-              to="/confirmation"
               class="alert"
               @close="handleResetForm()"
             />
