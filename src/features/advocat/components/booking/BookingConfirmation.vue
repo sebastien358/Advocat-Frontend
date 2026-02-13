@@ -187,7 +187,7 @@ onMounted(() => {
     padding: 8px;
   }
   @media (max-width: 767.98px) {
-    padding: 7px;
+    padding: 9px;
   }
   .date {
     font-size: 13px;

@@ -673,6 +673,7 @@ function closeModal() {
 }
 
 .booking-confirmation {
+  padding: 10px 0 0 0;
   &__summary {
     display: flex;
     align-items: flex-start;
@@ -710,19 +711,6 @@ function closeModal() {
     @media (max-width: 767.98px) {
       font-size: 12px;
     }
-  }
-  &__description {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0 0 0;
-  }
-  &__description p {
-    font-family: "Playfair Display", serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    color: #2F2F2F;
   }
   &__description .fa-xmark {
     cursor: pointer;
