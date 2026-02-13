@@ -1,10 +1,11 @@
 
 <script setup lang="ts">
-import {computed, nextTick, onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 import { useBookingStore } from "@/stores/bookingStore.ts";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import { useRouter } from "vue-router";
+import {useUiStore} from "@/stores/uiStore.ts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,52 +40,38 @@ const formattedDate = computed(() => {
   RESET DATA BOOKING
 ===============*/
 
-const router = useRouter();
+const uiStore = useUiStore()
+const router = useRouter()
 
 onMounted(() => {
-  const timer = setTimeout(() => {
+  const timeout = setTimeout(() => {
+    uiStore.closeBooking()
     bookingStore.resetBookingDraft()
-    router.replace('/') // mieux que push ici
+    router.replace('/')
   }, 3000)
 
   onUnmounted(() => {
-    clearTimeout(timer)
+    clearTimeout(timeout)
   })
 })
-
-/*===============
-  ANIMATION CONFIRMATION
-===============*/
-
-const bookingRef = ref<HTMLElement | null>(null);
-
-onMounted(async () => {
-  await nextTick();
-  gsap.from(bookingRef.value, {
-    opacity: 0,
-    filter: "blur(6px)",
-    duration: 0.8,
-    ease: "power2.out",
-  });
-});
 </script>
 
 <template>
-  <div class="container">
-  <div class="booking" ref="bookingRef">
+  <div class="container-confirmation">
+    <div class="booking">
       <!-- Booking date -->
       <div class="booking__date">
         <p class="date">📅 {{ formattedDate }}</p>
       </div>
       <!-- Booking text -->
-      <div class="booking_text">
-        <p class="booking_text--main">
+      <div class="booking__text">
+        <p class="booking__text--main">
           Votre rendez-vous est bien enregistré.
         </p>
-        <p class="booking_text--secondary">
+        <p class="booking__text--secondary">
           Vous recevrez prochainement une confirmation par email.
         </p>
-        <p class="booking_text--hint">
+        <p class="booking__text--hint">
           Le cabinet vous contactera si des informations complémentaires sont nécessaires.
         </p>
       </div>
@@ -97,7 +84,7 @@ onMounted(async () => {
   CONTAINER
 ===============*/
 
-.container {
+.container-confirmation {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,9 +142,12 @@ onMounted(async () => {
     font-weight: 600;
     letter-spacing: 0.2px;
   }
-  .booking_text {
+  .booking__text {
     text-align: center;
     margin-top: 8px;
+    @media (max-width: 767.98px) {
+      margin-top: -3px;
+    }
     &--main {
       font-size: 14px;
       font-weight: 500;
@@ -183,7 +173,7 @@ onMounted(async () => {
 ===============*/
 
 .booking__date {
-  margin: -5px auto 30px auto;
+  margin: 10px auto 30px auto;
   text-align: center;
   width: 240px;
   padding: 10px;

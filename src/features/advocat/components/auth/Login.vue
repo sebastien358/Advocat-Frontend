@@ -138,9 +138,9 @@ onMounted(() => {
             @close="closeFields()"
           />
           <div class="form__actions">
-            <button class="btn-submit" :disabled="isSubmitting">
+            <button class="btn btn-login" :disabled="isSubmitting">
               <span v-if="isSubmitting">Chargement...</span>
-              <span v-else>Envoyer</span>
+              <span v-else>Connexion</span>
             </button>
           </div>
         </form>
@@ -229,7 +229,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    .btn-submit {
+    .btn-login {
       margin-top: 12px;
     }
   }

@@ -2,7 +2,8 @@
 import ScrollTrigger from "gsap/ScrollTrigger";
 import {nextTick, onMounted, onUnmounted, ref} from "vue";
 import { gsap } from "gsap";
-
+import {useOpeningStatus} from "@/shared/date/useOpeningStatus.ts";
+const { isOpen, nextOpening, closingHour } = useOpeningStatus();
 gsap.registerPlugin(ScrollTrigger);
 
 /*======================
@@ -98,6 +99,15 @@ const toggle = async (index) => {
           <p class="hero__subtitle">
             Avocats installés à Évreux et Bernay
           </p>
+          <div class="hero-status" :class="isOpen ? 'hero-status--open' : 'hero-status--closed'">
+            <span class="hero-status__dot"></span>
+            <span v-if="isOpen">
+              Ouvert maintenant • Ferme à {{ closingHour }}
+            </span>
+            <span v-else>
+              Fermé • Réouverture {{ nextOpening }}
+            </span>
+          </div>
           <div class="hero__actions">
             <a href="tel:0780468148" class="btn btn-primary">07 80 46 81 48</a>
             <router-link to="/contact/form" class="btn btn-ghost">Contactez-nous</router-link>
@@ -229,7 +239,6 @@ const toggle = async (index) => {
 
       <section class="contact-quick">
         <div class="contact-quick__container">
-
           <div class="contact-quick__item">
             <div class="contact-quick__icon">📍</div>
             <h4>Adresse</h4>
@@ -238,22 +247,18 @@ const toggle = async (index) => {
               27000 Évreux
             </p>
           </div>
-
           <div class="contact-quick__item">
             <div class="contact-quick__icon">📞</div>
             <h4>Téléphone</h4>
             <p>07 80 46 81 48</p>
           </div>
-
           <div class="contact-quick__item">
             <div class="contact-quick__icon">✉️</div>
             <h4>E-mail</h4>
             <p>contact@advocat.fr</p>
           </div>
-
         </div>
       </section>
-
 
       <!-- REVENUR EN HAUT -->
       <button
@@ -292,7 +297,7 @@ const toggle = async (index) => {
 
 .hero {
   position: relative;
-  min-height: 100vh; // mobile moderne
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -312,11 +317,36 @@ const toggle = async (index) => {
     font-style: italic;
     opacity: .9;
   }
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  .hero-status__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .hero-status--open .hero-status__dot {
+    background: #4ade80;
+  }
+  .hero-status--closed .hero-status__dot {
+    background: #ef4444;
+  }
   /* IMAGE */
   &__bg {
     position: absolute;
     inset: 0;
-    background-image: url('@/assets/images/tribunal.jpg');
+    background-image: url('@/assets/images/tribunal-2.jpg');
     background-size: 140% auto;
     background-repeat: no-repeat;
     z-index: 1;
@@ -388,7 +418,9 @@ const toggle = async (index) => {
       font-size: 17px;
       margin-top: 10px;
     }
-
+    .hero-status {
+      font-size: 0.75rem;
+    }
     &__content {
       position: relative;
       z-index: 3;
@@ -434,6 +466,9 @@ const toggle = async (index) => {
     &__subtitle {
       font-size: 16px;
       margin-top: 10px;
+    }
+    .hero-status {
+      font-size: 0.70rem;
     }
     &__bg {
       background-position: center 65%;

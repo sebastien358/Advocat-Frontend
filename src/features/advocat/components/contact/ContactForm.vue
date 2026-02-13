@@ -176,7 +176,7 @@ onMounted(async () => {
             @close="closeFields()"
           />
           <div class="form-submit">
-            <button class="btn btn-submit" :disabled="isSubmitting">
+            <button class="btn btn-login" :disabled="isSubmitting">
               <span v-if="isSubmitting">Envoi en cours…</span>
               <span v-else>Envoyer</span>
             </button>
@@ -261,26 +261,6 @@ onMounted(async () => {
     grid-template-columns: 400px auto;
     gap: 1.2rem;
   }
-  .contact__form {
-    h2 {
-      font-size: 1.5rem;
-    }
-    .contact__subtitle {
-      font-size: 14px;
-    }
-    input,
-    textarea {
-      font-size: 13px;
-      &:focus {
-        border-color: #d3aeff;
-        background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
-      }
-      &::placeholder {
-        font-size: 12px;
-      }
-    }
-  }
 }
 
 @media (max-width: 767.98px) {
@@ -294,31 +274,6 @@ onMounted(async () => {
     gap: 1.2rem;
     max-width: 100%;
   }
-  .contact__form {
-    h2 {
-      font-size: 1.2rem;
-    }
-    .contact__subtitle {
-      font-size: 13px;
-    }
-    input,
-    textarea {
-      font-size: 13px;
-      &:focus {
-        border-color: #d3aeff;
-        background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
-      }
-      &::placeholder {
-        font-size: 11px;
-      }
-    }
-  }
-  .contact__form,
-  .contact__info {
-    padding: 1.8rem 1.7rem;
-    width: 100%;
-  }
 }
 
 
@@ -331,26 +286,22 @@ onMounted(async () => {
   padding: 2rem 1.7rem;
   border-radius: 1.2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
   h2 {
-    font-size: 1.7rem;
+    font-size: 24px;
     margin-bottom: 0.3rem;
     font-weight: 700;
     font-family: "Playfair Display", serif;
   }
-
   .contact__subtitle {
     margin-bottom: 15px;
     color: #777;
     font-size: 15px;
   }
-
   .form-group {
     display: flex;
     flex-direction: column;
     margin-top: 15px;
   }
-
   input,
   textarea {
     padding: 0.8rem 1rem;
@@ -391,12 +342,60 @@ onMounted(async () => {
   }
 }
 
-
-
 /*=====================
   RESPONSIVE FORM
 =====================*/
 
+@media (max-width: 991.98px) {
+  .contact__form {
+    h2 {
+      font-size: 1.5rem;
+    }
+    .contact__subtitle {
+      font-size: 14px;
+    }
+    input,
+    textarea {
+      font-size: 13px;
+      &:focus {
+        border-color: #d3aeff;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
+      }
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .contact__form {
+    h2 {
+      font-size: 1.2rem;
+    }
+    .contact__subtitle {
+      font-size: 13px;
+    }
+    input,
+    textarea {
+      font-size: 13px;
+      &:focus {
+        border-color: #d3aeff;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
+      }
+      &::placeholder {
+        font-size: 11px;
+      }
+    }
+  }
+  .contact__form,
+  .contact__info {
+    padding: 1.8rem 1.7rem;
+    width: 100%;
+  }
+}
 
 
 /*=====================

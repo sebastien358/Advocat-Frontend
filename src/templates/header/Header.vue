@@ -100,8 +100,6 @@ watch(
   { flush: "post" }
 );
 
-
-
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
@@ -202,7 +200,6 @@ const closeMenu = () => {
     </div>
     <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
   </header>
-
 </template>
 
 <style scoped lang="scss">

@@ -68,6 +68,17 @@
       transform: translateY(-1px);
     }
   }
+  &-login {
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-top: 10px;
+    font-size: 12px;
+    background: var(--green-page);
+    color: #fff;
+    @media (max-width: 767.98px) {
+      font-size: 10px;
+    }
+  }
   &-modal {
     margin-top: 10px;
     background: #f3e8ff;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AlertMessage from "@/templates/alert-message/AlertMessage.vue";
-import { computed, nextTick, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import { useBookingStore } from "@/stores/bookingStore.ts";
 import { useForm, useField } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -145,27 +145,11 @@ function handleResetForm() {
   closeFields();
   reset();
 }
-
-/*===============
-  FORM, TITLE, ANIMATIONS GSAP
-===============*/
-
-const bookingFormRef = ref<HTMLElement | null>(null);
-
-onMounted(async () => {
-  await nextTick();
-
-  gsap.from(bookingFormRef.value, {
-    opacity: 0,
-    y: 10,
-    duration: 0.6,
-  });
-});
 </script>
 
 <template>
   <div class="page">
-    <div class="container" ref="bookingFormRef">
+    <div class="container">
       <div class="booking">
         <!-- Booking date -->
         <div class="booking__date">
@@ -238,15 +222,15 @@ onMounted(async () => {
  ===============*/
 
 .booking__form {
-  margin: 40px 0 20px 0;
+  margin: 30px 0 20px 0;
   padding: 30px 20px 15px 20px;
   background: #fff;
-  border-radius: 18px;
+  border-radius: 3px;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
   text-align: center;
   width: 480px;
   h2 {
-    font-size: 18px;
+    font-size: 17px;
     color: #5a4e6a;
     font-family: "Playfair Display", serif;
     margin-bottom: 20px;
@@ -269,8 +253,8 @@ onMounted(async () => {
     input {
       width: 100%;
       font-size: 12px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
+      border-radius: 4px;
+      border: 1px solid #dfe4ea;
       background: #f9fafb;
       padding: 14px;
       transition:
@@ -293,9 +277,8 @@ onMounted(async () => {
   input:focus,
   .booking__form textarea:focus {
     outline: none;
-    border-color: #d3aeff;
+    border-color: #D7EAF2;
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
   }
   .btn {
     margin-top: 10px;
@@ -304,6 +287,7 @@ onMounted(async () => {
     color: #6b6d78;
     padding: 14px;
     font-size: 11px;
+    font-weight: normal;
   }
   .alert {
     margin-top: 10px;
@@ -314,7 +298,7 @@ onMounted(async () => {
 @media (max-width: 991.98px) {
   .booking__form {
     h2 {
-      font-size: 17px;
+      font-size: 16px;
       font-family: "Playfair Display", serif;
       margin-bottom: 22px;
     }
@@ -326,14 +310,13 @@ onMounted(async () => {
       }
     }
     .btn {
-      padding: 12px;
+      padding: 11px;
     }
   }
 }
 
 @media (max-width: 767.98px) {
   .booking__form {
-
     width: 100%;
     h2 {
       font-size: 14px;
@@ -367,7 +350,7 @@ onMounted(async () => {
 ===============*/
 
 .booking__date {
-  margin: 0 auto 0 auto;
+  margin: 30px auto 0 auto;
   text-align: center;
   width: 240px;
   padding: 10px;
@@ -378,12 +361,12 @@ onMounted(async () => {
   border: 1px solid #BFD6E2;
   color: #1F2937;
   @media (max-width: 991.98px) {
-    margin: 10px auto 0 auto;
+    margin: 30px auto 0 auto;
     padding: 8px;
   }
   @media (max-width: 767.98px) {
-    margin: 10px auto 0 auto;
-    padding: 7px;
+    margin: 30px auto 0 auto;
+    padding: 9px;
   }
   .date {
     font-size: 13px;

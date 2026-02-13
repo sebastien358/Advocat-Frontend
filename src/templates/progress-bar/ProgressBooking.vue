@@ -62,7 +62,7 @@ const props = defineProps<{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 25px 0 35px;
+  margin: 25px 0 0 0;
   width: 100%;
   .separator-progress-left,
   .separator-progress-right {
@@ -70,23 +70,17 @@ const props = defineProps<{
     height: 2px;
     background: #dfe4ea;
   }
-
   .separator-progress-left.active {
     background: #08d8ea;
   }
-
-
   .separator-progress {
     width: 40px;
     height: 2px;
     background: #dfe4ea;
   }
-
   .separator-progress.active {
     background: #08d8ea;
   }
-
-
   svg {
     background: #dfe4ea;
     padding: 5px;
