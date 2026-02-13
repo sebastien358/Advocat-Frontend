@@ -479,6 +479,7 @@ const closeMenu = () => {
     color: white;
     text-align: center;
     border: 0;
+    cursor: pointer;
   }
 }
 

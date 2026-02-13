@@ -213,9 +213,9 @@ onMounted(() => {
       margin-left: auto;
       margin-right: auto;
       &:focus {
-        border-color: #d3aeff;
+        border-color: var(--green-page);
         background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
+        box-shadow: 0 0 0 3px rgba(141, 174, 95, 0.22);
       }
       &::placeholder {
         font-size: 12px;

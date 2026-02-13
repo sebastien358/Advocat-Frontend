@@ -77,6 +77,159 @@ const toggle = async (index) => {
     )
   }
 }
+
+/*======================
+  ANIMATION HERO
+======================*/
+
+const heroTitleRef = ref<HTMLElement | null>(null)
+const heroSubtitleRef = ref<HTMLElement | null>(null)
+
+function heroAnimation() {
+  const tl = gsap.timeline({
+    defaults: {
+      ease: 'power2.out',
+      duration: 0.5
+    }
+  })
+
+  tl.from(heroTitleRef.value, {
+    opacity: 0,
+    y: 40
+  })
+
+  tl.from(heroSubtitleRef.value, {
+    opacity: 0,
+    y: 30
+  }, "-=0.3")
+
+  tl.from(".btn-primary, .btn-ghost", {
+    opacity: 0,
+    y: 20,
+    stagger: 0.1
+  }, "-=0.3")
+}
+
+/*======================
+  ANIMATION TEAM
+======================*/
+
+const cabinetIntroRef = ref<HTMLElement | null>(null)
+const cabinetTeamRef1 = ref<HTMLElement | null>(null)
+const cabinetTeamRef2 = ref<HTMLElement | null>(null)
+
+function teamAnimation() {
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: cabinetIntroRef.value,
+      start: "top 80%",
+      once: true
+    },
+    defaults: {
+      ease: "power3.out",
+      duration: 0.8
+    }
+  })
+
+  tl.from(cabinetIntroRef.value, {
+    opacity: 0,
+    y: 40
+  })
+
+  tl.from(cabinetTeamRef1.value, {
+    opacity: 0,
+    y: 30
+  }, "-=0.5")
+
+  tl.from(".block-1", {
+    opacity: 0,
+    y: 30,
+    stagger: 0.15
+  }, "-=0.5")
+
+  tl.from(cabinetTeamRef2.value, {
+    opacity: 0,
+    y: 30
+  }, "-=0.5")
+
+  tl.from(".block-2", {
+    opacity: 0,
+    y: 30,
+    stagger: 0.15
+  }, "-=0.5")
+}
+
+/*======================
+  ANIMATION ENGAGEMENT QUALITY
+======================*/
+
+const engagementQualityGrid = ref<HTMLElement | null>(null)
+
+function animEngagementQuality() {
+  const elems = engagementQualityGrid.value.querySelectorAll('.engagements-quality__item')
+
+  gsap.from(elems, {
+    opacity: 0,
+    y: 20,
+    ease: 'power3.out',
+    duration: 0.8,
+    stagger: 0.2,
+    scrollTrigger: {
+      trigger: engagementQualityGrid.value,
+      start: "top 80%",
+      once: true
+    },
+  })
+}
+
+/*======================
+  ANIMATION
+======================*/
+
+const caseSubmitSubtitle = ref<HTMLElement | null>(null)
+const caseSubmitTitle = ref<HTMLElement | null>(null)
+const caseSubmitText = ref<HTMLElement | null>(null)
+
+function animCaseSubmit() {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: caseSubmitSubtitle.value,
+      start: "top 90%",
+      once: true
+    },
+    defaults: {
+      ease: "power4.out",
+      duration: 0.6
+    }
+  })
+
+  tl.from(caseSubmitSubtitle.value, {
+    opacity: 0,
+    y: 30
+  })
+
+  tl.from(caseSubmitTitle.value, {
+    opacity: 0,
+    y: 30
+  }, "-=0.4")
+
+  tl.from(caseSubmitText.value, {
+    opacity: 0,
+    y: 30
+  }, "-=0.4")
+
+  tl.fromTo('.case-submit__cta',
+    { opacity: 0, x: 100 },
+    { opacity: 1, x: 0, duration: 0.3 })
+}
+
+onMounted(() => {
+  heroAnimation()
+  teamAnimation()
+  animEngagementQuality()
+  animCaseSubmit()
+})
 </script>
 
 <template>
@@ -87,35 +240,42 @@ const toggle = async (index) => {
       <section id="hero" class="hero">
        <div class="hero__bg"></div>
         <div class="hero__content">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
-               xmlns="http://www.w3.org/2000/svg">
-            <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
-            <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
-            <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
-            <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
-          </svg>
-          <h1>Maître Julien Morel</h1>
-          <h2>Maître Claire Dumas</h2>
-          <p class="hero__subtitle">
-            Avocats installés à Évreux et Bernay
-          </p>
-          <div class="hero-status" :class="isOpen ? 'hero-status--open' : 'hero-status--closed'">
-            <span class="hero-status__dot"></span>
-            <span v-if="isOpen">
+
+          <div ref="heroTitleRef">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
+              <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
+              <path d="M48 16L38 32H58L48 16Z" fill="currentColor"/>
+              <rect x="20" y="44" width="24" height="6" fill="currentColor"/>
+            </svg>
+            <h1>Maître Julien Morel</h1>
+            <h2>Maître Claire Dumas</h2>
+          </div>
+
+          <div ref="heroSubtitleRef">
+            <p class="hero__subtitle">
+              Avocats installés à Évreux et Bernay
+            </p>
+            <div class="hero-status" :class="isOpen ? 'hero-status--open' : 'hero-status--closed'">
+              <span class="hero-status__dot"></span>
+              <span v-if="isOpen">
               Ouvert maintenant • Ferme à {{ closingHour }}
             </span>
-            <span v-else>
+              <span v-else>
               Fermé • Réouverture {{ nextOpening }}
             </span>
+            </div>
           </div>
-          <div class="hero__actions">
+
+          <div class="hero__actions" ref="heroButtonsRef">
             <a href="tel:0780468148" class="btn btn-primary">07 80 46 81 48</a>
             <router-link to="/contact/form" class="btn btn-ghost">Contactez-nous</router-link>
           </div>
         </div>
       </section>
       <!-- INTRO -->
-      <section id="cabinet-intro" class="intro">
+      <section id="cabinet-intro" class="intro" ref="cabinetIntroRef">
         <h2>Une équipe dynamique à votre écoute</h2>
         <p>
           Installé à <strong>Évreux</strong> et <strong>Bernay</strong>, notre cabinet
@@ -130,9 +290,9 @@ const toggle = async (index) => {
 
       <section id="equipe" class="sections">
         <!-- BLOC 1 : ÉQUIPE -->
-        <section class="block block--team">
+        <section class="block block--team" ref="cabinetTeamRef1">
           <div class="block__grid">
-            <div class="block__content">
+            <div class="block__content block-1">
               <h2>Une équipe dynamique à votre écoute</h2>
               <p class="block__content__subtitle">Cabinet implanté à Évreux et Bernay.</p>
               <ul>
@@ -146,10 +306,10 @@ const toggle = async (index) => {
           </div>
         </section>
         <!-- BLOC 2 : DOMAINES -->
-        <section id="expertises" class="block block--domains">
+        <section id="expertises" class="block block--domains" ref="cabinetTeamRef2">
           <div class="block__grid">
             <img src="@/assets/images/pexels-smuldur-30573089.jpg" alt="">
-            <div class="block__content">
+            <div class="block__content block-2">
               <h2>Des domaines de compétence diversifiés</h2>
               <ul class="checks">
                 <li>Droit de la famille</li>
@@ -191,7 +351,7 @@ const toggle = async (index) => {
         <div class="engagements-quality__container">
           <span class="engagements-quality__surtitle">Avocats à Évreux et Bernay</span>
           <h2 class="engagements-quality__title">Nos engagements de qualité</h2>
-          <div class="engagements-quality__grid">
+          <div class="engagements-quality__grid" ref="engagementQualityGrid">
             <div class="engagements-quality__item">
               <div class="engagements-quality__icon">📘</div>
               <h3>Écoute</h3>
@@ -223,15 +383,18 @@ const toggle = async (index) => {
           <img src="@/assets/images/affaire.jpg" alt="Une affaire à soumettre à notre cabinet">
         </div>
         <div class="case-submit__content">
-          <span class="case-submit__subtitle">Avocats à Évreux et Bernay</span>
-          <h2>Une affaire à soumettre<br>à notre cabinet&nbsp;?</h2>
-          <p>
+          <span class="case-submit__subtitle" ref="caseSubmitSubtitle">Avocats à Évreux et Bernay</span>
+          <h2 ref="caseSubmitTitle">Une affaire à soumettre<br>à notre cabinet&nbsp;?</h2>
+          <p ref="caseSubmitText">
             L’accueil téléphonique de Maître Julien Morel  est ouvert
             du lundi au vendredi de 9h30 à 12h30 et de 13h30 à 17h.
             <br>
             Contactez-nous pour un rendez-vous.
           </p>
+
           <router-link to="/contact/form" class="case-submit__cta">Contactez-nous</router-link>
+
+
         </div>
       </section>
 
@@ -1102,7 +1265,6 @@ const toggle = async (index) => {
   color: white;
   border: none;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(162, 89, 255, 0.35);
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
