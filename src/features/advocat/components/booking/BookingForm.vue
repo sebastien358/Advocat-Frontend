@@ -317,6 +317,7 @@ function handleResetForm() {
 
 @media (max-width: 767.98px) {
   .booking__form {
+    padding: 20px 20px 15px 20px;
     width: 100%;
     h2 {
       font-size: 14px;
@@ -329,6 +330,7 @@ function handleResetForm() {
         font-size: 9px;
         padding-left: 2px;
         margin-left: 3px;
+        margin-top: 2px;
       }
     }
     .btn {
@@ -336,8 +338,8 @@ function handleResetForm() {
       padding: 10px;
     }
     .form-group input {
-      font-size: 13px;
-      padding: 13px 10px;
+      font-size: 12px;
+      padding: 12px 8px;
     }
     .form-group input::placeholder {
       font-size: 11px;

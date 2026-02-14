@@ -571,7 +571,7 @@ function closeModal() {
         </div>
         <!-- Separator -->
         <div class="separator-top"></div>
-        <div class="booking__title">
+        <div class="booking-form__title">
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M32 8V44" stroke="currentColor" stroke-width="4"/>
             <path d="M16 16L6 32H26L16 16Z" fill="currentColor"/>
@@ -651,13 +651,18 @@ function closeModal() {
       font-size: 11px;
     }
   }
-  .separator-top {
-    border-bottom: 1px solid #e0e0e0;
-    padding-top: 15px;
+  &__description .fa-xmark {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    font-weight: 900;
   }
   .separator-top {
     border-bottom: 1px solid #e0e0e0;
     padding-top: 15px;
+    @media (max-width: 767.98px) {
+      padding-top: 10px;
+    }
   }
   &__title {
     margin-top: 30px;
@@ -684,7 +689,7 @@ function closeModal() {
     text-align: center;
     letter-spacing: 0.2px;
     @media (max-width: 767.98px) {
-      font-size: 12px;
+      font-size: 11px;
     }
     span {
       white-space: nowrap;
@@ -709,7 +714,7 @@ function closeModal() {
     letter-spacing: 0.2px;
     color: #2F2F2F;
     @media (max-width: 767.98px) {
-      font-size: 12px;
+      font-size: 11px;
     }
   }
   &__description .fa-xmark {
@@ -721,6 +726,9 @@ function closeModal() {
   .separator-top {
     border-bottom: 1px solid #e0e0e0;
     padding-top: 15px;
+    @media (max-width: 767.98px) {
+      padding-top: 10px;
+    }
   }
   &__title {
     margin-top: 30px;
@@ -734,12 +742,6 @@ function closeModal() {
     }
   }
 }
-
-
-
-
-
-
 
 .page-wrapper {
   position: fixed;
@@ -811,10 +813,6 @@ function closeModal() {
   }
 }
 
-@media (max-width: 991.98px) {
-  .loading-overlay {}
-}
-
 @media (max-width: 767.98px) {
   .loading-overlay {
     &__loader {
@@ -837,7 +835,7 @@ function closeModal() {
   }
   &__description p {
     font-family: "Playfair Display", serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.2px;
     color: #2F2F2F;
@@ -887,11 +885,15 @@ function closeModal() {
   .booking {
     padding: 15px 0 0 0;
     &__description p {
-      font-size: 13px;
+      font-size: 12px;
     }
     &__subtitle {
       font-size: 12px;
       text-align: center;
+    }
+    .separator-top {
+      border-bottom: 1px solid #e0e0e0;
+      padding-top: 10px;
     }
   }
 }
@@ -934,7 +936,7 @@ function closeModal() {
     margin: 30px 0 0 0;
     gap: 10px;
     .btn-category {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 }
@@ -960,7 +962,7 @@ function closeModal() {
     display: flex;
     align-items: center;
     column-gap: 5px;
-    font-size: 18px;
+    font-size: 17px;
     letter-spacing: 0.3px;
   }
   &__description-text span {
@@ -1035,11 +1037,15 @@ function closeModal() {
 @media (max-width: 767.98px) {
   .booking-service {
     display: block;
+    &__description {
+      margin-bottom: 8px;
+    }
     &__description-text {
       justify-content: center;
+      font-size: 16px;
     }
     .service-label {
-      font-size: 16px;
+      font-size: 15px;
       width: 100%;
     }
     .service-menu {
@@ -1148,6 +1154,9 @@ function closeModal() {
       align-items: center;
       gap: 10px;
     }
+    &__card__content__avatar .name {
+      font-size: 13px;
+    }
     &__card__content__avatar img {
       border-radius: 50%;
       width: 48px;
@@ -1176,12 +1185,18 @@ function closeModal() {
       &__card__content {
         width: 250px;
       }
+      &__card__content__avatar .name {
+        font-size: 12px;
+      }
       &__card__content.one-card {
         width: 230px;
       }
       &__card__content__avatar img.one-card {
         width: 50px;
         height: 50px;
+      }
+      &__card__content__avatar .name.one-card {
+        font-size: 13px;
       }
     }
   }
@@ -1341,7 +1356,6 @@ function closeModal() {
     box-shadow:
     0 8px 18px rgba(0, 0, 0, 0.12),
     0 2px 6px rgba(0, 0, 0, 0.06);
-
   }
   &__pagination {
     display: flex;
@@ -1427,7 +1441,6 @@ function closeModal() {
       margin-top: 30px;
       .day-item {
         font-size: 13px;
-        //padding: 10px 0;
       }
     }
     &__pagination {
@@ -1448,6 +1461,9 @@ function closeModal() {
   }
 
   .booking-reservation {
+    .separator-top {
+      padding-top: 10px;
+    }
     &__items {
       .days-list {
         gap: 8px;
@@ -1475,8 +1491,8 @@ function closeModal() {
 
 @media (max-width: 575.98px) {
   .booking-reservation {
-    .booking-reservation-title {
-
+    .separator-top {
+      padding-top: 10px;
     }
     &__items {
       .days-list {

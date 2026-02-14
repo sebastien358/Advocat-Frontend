@@ -120,66 +120,33 @@ const cabinetTeamRef2 = ref<HTMLElement | null>(null)
 
 function teamAnimation() {
 
-  const tl = gsap.timeline({
+  const isDesktop = window.innerWidth > 767.98
+
+  // SECTION 1
+  gsap.from([cabinetIntroRef.value, cabinetTeamRef1.value], {
     scrollTrigger: {
       trigger: cabinetIntroRef.value,
       start: "top 80%",
       once: true
     },
-    defaults: {
-      ease: "power3.out",
-      duration: 0.8
-    }
-  })
-
-  tl.from(cabinetIntroRef.value, {
     opacity: 0,
-    y: 40
-  })
-
-  tl.from(cabinetTeamRef1.value, {
-    opacity: 0,
-    y: 30
-  }, "-=0.5")
-
-  tl.from(".block-1", {
-    opacity: 0,
-    y: 30,
-    stagger: 0.15
-  }, "-=0.5")
-
-  tl.from(cabinetTeamRef2.value, {
-    opacity: 0,
-    y: 30
-  }, "-=0.5")
-
-  tl.from(".block-2", {
-    opacity: 0,
-    y: 30,
-    stagger: 0.15
-  }, "-=0.5")
-}
-
-/*======================
-  ANIMATION ENGAGEMENT QUALITY
-======================*/
-
-const engagementQualityGrid = ref<HTMLElement | null>(null)
-
-function animEngagementQuality() {
-  const elems = engagementQualityGrid.value.querySelectorAll('.engagements-quality__item')
-
-  gsap.from(elems, {
-    opacity: 0,
-    y: 20,
-    ease: 'power3.out',
-    duration: 0.8,
+    y: isDesktop ? 40 : 20,
+    duration: 0.7,
     stagger: 0.2,
+    ease: "power2.out"
+  })
+
+  // SECTION 2
+  gsap.from([cabinetTeamRef2.value], {
     scrollTrigger: {
-      trigger: engagementQualityGrid.value,
-      start: "top 80%",
+      trigger: cabinetTeamRef2.value,
+      start: "top 85%",
       once: true
     },
+    opacity: 0,
+    y: isDesktop ? 40 : 20,
+    duration: 0.7,
+    ease: "power2.out"
   })
 }
 
@@ -191,7 +158,10 @@ const caseSubmitSubtitle = ref<HTMLElement | null>(null)
 const caseSubmitTitle = ref<HTMLElement | null>(null)
 const caseSubmitText = ref<HTMLElement | null>(null)
 
+const isDesktop = window.innerWidth > 767.98
+
 function animCaseSubmit() {
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: caseSubmitSubtitle.value,
@@ -206,7 +176,7 @@ function animCaseSubmit() {
 
   tl.from(caseSubmitSubtitle.value, {
     opacity: 0,
-    y: 30
+    y: 20
   })
 
   tl.from(caseSubmitTitle.value, {
@@ -220,14 +190,13 @@ function animCaseSubmit() {
   }, "-=0.4")
 
   tl.fromTo('.case-submit__cta',
-    { opacity: 0, x: 100 },
+    { opacity: 0, x: isDesktop ? 60 : 30 },
     { opacity: 1, x: 0, duration: 0.3 })
 }
 
 onMounted(() => {
   heroAnimation()
   teamAnimation()
-  animEngagementQuality()
   animCaseSubmit()
 })
 </script>
@@ -351,7 +320,7 @@ onMounted(() => {
         <div class="engagements-quality__container">
           <span class="engagements-quality__surtitle">Avocats à Évreux et Bernay</span>
           <h2 class="engagements-quality__title">Nos engagements de qualité</h2>
-          <div class="engagements-quality__grid" ref="engagementQualityGrid">
+          <div class="engagements-quality__grid">
             <div class="engagements-quality__item">
               <div class="engagements-quality__icon">📘</div>
               <h3>Écoute</h3>
@@ -393,8 +362,6 @@ onMounted(() => {
           </p>
 
           <router-link to="/contact/form" class="case-submit__cta">Contactez-nous</router-link>
-
-
         </div>
       </section>
 
