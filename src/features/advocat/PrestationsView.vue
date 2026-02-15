@@ -639,7 +639,7 @@ onMounted(() => {
 
 .intro {
   max-width: 900px;
-  margin: 4rem auto 4rem auto;
+  margin: 3rem auto 0 auto;
   padding: 0 20px;
   text-align: center;
   h2 {
@@ -731,7 +731,6 @@ onMounted(() => {
   }
   img {
     width: 100%;
-
     height: 600px;
     border-radius: 16px;
   }

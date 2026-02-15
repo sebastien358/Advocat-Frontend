@@ -195,7 +195,7 @@ onMounted(async () => {
           <li>🕒 Samedi : sur rendez-vous</li>
         </ul>
         <p class="contact__phone">📞 01 23 45 67 89</p>
-        <p class="contact__mail">✉️ contact@salon-bien-etre.fr</p>
+        <p class="contact__mail">✉️ contact@advocat.fr</p>
         <div class="contact__badges">
           <span class="badge badge--green">Réponse sous 24h</span>
           <span class="badge badge--yellow">Prise de RDV rapide</span>

@@ -410,7 +410,16 @@ function closeModal() {
 
 <template>
   <main class="page-wrapper">
+
     <div class="container" ref="bookingRef">
+
+      <div class="loading-page">
+
+
+
+
+      </div>
+
       <section v-if="!isStep1Complete" class="booking">
         <div class="booking__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
@@ -605,6 +614,7 @@ function closeModal() {
         <ProgressBooking :progress="progress" />
         <BookingConfirmation />
       </section>
+
     </div>
   </main>
 </template>
@@ -742,6 +752,10 @@ function closeModal() {
     }
   }
 }
+
+/*=================
+  PAGE WRAPPER
+=================*/
 
 .page-wrapper {
   position: fixed;
