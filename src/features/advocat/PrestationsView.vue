@@ -681,7 +681,7 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .intro {
-    margin: 3rem 10px 0 10px;
+    margin: 2rem 10px 0 10px;
     h2 {
       font-size: 19px;
       color: var(--green-page);
@@ -747,7 +747,7 @@ onMounted(() => {
     padding: 5rem 10px;
     &__grid {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2rem;
     }
     &__content h2 {
       color: var(--green-page);
@@ -772,10 +772,10 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .block {
-    padding: 2rem 10px;
+    padding: 1rem 10px;
     &__grid {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 2rem;
     }
     &__content h2 {
       color: var(--green-page);

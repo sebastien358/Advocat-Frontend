@@ -321,7 +321,7 @@ const progress = computed(() => {
   return 1
 })
 
-const bookingSelectedSlot = ref('')
+const bookingSelectedSlot = ref<string | null>('')
 
 function selectSlot(slot: Slot) {
   bookingStore.setBookingDraft({
@@ -406,20 +406,17 @@ const uiStore = useUiStore()
 function closeModal() {
   return uiStore.closeBooking()
 }
+
+const isBookingContextReady = computed(() =>
+  staffStore.staffs.length > 0 &&
+  serviceStore.services.length > 0 &&
+  categoryStore.categories.length > 0
+)
 </script>
 
 <template>
   <main class="page-wrapper">
-
     <div class="container" ref="bookingRef">
-
-      <div class="loading-page">
-
-
-
-
-      </div>
-
       <section v-if="!isStep1Complete" class="booking">
         <div class="booking__description">
           <p>Préparez votre rendez-vous<strong></strong></p>
@@ -437,75 +434,82 @@ function closeModal() {
         </div>
         <!-- Barre de progression -->
         <ProgressBooking :progress="progress" />
-        <!-- Booking category -->
-        <section class="booking-category" v-if="categoryStore.categories.length > 0">
-          <button
-            v-for="cat in categoryStore.categories"
-            :key="cat.id"
-            @click="selectCategory(cat.id)"
-            :class="{ active: bookingCategoryId === cat.id }"
-            class="btn btn-category"
-          >
-            {{ cat.name }}
-          </button>
-        </section>
-        <!-- Booking services -->
-        <section class="booking-service" v-if="filteredService">
-          <div>
-            <div class="booking-service__description">
-              <p class="booking-service__description-text"><span>📋</span>Type de consultation</p>
+        <!-- booking context ready -->
+        <div class="loading-overlay" v-if="!isBookingContextReady">
+          <div class="loading-overlay__loader"></div>
+        </div>
+        <div v-else>
+          <!-- Booking category -->
+          <section class="booking-category" v-if="categoryStore.categories.length > 0">
+            <button
+              v-for="cat in categoryStore.categories"
+              :key="cat.id"
+              @click="selectCategory(cat.id)"
+              :class="{ active: bookingCategoryId === cat.id }"
+              class="btn btn-category"
+            >
+              {{ cat.name }}
+            </button>
+          </section>
+          <!-- Booking services -->
+          <section class="booking-service" v-if="filteredService">
+            <div>
+              <div class="booking-service__description">
+                <p class="booking-service__description-text"><span>📋</span>Type de consultation</p>
+              </div>
+              <div @click="toggleMenu()" class="service-label">
+                {{ bookingServiceText || "Choisissez votre prestation" }}
+                <span class="service-icon" ref="logoRef">
+            <font-awesome-icon icon="fa-solid fa-angle-down" />
+          </span>
+              </div>
+              <div class="service-menu" v-show="isVisible" ref="serviceMenu">
+                <div
+                  @click="selectService(service.id, service.duration, service.name)"
+                  v-for="service in filteredService"
+                  :key="service.id"
+                  class="service-items"
+                  :class="{ 'active-service': service.id === bookingServiceId }"
+                >
+                  <span class="name">{{ service.name }}</span>
+                  <span>{{ service.duration }} min</span>
+                  <span>{{ service.price }}€</span>
+                </div>
+              </div>
+              <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
             </div>
-            <div @click="toggleMenu()" class="service-label">
-              {{ bookingServiceText || "Choisissez votre prestation" }}
-              <span class="service-icon" ref="logoRef">
-                <font-awesome-icon icon="fa-solid fa-angle-down" />
-              </span>
-            </div>
-            <div class="service-menu" v-show="isVisible" ref="serviceMenu">
-              <div
-                @click="selectService(service.id, service.duration, service.name)"
-                v-for="service in filteredService"
-                :key="service.id"
-                class="service-items"
-                :class="{ 'active-service': service.id === bookingServiceId }"
-              >
-                <span class="name">{{ service.name }}</span>
-                <span>{{ service.duration }} min</span>
-                <span>{{ service.price }}€</span>
+          </section>
+          <!-- Booking staff -->
+          <section class="booking-staff-wrapper" v-if="staffStore.filteredStaff.length > 0">
+            <div class="booking-staff" ref="bookingStaff" :class="{ 'active-booking-staff': staffStore.filteredStaff.length > 0 }">
+              <p class="booking-staff__label" ref="staffLabel" :class="{ active: staffStore.filteredStaff.length >= 2 }">
+                Avec qui ?
+              </p>
+              <div class="booking-staff__grid">
+                <label v-for="staff in staffStore.filteredStaff" :key="staff.id" class="booking-staff__cards">
+                  <!-- Accompagnant -->
+                  <div class="booking-staff__card__content" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">
+                    <div class="booking-staff__card__content__avatar">
+                      <img v-if="staff.picture" :src="staff.picture.filename" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }" />
+                      <span class="name" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">Maître {{ staff.firstname }}</span>
+                    </div>
+                    <input
+                      @click="selectStaff(staff.id, staff.firstname)"
+                      type="radio"
+                      name="staff"
+                      :value="staff.id"
+                    />
+                  </div>
+                </label>
               </div>
             </div>
-            <Calc :isVisible="isVisible" @close="isOpen = false" :transparent="true" />
+          </section>
+          <div class="booking__placeholder">
+            <p>👤 Veuillez sélectionner un avocat pour afficher les disponibilités</p>
           </div>
-        </section>
-        <!-- Booking staff -->
-        <section class="booking-staff-wrapper" v-if="staffStore.filteredStaff.length > 0">
-          <div class="booking-staff" ref="bookingStaff" :class="{ 'active-booking-staff': staffStore.filteredStaff.length > 0 }">
-            <p class="booking-staff__label" ref="staffLabel" :class="{ active: staffStore.filteredStaff.length >= 2 }">
-              Avec qui ?
-            </p>
-            <div class="booking-staff__grid">
-              <label v-for="staff in staffStore.filteredStaff" :key="staff.id" class="booking-staff__cards">
-                <!-- Accompagnant -->
-                <div class="booking-staff__card__content" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">
-                  <div class="booking-staff__card__content__avatar">
-                    <img v-if="staff.picture" :src="staff.picture.filename" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }" />
-                    <span class="name" :class="{ 'one-card': staffStore.filteredStaff.length === 1 }">Maître {{ staff.firstname }}</span>
-                  </div>
-                  <input
-                    @click="selectStaff(staff.id, staff.firstname)"
-                    type="radio"
-                    name="staff"
-                    :value="staff.id"
-                  />
-                </div>
-              </label>
-            </div>
-          </div>
-        </section>
-        <div class="booking__placeholder">
-          <p>👤 Veuillez sélectionner un avocat pour afficher les disponibilités</p>
         </div>
       </section>
+
       <!-- BOOKING RESERVATION -->
       <section v-else-if="!isStep2Complete" class="booking-reservation container-reservation">
         <div class="booking-reservation__summary">
@@ -614,7 +618,6 @@ function closeModal() {
         <ProgressBooking :progress="progress" />
         <BookingConfirmation />
       </section>
-
     </div>
   </main>
 </template>
@@ -802,14 +805,17 @@ function closeModal() {
 
 .loading-overlay {
   background: #fff;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  width: 450px;
+  height: 400px;
+  margin-top: -20px;
   &__loader {
-    width: 40px;
-    height: 40px;
-    border: 5px solid var(--green-page);
+    width: 30px;
+    height: 30px;
+    border: 5px solid #08d8ea;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
@@ -829,10 +835,8 @@ function closeModal() {
 
 @media (max-width: 767.98px) {
   .loading-overlay {
-    &__loader {
-      width: 30px;
-      height: 30px;
-    }
+    width: 100%;
+    height: 350px;
   }
 }
 
