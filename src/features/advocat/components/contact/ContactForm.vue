@@ -314,29 +314,32 @@ onMounted(async () => {
     width: 100%;
     border: 1px solid #ddd;
     background: #f9fafb;
-
     &:focus {
-      border-color: #d3aeff;
+      border-color: var(--green-page);
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(211, 174, 255, 0.35);
+      box-shadow: 0 0 0 3px rgba(141, 174, 95, 0.22);
     }
-
     &::placeholder {
       font-size: 13px;
     }
   }
-
   textarea {
     height: 120px;
     resize: none;
   }
-
   .form-submit {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
+  .form-submit .btn-login {
+    transition: all 0.2s ease;
+  }
+  .form-submit .btn-login:hover {
+    background: #5a9963;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
   .alert {
     margin-top: 6px;
   }

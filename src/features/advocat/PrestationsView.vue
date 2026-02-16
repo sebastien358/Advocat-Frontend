@@ -262,7 +262,7 @@ onMounted(() => {
         <section class="block block--team" ref="cabinetTeamRef1">
           <div class="block__grid">
             <div class="block__content block-1">
-              <h2>Une équipe dynamique à votre écoute</h2>
+              <h2>Une équipe dédiée à la défense de vos intérêts</h2>
               <p class="block__content__subtitle">Cabinet implanté à Évreux et Bernay.</p>
               <ul>
                 <li>Maître Julien Morel</li>
@@ -291,15 +291,18 @@ onMounted(() => {
         </section>
       </section>
 
-      <section id="engagements" class="engagements">
-        <h2>Nos engagements</h2>
-        <div class="engagements__grid">
-          <div class="engagement">Écoute</div>
-          <div class="engagement">Disponibilité</div>
-          <div class="engagement">Rigueur</div>
-          <div class="engagement">Proximité</div>
-        </div>
+      <section class="engagement-container">
+        <section id="engagements" class="engagements">
+          <h2>Nos engagements</h2>
+          <div class="engagements__grid">
+            <div class="engagement">Écoute</div>
+            <div class="engagement">Disponibilité</div>
+            <div class="engagement">Rigueur</div>
+            <div class="engagement">Proximité</div>
+          </div>
+        </section>
       </section>
+
 
       <!-- MENUS DÉROULANT -->
       <section id="procedures" class="accordion">
@@ -801,12 +804,38 @@ onMounted(() => {
   ENGAGEMENTS
 ===================*/
 
+.engagement-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 20px;
+}
+
 .engagements {
-  padding: 80px 20px;
-  background: #fafafa;
-  text-align: center;
+
+  width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 0 auto 0 auto;
+
+  font-size: 16px;
+  background: #ffffff;
+  padding: 35px 20px;
+  border-radius: 14px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  border-top: 3px solid #6BAA75; // au lieu de left
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  }
+
+
   h2 {
     font-size: 25px;
     margin-bottom: 40px;
@@ -828,8 +857,9 @@ onMounted(() => {
 }
 
 @media (max-width: 991.98px) {
+
   .engagements {
-    padding: 50px 20px;
+    padding: 35px 20px;
     h2 {
       font-size: 20px;
       margin-bottom: 30px;
@@ -844,8 +874,12 @@ onMounted(() => {
 }
 
 @media (max-width: 767.98px) {
+  .engagement-container {
+    margin: 0 10px;
+  }
   .engagements {
-    padding: 40px 20px;
+    margin: 20px auto 0 auto;
+    padding: 35px 20px;
     h2 {
       font-size: 16px;
       margin-bottom: 20px;
@@ -1073,7 +1107,7 @@ onMounted(() => {
     font-size: 16px;
     line-height: 1.6;
     max-width: 680px;
-    margin: 0 auto 28px;
+    margin: 0 auto 28px auto;
     opacity: 0.95;
   }
   &__bg {
@@ -1112,18 +1146,19 @@ onMounted(() => {
   }
   &__cta {
     align-self: center;
-    background: #ffffff;
-    color: #333;
-    padding: 12px 28px;
-    border-radius: 24px;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #ffffff;
+    color: #000;
+    padding: 12px 28px;
+    border-radius: 30px;
+    transition: all 0.2s ease;
   }
   &__cta:hover {
+    background: #6BAA75;
+    color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -1135,6 +1170,7 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .case-submit {
+    height: 340px;
     margin: 20px 0 0 0;
     border-radius: 0;
     h2 {
@@ -1143,6 +1179,10 @@ onMounted(() => {
     }
     p {
       font-size: 15px;
+      margin: 0 auto 24px auto;
+    }
+    &__cta {
+      font-size: 12px;
     }
   }
 }
