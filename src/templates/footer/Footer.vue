@@ -6,6 +6,7 @@ import { nextTick, onMounted } from "vue";
 import { gsap } from "gsap";
 
 import ScrollTrigger from "gsap/ScrollTrigger";
+import {useUiStore} from "@/stores/uiStore.ts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,15 +32,17 @@ onMounted(async () => {
   REDIRECT RÉSERVATION
 ===============*/
 
-const router = useRouter();
+const uiStore = useUiStore()
 
-function goRedirectReservation() {
-  router.push({ path: "/booking" });
+function bookingOpen() {
+  uiStore.openBooking()
 }
 
 /*===============
   REDIRECT LEGAL
 ===============*/
+
+const router = useRouter();
 
 function goRedirectLegal() {
   router.push({ path: "/legal-notices" });
@@ -128,7 +131,7 @@ function goRedirectLegal() {
           <li>Accompagnement personnalisé</li>
           <li>Suivi des dossiers</li>
         </ul>
-        <button @click="goRedirectReservation()" class="footer__cta">Prendre rendez-vous</button>
+        <button @click="bookingOpen()" class="footer__cta">Prendre rendez-vous</button>
       </div>
     </div>
     <div class="footer__bottom">

@@ -18,7 +18,7 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .calc {
-  //z-index: 100;
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;

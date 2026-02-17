@@ -130,7 +130,8 @@ const uiStore = useUiStore()
 const router = useRouter();
 
 function modalReservation() {
-  return uiStore.openBooking()
+  uiStore.openBooking()
+  isOpen.value = false;
 }
 
 const closeMenu = () => {
@@ -162,12 +163,12 @@ const closeMenu = () => {
       </div>
       <!-- NAV DESKTOP -->
       <div class="header__nav">
-        <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
-        <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
-        <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }">Engagements</RouterLink>
-        <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
+        <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }" @click="closeMenu()">Accueil</RouterLink>
+        <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }" @click="closeMenu()">Équipe</RouterLink>
+        <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }" @click="closeMenu()" >Engagements</RouterLink>
+        <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }" @click="closeMenu()">Contact</RouterLink>
         <div v-if="!roleAdmin()">
-          <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Espace pro</RouterLink>
+          <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }" @click="closeMenu()">Espace pro</RouterLink>
         </div>
         <div v-else>
           <a @click="logout()" href="#">Déconnexion</a>
@@ -184,15 +185,15 @@ const closeMenu = () => {
     </div>
     <!-- MENU MOBILE -->
     <div v-show="isVisible" class="mobile-menu" ref="serviceMenu">
-      <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }">Accueil</RouterLink>
-      <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }">Équipe</RouterLink>
-      <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }">Engagements</RouterLink>
-      <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }">Contact</RouterLink>
+      <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }" @click="closeMenu()">Accueil</RouterLink>
+      <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }" @click="closeMenu()">Équipe</RouterLink>
+      <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }" @click="closeMenu()">Engagements</RouterLink>
+      <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }" @click="closeMenu()">Contact</RouterLink>
       <div v-if="!roleAdmin()">
-        <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }">Connexion</RouterLink>
+        <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }" @click="closeMenu()">Connexion</RouterLink>
       </div>
       <div v-else class="mobile-menu__connected">
-        <RouterLink to="/admin" :class="{ active: $route.path === '/admin' && !$route.hash }">Espace pro</RouterLink>
+        <RouterLink to="/admin" :class="{ active: $route.path === '/admin' && !$route.hash }" @click="closeMenu()">Espace pro</RouterLink>
         <a @click="logout()" href="#" class="logout-mobile">Déconnexion</a>
       </div>
       <button @click="modalReservation()" class="mobile-cta">Prendre RDV</button>

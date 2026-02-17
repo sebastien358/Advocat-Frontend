@@ -43,12 +43,12 @@ const { handleSubmit, isSubmitting } = useForm({
 
 const { value: firstname, errorMessage: errorFirstname } = useField<string>("firstname");
 const { value: lastname, errorMessage: errorLastname } = useField<string>("lastname");
-const { value: image, errorMessage: errorImage, setValue } = useField<string>("image");
+const { value: image, errorMessage: errorImage, setValue } = useField<File | undefined>("image");
 
 function onFileChange(e: Event) {
   const file = (e.target as HTMLInputElement).files?.[0];
   setValue(file ?? undefined);
-  imgFile.value = file.name;
+  imgFile.value = file ? file.name : null;
 }
 
 const onSubmit = handleSubmit(async (dataStaff, { resetForm }) => {

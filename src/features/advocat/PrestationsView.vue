@@ -130,7 +130,7 @@ function teamAnimation() {
       once: true
     },
     opacity: 0,
-    y: isDesktop ? 40 : 20,
+    y: isDesktop ? 30 : 10,
     duration: 0.7,
     stagger: 0.2,
     ease: "power2.out"
@@ -144,7 +144,7 @@ function teamAnimation() {
       once: true
     },
     opacity: 0,
-    y: isDesktop ? 40 : 20,
+    y: isDesktop ? 30 : 10,
     duration: 0.7,
     ease: "power2.out"
   })
@@ -291,18 +291,18 @@ onMounted(() => {
         </section>
       </section>
 
+      <!-- ENGAGEMENTS -->
       <section class="engagement-container">
         <section id="engagements" class="engagements">
-          <h2>Nos engagements</h2>
+          <h2>Notre approche</h2>
           <div class="engagements__grid">
             <div class="engagement">Écoute</div>
-            <div class="engagement">Disponibilité</div>
             <div class="engagement">Rigueur</div>
-            <div class="engagement">Proximité</div>
+            <div class="engagement">Clarté</div>
+            <div class="engagement">Engagement</div>
           </div>
         </section>
       </section>
-
 
       <!-- MENUS DÉROULANT -->
       <section id="procedures" class="accordion">
@@ -322,27 +322,27 @@ onMounted(() => {
       <section id="engagements-quality" class="engagements-quality">
         <div class="engagements-quality__container">
           <span class="engagements-quality__surtitle">Avocats à Évreux et Bernay</span>
-          <h2 class="engagements-quality__title">Nos engagements de qualité</h2>
+          <h2 class="engagements-quality__title">Pourquoi choisir notre cabinet ?</h2>
           <div class="engagements-quality__grid">
             <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">📘</div>
-              <h3>Écoute</h3>
-              <p>Une analyse attentive de votre situation pour vous proposer une stratégie adaptée.</p>
+              <div class="engagements-quality__icon">📅</div>
+              <h3>Prise de rendez-vous rapide</h3>
+              <p>RDV en cabinet ou en visioconférence.</p>
             </div>
             <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">🏛️</div>
-              <h3>Rigueur</h3>
-              <p>Un suivi précis et sérieux de chaque dossier, dans le respect des règles déontologiques.</p>
+              <div class="engagements-quality__icon">📂</div>
+              <h3>Suivi personnalisé</h3>
+              <p>Un interlocuteur dédié à votre dossier.</p>
             </div>
             <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">🤝</div>
-              <h3>Proximité</h3>
-              <p>Un accompagnement humain et disponible, du premier contact à la conclusion du dossier.</p>
+              <div class="engagements-quality__icon">📞</div>
+              <h3>Disponibilité</h3>
+              <p>Réponse rapide à vos questions.</p>
             </div>
             <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">€</div>
-              <h3>Transparence</h3>
-              <p>Des honoraires clairement expliqués, sans surprise.</p>
+              <div class="engagements-quality__icon">💶</div>
+              <h3>Honoraires maîtrisés</h3>
+              <p>Convention claire dès le premier échange.</p>
             </div>
           </div>
         </div>
@@ -641,69 +641,74 @@ onMounted(() => {
 ===================*/
 
 .intro {
-  max-width: 900px;
-  margin: 3rem auto 0 auto;
+  max-width: 1200px;
+  margin: 3.5rem auto 0 auto;
   padding: 0 20px;
   text-align: center;
+
   h2 {
-    font-size: 32px;
+    font-size: 34px;
     color: var(--green-page);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
   }
+
   p {
-    line-height: 1.6;
+    max-width: 62ch;
+    margin: 0.8rem auto;
+    line-height: 1.75;
     font-size: 16px;
-    margin-bottom: 20px;
+    color: #1f2937;
   }
 
   &__small {
-    opacity: .75;
-    font-size: 16px;
+    color: #6b7280;
+    opacity: 1;
+    font-size: 15px;
+    margin-top: 0.2rem;
   }
 }
 
 @media (max-width: 991.98px) {
   .intro {
-    margin: 3rem 20px 3rem 20px;
+    margin: 3rem 20px 2rem 20px;
+
     h2 {
       font-size: 24px;
-      color: var(--green-page);
-      margin-bottom: 15px;
     }
+
     p {
-      line-height: 1.6;
-      margin-bottom: 10px;
       font-size: 14px;
+      line-height: 1.7;
     }
+
     &__small {
-      opacity: .75;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 }
 
 @media (max-width: 767.98px) {
   .intro {
-    margin: 2rem 10px 0 10px;
+    margin: 2rem 10px 1.5rem 10px;
+
     h2 {
-      font-size: 19px;
-      color: var(--green-page);
-      margin-bottom: 15px;
+      font-size: 20px;
     }
+
     p {
-      line-height: 1.5;
-      margin-bottom: 15px;
       font-size: 13px;
+      line-height: 1.6;
     }
+
     &__small {
-      opacity: .75;
-      font-size: 16px;
+      font-size: 13px;
     }
   }
 }
 
 /*===================
-  TEAM
+  TEAM / DOMAINES (anti-fade)
 ===================*/
 
 .sections {
@@ -711,91 +716,125 @@ onMounted(() => {
 }
 
 .block {
-  padding: 5rem 20px;
+  padding: 4rem 20px;
+
   &__grid {
-    max-width: 1800px;
+    max-width: 1600px;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
   }
-  &__content h2 {
-    color: var(--green-page);
-    margin-bottom: 20px;
-    font-size: 28px;
-  }
-  &__content__subtitle {
-    margin-top: -15px;
-    font-size: 18px;
-  }
-  &__content ul li {
-    margin-top: 20px;
-  }
+
   img {
     width: 100%;
     height: 600px;
-    border-radius: 16px;
+    border-radius: 16px; // ok, mais raisonnable
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: 0; // pas de "carte"
+    color: #111827;
+
+    h2 {
+      color: var(--green-page);
+      margin-bottom: 12px;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    &__subtitle {
+      margin-top: 0;
+      margin-bottom: 22px;
+      font-size: 15px;
+      color: #6b7280;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(17, 24, 39, 0.10);
+        font-size: 15px;
+        color: #111827;
+      }
+
+      li:last-child {
+        border-bottom: 0;
+      }
+    }
   }
 }
 
-.checks li::before {
-  content: "✓ ";
-  color: var(--green-page);
+/* checks : pas de "✓ " collé, juste un accent sobre */
+.checks {
+  li {
+    position: relative;
+    padding-left: 18px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      transform: translateY(-50%);
+      background: var(--green-page);
+    }
+  }
 }
 
 /* responsive */
 @media (max-width: 991.98px) {
   .block {
-    padding: 5rem 10px;
+    padding: 3rem 10px;
+
     &__grid {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+
     &__content h2 {
-      color: var(--green-page);
       text-align: center;
       font-size: 24px;
     }
+
     &__content__subtitle {
       text-align: center;
-      margin-top: -12px;
-      font-size: 16px;
     }
+
     &__content ul li {
-      margin-top: 20px;
       text-align: center;
-      font-size: 14px;
-    }
-    .values {
-      grid-template-columns: 1fr 1fr;
     }
   }
 }
 
 @media (max-width: 767.98px) {
   .block {
-    padding: 1rem 10px;
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+    padding: 2rem 10px;
+
+    img {
+      height: 320px;
     }
+
     &__content h2 {
-      color: var(--green-page);
-      text-align: center;
-      font-size: 19px;
+      font-size: 20px;
     }
-    &__content__subtitle {
-      margin-top: -14px;
-      text-align: center;
-      font-size: 14px;
-    }
+
     &__content ul li {
-      margin-top: 17px;
-      font-size: 12px;
-    }
-    .values {
-      grid-template-columns: 1fr 1fr;
+      font-size: 13px;
     }
   }
 }
@@ -899,10 +938,11 @@ onMounted(() => {
 
 .accordion {
   max-width: 1200px;
+
   margin: 60px auto;
   padding: 0 20px;
   @media (max-width: 991.98px) {
-    margin: 30px auto;
+    margin: 50px auto;
   }
   @media (max-width: 767.98px) {
     margin: 40px auto;
@@ -1015,7 +1055,7 @@ onMounted(() => {
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     h3 {
-      font-size: 19px;
+      font-size: 18px;
       margin-bottom: 10px;
       font-weight: 600;
       line-height: 1.4;
@@ -1026,8 +1066,8 @@ onMounted(() => {
     }
   }
   &__icon {
+    margin: 0 auto 15px auto;
     font-size: 32px;
-    margin-bottom: 16px;
   }
 }
 
