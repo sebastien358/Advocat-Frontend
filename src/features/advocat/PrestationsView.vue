@@ -323,20 +323,6 @@ onMounted(() => {
         </section>
       </section>
 
-      <!-- ENGAGEMENTS -->
-
-      <section class="engagement-container">
-        <section id="engagements" class="engagements">
-          <h2>Notre approche</h2>
-          <div class="engagements__grid">
-            <div class="engagement">Écoute</div>
-            <div class="engagement">Rigueur</div>
-            <div class="engagement">Clarté</div>
-            <div class="engagement">Engagement</div>
-          </div>
-        </section>
-      </section>
-
       <!-- MENUS DÉROULANT -->
 
       <section id="procedures" class="accordion">
@@ -350,37 +336,40 @@ onMounted(() => {
           </div>
         </div>
       </section>
+      <!-- MENUS DÉROULANT -->
 
-      <!-- ENGAGEMENT QUALITY -->
 
-      <section id="engagements-quality" class="engagements-quality">
-        <div class="engagements-quality__container">
-          <span class="engagements-quality__surtitle">Avocats à Évreux et Bernay</span>
-          <h2 class="engagements-quality__title">Pourquoi choisir notre cabinet ?</h2>
-          <div class="engagements-quality__grid">
-            <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">📅</div>
-              <h3>Prise de rendez-vous rapide</h3>
-              <p>RDV en cabinet ou en visioconférence.</p>
+      <section class="client-support-premium">
+        <div class="overlay"></div>
+
+        <div class="client-support-premium__container">
+          <h2>Être accompagné à chaque étape</h2>
+          <div class="section-line"></div>
+          <div class="premium-grid">
+            <div class="premium-item">
+              <span>01</span>
+              <h3>Analyse approfondie</h3>
+              <p>Compréhension précise de votre situation et de vos enjeux juridiques.</p>
             </div>
-            <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">📂</div>
-              <h3>Suivi personnalisé</h3>
-              <p>Un interlocuteur dédié à votre dossier.</p>
+
+            <div class="premium-item">
+              <span>02</span>
+              <h3>Stratégie sur mesure</h3>
+              <p>Définition d’une approche adaptée à votre dossier et à vos objectifs.</p>
             </div>
-            <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">📞</div>
-              <h3>Disponibilité</h3>
-              <p>Réponse rapide à vos questions.</p>
-            </div>
-            <div class="engagements-quality__item">
-              <div class="engagements-quality__icon">💶</div>
-              <h3>Honoraires maîtrisés</h3>
-              <p>Convention claire dès le premier échange.</p>
+
+            <div class="premium-item">
+              <span>03</span>
+              <h3>Suivi rigoureux</h3>
+              <p>Information claire et régulière jusqu’à la résolution de votre affaire.</p>
             </div>
           </div>
         </div>
       </section>
+
+
+
+
 
       <!--  AFFAIRE -->
 
@@ -513,6 +502,69 @@ onMounted(() => {
 
 <style scoped lang="scss">
 
+.client-support-premium {
+  position: relative;
+  background: #1f1f1f;
+  padding: 120px 20px;
+  color: white;
+  overflow: hidden;
+}
+
+.client-support-premium__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.client-support-premium h2 {
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.section-line {
+  width: 60px;
+  height: 2px;
+  background: #8b9f6f;
+  margin: 20px auto 60px auto;
+}
+
+.premium-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.premium-item {
+  flex: 1;
+  min-width: 250px;
+  text-align: left;
+}
+
+.premium-item span {
+  font-size: 42px;
+  color: #8b9f6f;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.premium-item h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.premium-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #cccccc;
+}
+
+
+////////
 .iframe-container {
   margin: 60px 20px 0;
   display: grid;
@@ -1259,106 +1311,13 @@ onMounted(() => {
 }
 
 /*===================
-  ENGAGEMENTS
-===================*/
-
-.engagement-container {
-  display: flex;
-  justify-content: center;
-  margin: 4rem 20px 0 20px;
-}
-
-.engagements {
-
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-
-  font-size: 16px;
-  background: #ffffff;
-  padding: 35px 20px;
-  border-radius: 14px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
-  font-weight: 600;
-  border-top: 3px solid #6BAA75; // au lieu de left
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
-  }
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-  }
-
-
-  h2 {
-    font-size: 25px;
-    margin-bottom: 40px;
-  }
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: center;
-    gap: 20px;
-    .engagement {
-      font-size: 15px;
-      background: #ffffff;
-      padding: 30px 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      font-weight: 500;
-    }
-  }
-}
-
-@media (max-width: 991.98px) {
-
-  .engagements {
-    padding: 35px 20px;
-    h2 {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-    &__grid {
-      grid-template-columns: repeat(1, 1fr);
-      .engagement {
-        font-size: 14px;
-      }
-    }
-  }
-}
-
-@media (max-width: 767.98px) {
-  .engagement-container {
-    margin: 0 10px;
-  }
-  .engagements {
-    margin: 20px auto 0 auto;
-    padding: 35px 20px;
-    h2 {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    &__grid {
-      gap: 15px;
-      .engagement {
-        font-size: 13px;
-      }
-    }
-  }
-}
-
-/*===================
   ACCORDIONS
 ===================*/
 
 .accordion {
-  max-width: 900px;
+  max-width: 1200px;
 
-  margin: 200px auto 150px auto;
+  margin: 120px auto 100px auto;
   padding: 0 20px;
   @media (max-width: 991.98px) {
     margin: 50px auto;
@@ -1369,7 +1328,9 @@ onMounted(() => {
 }
 
 .accordion-item {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid black;
+
+  padding: 0 40px;
 }
 
 .accordion-header {
@@ -1377,12 +1338,13 @@ onMounted(() => {
   background: none;
   border: none;
   padding: 25px 0;
-  font-size: 20px;
+  font-size: 32px;
   color: #8dbf67;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  font-family: "Playfair Display", serif;
   @media (max-width: 991.98px) {
     font-size: 18px;
   }
@@ -1393,15 +1355,18 @@ onMounted(() => {
 }
 
 .accordion-header .icon {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: #8dbf67;
-  color: #fff;
+  background: black;
+
+
+  color: #8dbf67;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 34px;
   transition: transform 200ms ease;
   @media (max-width: 991.98px) {
     font-size: 18px;
@@ -1418,7 +1383,7 @@ onMounted(() => {
 .accordion-content p {
   padding: 0 0 18px 0;
   line-height: 1.6;
-  font-size: 15px;
+  //font-size: 15px;
   @media (max-width: 991.98px) {
     font-size: 14px;
   }
@@ -1439,115 +1404,6 @@ onMounted(() => {
   overflow: hidden;
   height: 0;
   opacity: 0;
-}
-
-/*===================
-  ENGAGEMENTS QUALITY
-===================*/
-
-.engagements-quality {
-  background: #ffffff;
-  padding: 80px 20px;
-
-
-
-  &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  &__surtitle {
-    font-size: 14px;
-    color: #7aa35a;
-    margin-bottom: 8px;
-    display: block;
-  }
-  &__title {
-    font-size: 32px;
-    margin-bottom: 48px;
-  }
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 34px;
-  }
-  &__item {
-    background: #f9f9f9;
-    padding: 32px 24px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-    h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-    p {
-      line-height: 22px;
-      font-size: 16px;
-    }
-  }
-  &__icon {
-    margin: 0 auto 15px auto;
-    font-size: 32px;
-  }
-}
-
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .engagements-quality__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 991.98px) {
-  .engagements-quality {
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    &__item {
-      padding: 32px 24px;
-      h3 {
-        font-size: 17px;
-        margin-bottom: 10px;
-      }
-      p {
-        line-height: 20px;
-        font-size: 15px;
-      }
-    }
-  }
-}
-
-@media (max-width: 767.98px) {
-  .engagements-quality {
-    padding: 30px 10px 40px 10px;
-    &__surtitle {
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-    &__title {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    &__item {
-      padding: 30px 24px;
-      h3 {
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-      p {
-        line-height: 20px;
-        font-size: 14px;
-      }
-    }
-  }
 }
 
 /*===================
