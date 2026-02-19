@@ -131,7 +131,7 @@ function teamAnimation() {
     },
     opacity: 0,
     y: isDesktop ? 30 : 10,
-    duration: 0.7,
+    duration: isDesktop ? 0.7 : 0.3,
     stagger: 0.2,
     ease: "power2.out"
   })
@@ -145,7 +145,7 @@ function teamAnimation() {
     },
     opacity: 0,
     y: isDesktop ? 30 : 10,
-    duration: 0.7,
+    duration: isDesktop ? 0.7 : 0.3,
     ease: "power2.out"
   })
 }
@@ -243,18 +243,42 @@ onMounted(() => {
           </div>
         </div>
       </section>
+
       <!-- INTRO -->
+
       <section id="cabinet-intro" class="intro" ref="cabinetIntroRef">
         <h2>Une équipe dynamique à votre écoute</h2>
-        <p>
-          Installé à <strong>Évreux</strong> et <strong>Bernay</strong>, notre cabinet
-          offre une proximité et une facilité d’accueil.
+
+        <p class="intro__lead">
+          Installé à <strong>Évreux</strong> et <strong>Bernay</strong>, notre cabinet offre une proximité et une facilité d’accueil.
         </p>
+
         <p class="intro__small">
-          Rattaché au Barreau de l’Eure, nous vous accompagnons dans vos démarches
-          avec rigueur, écoute et disponibilité.
+          Rattaché au Barreau de l’Eure, nous vous accompagnons dans vos démarches avec rigueur, écoute et disponibilité.
+        </p>
+
+        <p class="intro__small">
+          Notre cabinet est composé à ce jour de deux avocats :
+        </p>
+
+        <div class="intro__names">
+          <p><strong>Maître Julien Morrecchi</strong></p>
+          <p><strong>Maître Claire Dumas</strong></p>
+        </div>
+
+        <p class="intro__small">
+          Notre équipe se compose par ailleurs d’une assistante :
+        </p>
+
+        <div class="intro__names">
+          <p><strong>Secrétariat du cabinet</strong></p>
+        </div>
+
+        <p class="intro__small">
+          À votre écoute, à votre disposition et en étroite collaboration avec l’avocat en charge de votre dossier, pour assurer le meilleur suivi possible.
         </p>
       </section>
+
       <!-- ÉQUIPE -->
 
       <section id="equipe" class="sections">
@@ -271,16 +295,24 @@ onMounted(() => {
                 <li>Nicolas Renaud</li>
               </ul>
             </div>
-            <img src="@/assets/images/team.jpg" alt="">
+            <img src="@/assets/images/team-2.jpg" alt="">
           </div>
         </section>
+
         <!-- BLOC 2 : DOMAINES -->
-        <section id="expertises" class="block block--domains" ref="cabinetTeamRef2">
+
+        <section id="expertises" class="block block--team" ref="cabinetTeamRef2">
           <div class="block__grid">
-            <img src="@/assets/images/pexels-smuldur-30573089.jpg" alt="">
-            <div class="block__content block-2">
+
+            <img src="@/assets/images/pexels-smuldur-30573089.jpg" alt="Statue de la justice">
+
+            <div class="block__content">
               <h2>Des domaines de compétence diversifiés</h2>
-              <ul class="checks">
+              <p class="block__content__subtitle">
+                Nous intervenons dans plusieurs domaines du droit.
+              </p>
+
+              <ul>
                 <li>Droit de la famille</li>
                 <li>Droit des personnes</li>
                 <li>Droit pénal</li>
@@ -292,6 +324,7 @@ onMounted(() => {
       </section>
 
       <!-- ENGAGEMENTS -->
+
       <section class="engagement-container">
         <section id="engagements" class="engagements">
           <h2>Notre approche</h2>
@@ -305,6 +338,7 @@ onMounted(() => {
       </section>
 
       <!-- MENUS DÉROULANT -->
+
       <section id="procedures" class="accordion">
         <div class="accordion-item" v-for="(item, index) in items" :key="index">
           <button class="accordion-header" @click="toggle(index)">
@@ -368,6 +402,78 @@ onMounted(() => {
         </div>
       </section>
 
+      <!-- IFRAME -->
+
+      <div class="iframe-container">
+        <div class="iframe-container__content">
+
+          <div class="iframe-results">
+            <div class="place-card">
+              <div class="place-card__media" aria-hidden="true"></div>
+
+              <div class="place-card__body">
+                <div class="place-card__title">Cabinet</div>
+                <div class="place-card__subtitle">Accès et rendez-vous</div>
+
+                <div class="place-card__line">
+                  <span class="dot"></span>
+                  <span>Repérez l’emplacement et préparez votre itinéraire.</span>
+                </div>
+
+                <div class="place-card__line">
+                  <span class="dot"></span>
+                  <span>Consultations sur rendez-vous (cabinet ou visio).</span>
+                </div>
+
+                <div class="place-card__actions">
+                  <a class="btn btn--primary" href="#prendre-rdv">Prendre RDV</a>
+                  <a
+                    class="btn btn--ghost"
+                    href="https://www.google.com/maps/dir/?api=1&destination=18%20Rue%20de%20la%20S%C3%A9r%C3%A9nit%C3%A9%2027000%20%C3%89vreux"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Itinéraire
+                  </a>
+                </div>
+
+                <div class="place-card__hint">
+                  Les coordonnées complètes sont indiquées plus bas sur la page.
+                </div>
+              </div>
+            </div>
+
+            <div class="place-card place-card--compact">
+              <div class="place-card__body">
+                <div class="place-card__title">Infos pratiques</div>
+
+                <div class="place-card__chips">
+                  <span class="chip">Accès PMR</span>
+                  <span class="chip">Parking à proximité</span>
+                  <span class="chip">Visio possible</span>
+                </div>
+
+                <p class="place-card__text">
+                  En cas d’urgence, privilégiez l’appel au cabinet. Pour éviter l’attente,
+                  la demande de rendez-vous peut se faire directement via le bouton “Prendre RDV”.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12294.319109934564!2d-0.24133006287153588!3d49.28515163344128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480a6156d5655ba5%3A0x1eb3a9d9ae79f46a!2sPlage%20de%20Ouistreham!5e0!3m2!1sfr!2sfr!4v1765478462795!5m2!1sfr!2sfr"
+          width="400"
+          height="300"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Plan d’accès"
+        ></iframe>
+      </div>
+
       <!--  CONTACT CABINET -->
 
       <section class="contact-quick">
@@ -406,9 +512,193 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+
+.iframe-container {
+  margin: 60px 20px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
+
+  &__content {
+
+    padding: 40px 30px 0 30px;
+    background: #faf8f8;
+  }
+
+  iframe {
+    width: 100%;
+    height: 600px;
+  }
+}
+
+.iframe-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.iframe-search {
+  height: 40px;
+  padding: 0 12px;
+
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  outline: none;
+
+  &:focus {
+    border-color: rgba(122, 173, 80, 0.9);
+    box-shadow: 0 0 0 4px rgba(122, 173, 80, 0.18);
+  }
+}
+
+.iframe-meta {
+  font-size: 13px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.iframe-results {
+  display: grid;
+  gap: 14px;
+}
+
+.place-card {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f8f8fa;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+
+  &__media {
+    background: linear-gradient(135deg, rgba(122, 173, 80, 0.18), rgba(15, 23, 42, 0.08));
+    min-height: 96px;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+
+  &__line {
+    display: grid;
+    grid-template-columns: 10px 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.92;
+    margin: 6px 0;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  &__hint {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-top: 10px;
+  }
+
+  &--compact {
+    grid-template-columns: 1fr;
+
+    .place-card__media {
+      display: none;
+    }
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 8px;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0.9;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(122, 173, 80, 0.95);
+  margin-top: 6px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid transparent;
+
+  &--primary {
+    background: rgba(122, 173, 80, 1);
+    color: #0b1220;
+  }
+
+  &--ghost {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.14);
+    color: rgba(15, 23, 42, 0.9);
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .iframe-container {
+    grid-template-columns: 1fr;
+  }
+
+  .iframe-container iframe {
+    height: 360px;
+  }
+
+  .place-card {
+    grid-template-columns: 1fr;
+
+    &__media {
+      min-height: 140px;
+    }
+  }
+}
+
+
+
+
 /*==========================
   SALON PAGE
 ==========================*/
+
 
 .salon-page {
   overflow: hidden;
@@ -640,72 +930,106 @@ onMounted(() => {
   INTRO
 ===================*/
 
+/* ============================= */
+/* INTRO SECTION */
+/* ============================= */
+
 .intro {
-  max-width: 1200px;
-  margin: 3.5rem auto 0 auto;
-  padding: 0 20px;
+  background: #ffffff;
+  padding: 80px 20px 70px 20px;  // top | right | bottom | left
   text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
 
-  h2 {
-    font-size: 34px;
-    color: var(--green-page);
-    margin-bottom: 12px;
-    letter-spacing: -0.02em;
+}
+
+/* ============================= */
+/* TITRE */
+/* ============================= */
+
+.intro h2 {
+
+
+  font-size: clamp(24px, 2.2vw, 38px);
+
+  font-family: "Playfair Display", serif;
+
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--green-page);
+  margin-bottom: 14px;
+
+
+}
+
+/* ============================= */
+/* TEXTE PRINCIPAL */
+/* ============================= */
+
+.intro__lead {
+  font-size: 17px;
+  line-height: 1.8;
+  color: rgba(15, 23, 42, 0.85);
+  margin-bottom: 18px;
+}
+
+.intro__small {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(15, 23, 42, 0.75);
+  margin-bottom: 18px;
+}
+
+/* ============================= */
+/* NOMS AVOCATS */
+/* ============================= */
+
+.intro__names {
+  margin: 24px auto 24px auto;
+}
+
+.intro__names p {
+  margin: 6px 0;
+
+
+
+  font-weight: bold;
+
+
+}
+
+.intro__names strong {
+
+  color: rgba(15, 23, 42, 0.95);
+
+  font-family: "Playfair Display", serif; /* ou ta serif premium si tu en as une */
+  font-weight: 900;
+  letter-spacing: 0.01em;
+
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 991px) {
+  .intro {
+    padding: 70px 20px 60px;
   }
 
-  p {
-    max-width: 62ch;
-    margin: 0.8rem auto;
-    line-height: 1.75;
-    font-size: 16px;
-    color: #1f2937;
+  .intro h2 {
+    font-size: 26px;
   }
 
-  &__small {
-    color: #6b7280;
-    opacity: 1;
+  .intro__lead,
+  .intro__small {
     font-size: 15px;
-    margin-top: 0.2rem;
   }
 }
 
-@media (max-width: 991.98px) {
-  .intro {
-    margin: 3rem 20px 2rem 20px;
 
-    h2 {
-      font-size: 24px;
-    }
 
-    p {
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    &__small {
-      font-size: 14px;
-    }
-  }
-}
-
-@media (max-width: 767.98px) {
-  .intro {
-    margin: 2rem 10px 1.5rem 10px;
-
-    h2 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    &__small {
-      font-size: 13px;
-    }
-  }
-}
 
 /*===================
   TEAM / DOMAINES (anti-fade)
@@ -715,66 +1039,161 @@ onMounted(() => {
   background: #fff;
 }
 
+
+/* =========================================
+   SECTION ÉQUIPE — VERSION PROPRE
+   ========================================= */
+
+
+
+
+
+/* =========================================
+   BASE BLOCK
+   ========================================= */
+
 .block {
-  padding: 4rem 20px;
+  padding: 5rem 20px;
 
   &__grid {
-    max-width: 1600px;
-    margin: auto;
+    max-width: 2000px; /* Large comme ton hero */
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 5rem;
     align-items: center;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    overflow: visible;
   }
 
   img {
     width: 100%;
-    height: 600px;
-    border-radius: 16px; // ok, mais raisonnable
+    height: 720px;
+    border-radius: 12px;
     object-fit: cover;
+    display: block;
   }
 
   &__content {
-    padding: 0; // pas de "carte"
+    max-width: 520px;
     color: #111827;
 
     h2 {
-      color: var(--green-page);
-      margin-bottom: 12px;
-      font-size: 28px;
+      margin: 0 0 10px 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(26px, 2.3vw, 34px); /* Légèrement réduit pour harmoniser */
+      font-weight: 500;
       letter-spacing: -0.02em;
+      color: var(--green-page);
+      line-height: 1.15;
     }
 
     &__subtitle {
-      margin-top: 0;
-      margin-bottom: 22px;
+      margin: 0 0 30px 0;
       font-size: 15px;
-      color: #6b7280;
+      color: rgba(17, 24, 39, 0.55);
     }
 
     ul {
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
 
       li {
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(17, 24, 39, 0.10);
-        font-size: 15px;
-        color: #111827;
+        position: relative;
+        padding: 14px 0 14px 18px;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(17, 24, 39, 0.88);
+        border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+        transition: all 0.2s ease;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 2px;
+          height: 18px;
+          background: rgba(17, 24, 39, 0.18);
+          border-radius: 2px;
+        }
+
+        &:last-child {
+          border-bottom: 0;
+        }
       }
 
-      li:last-child {
-        border-bottom: 0;
+      /* Avocats légèrement plus marqués UNIQUEMENT si c'est le premier bloc */
+      .block--team & li:nth-child(1),
+      .block--team & li:nth-child(2) {
+        font-weight: 500;
+        color: rgba(17, 24, 39, 0.95);
       }
     }
   }
 }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1100px) {
+  .block {
+    &__grid {
+      gap: 3rem;
+    }
+
+    img {
+      height: 560px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .block {
+    padding: 4rem 20px;
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    img {
+      height: 420px;
+      border-radius: 16px;
+    }
+
+    &__content {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .block {
+    padding: 3rem 16px;
+
+    img {
+      height: 320px;
+      border-radius: 14px;
+    }
+
+    &__content {
+      ul li {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 
 /* checks : pas de "✓ " collé, juste un accent sobre */
 .checks {
@@ -846,14 +1265,14 @@ onMounted(() => {
 .engagement-container {
   display: flex;
   justify-content: center;
-  margin: 0 20px;
+  margin: 4rem 20px 0 20px;
 }
 
 .engagements {
 
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
 
   font-size: 16px;
   background: #ffffff;
@@ -937,9 +1356,9 @@ onMounted(() => {
 ===================*/
 
 .accordion {
-  max-width: 1200px;
+  max-width: 900px;
 
-  margin: 60px auto;
+  margin: 200px auto 150px auto;
   padding: 0 20px;
   @media (max-width: 991.98px) {
     margin: 50px auto;
@@ -1029,6 +1448,9 @@ onMounted(() => {
 .engagements-quality {
   background: #ffffff;
   padding: 80px 20px;
+
+
+
   &__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1134,10 +1556,11 @@ onMounted(() => {
 
 .case-submit {
   position: relative;
-  height: 420px;
+
   overflow: hidden;
-  border-radius: 16px;
-  margin: 80px 20px 0 20px;
+  margin: 80px 0 0 0;
+
+  height: 550px;
   h2 {
     font-size: 42px;
     font-weight: 600;
@@ -1233,7 +1656,7 @@ onMounted(() => {
 
 .contact-quick {
   background: #ffffff;
-  padding: 80px 60px;
+  padding: 140px 60px;
   &__container {
     max-width: 1100px;
     margin: 0 auto;
