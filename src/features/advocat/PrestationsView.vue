@@ -368,6 +368,51 @@ onMounted(() => {
       </section>
 
 
+      <!-- POURQUOI NOUS CHOISIR -->
+
+      <section class="why-us" id="why-us">
+        <div class="why-us__container">
+          <header class="why-us__header">
+            <p class="why-us__kicker">Notre engagement</p>
+            <h2 class="why-us__title">Pourquoi nous choisir</h2>
+            <span class="why-us__divider" aria-hidden="true"></span>
+            <p class="why-us__subtitle">
+              Une approche fondée sur la rigueur, l’écoute et la stratégie, avec un suivi clair à chaque étape.
+            </p>
+          </header>
+
+          <div class="why-us__grid">
+            <article class="why-us__item">
+              <div class="why-us__icon" aria-hidden="true">⚖️</div>
+              <h3 class="why-us__itemTitle">Rigueur juridique</h3>
+              <p class="why-us__text">
+                Analyse approfondie de votre situation et des enjeux, pour bâtir une défense solide et cohérente.
+              </p>
+            </article>
+
+            <article class="why-us__item">
+              <div class="why-us__icon" aria-hidden="true">🤝</div>
+              <h3 class="why-us__itemTitle">Accompagnement humain</h3>
+              <p class="why-us__text">
+                Explications accessibles, échanges réguliers et recommandations adaptées à votre dossier.
+              </p>
+            </article>
+
+            <article class="why-us__item">
+              <div class="why-us__icon" aria-hidden="true">🔎</div>
+              <h3 class="why-us__itemTitle">Transparence</h3>
+              <p class="why-us__text">
+                Cadre clair dès le départ : étapes, délais, honoraires et informations sur l’avancement de l’affaire.
+              </p>
+            </article>
+          </div>
+
+          <div class="why-us__cta">
+            <a class="why-us__btn why-us__btn--primary" href="#contact">Nous contacter</a>
+            <a class="why-us__btn why-us__btn--ghost" href="#prendre-rdv">Prendre rendez-vous</a>
+          </div>
+        </div>
+      </section>
 
 
 
@@ -398,7 +443,12 @@ onMounted(() => {
 
           <div class="iframe-results">
             <div class="place-card">
-              <div class="place-card__media" aria-hidden="true"></div>
+              <div class="place-card__media" >
+
+                <img src="@/assets/images/salle-attente.jpg" class="img-salle-attente" />
+
+
+              </div>
 
               <div class="place-card__body">
                 <div class="place-card__title">Cabinet</div>
@@ -502,6 +552,217 @@ onMounted(() => {
 
 <style scoped lang="scss">
 
+/* ====== WHY US (Pourquoi nous choisir) ====== */
+.why-us {
+  padding: 90px 20px;
+  background: #ffffff;
+  &__container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  &__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  &__kicker {
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .65;
+    margin: 0 0 10px 0;
+  }
+  &__title {
+    margin: 0;
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  &__divider {
+    display: inline-block;
+    width: 64px;
+    height: 2px;
+    margin: 18px 0 14px;
+    background: #7aa46b; /* couleur thème (modifiable) */
+    border-radius: 999px;
+  }
+  &__subtitle {
+    margin: 0 auto;
+    max-width: 720px;
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: .8;
+  }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 30px;
+  }
+  &__item {
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    background: #fff;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  &__item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(122,164,107,.45);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  &__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(122,164,107,.10); /* couleur thème (modifiable) */
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+  &__itemTitle {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  &__text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: .85;
+  }
+  &__cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  &__btn {
+
+    font-size: 15px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  &__btn:hover {
+    transform: translateY(-1px);
+  }
+  &__btn--primary {
+    background: #7aa46b; /* couleur thème (modifiable) */
+    color: #fff;
+  }
+  &__btn--primary:hover {
+    background: #6a935c;
+  }
+  &__btn--ghost {
+    background: transparent;
+    color: rgba(0,0,0,.75);
+    border-color: rgba(0,0,0,.16);
+  }
+  &__btn--ghost:hover {
+    border-color: rgba(122,164,107,.55);
+  }
+}
+
+
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .why-us {
+    padding: 70px 20px;
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    &__item {
+      padding: 20px;
+    }
+    &__item:hover {
+      transform: translateY(-2px);
+    }
+    &__itemTitle {
+      margin: 0 0 10px 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    &__text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: .85;
+    }
+    &__btn {
+
+      font-size: 13px;
+    }
+  }
+}
+
+
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .why-us {
+    padding: 60px 10px 35px 10px;
+    &__title {
+      font-size: 26px;
+    }
+    &__subtitle {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 0;
+    }
+    &__item {
+      padding: 15px;
+    }
+    &__item:hover {
+      transform: translateY(-1px);
+    }
+    &__icon {
+      width: 44px;
+      height: 44px;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    &__itemTitle {
+      margin: 0 0 10px 0;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    &__text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: .85;
+    }
+    &__btn {
+
+      font-size: 12px;
+    }
+  }
+}
+
+
+
+
+/////////////////// CLIENT SUPPORT
+
 .client-support-premium {
   position: relative;
   background: #1f1f1f;
@@ -596,20 +857,6 @@ onMounted(() => {
   margin-bottom: 14px;
 }
 
-.iframe-search {
-  height: 40px;
-  padding: 0 12px;
-
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #ffffff;
-  outline: none;
-
-  &:focus {
-    border-color: rgba(122, 173, 80, 0.9);
-    box-shadow: 0 0 0 4px rgba(122, 173, 80, 0.18);
-  }
-}
-
 .iframe-meta {
   font-size: 13px;
   opacity: 0.7;
@@ -623,18 +870,14 @@ onMounted(() => {
 
 .place-card {
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 150px 1fr;
   gap: 14px;
   padding: 14px;
   border-radius: 12px;
-  background: #f8f8fa;
   border: 1px solid rgba(15, 23, 42, 0.08);
-
-  &__media {
-    background: linear-gradient(135deg, rgba(122, 173, 80, 0.18), rgba(15, 23, 42, 0.08));
-    min-height: 96px;
+  &__media .img-salle-attente {
+    height: 100%;
   }
-
   &__title {
     font-weight: 700;
     font-size: 14px;
@@ -1065,22 +1308,33 @@ onMounted(() => {
 /* MOBILE */
 /* ============================= */
 
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
   .intro {
-    padding: 70px 20px 60px;
+    padding: 70px 20px 60px 20px;
+  }
+  .intro h2 {
+    font-size: 26px;
+  }
+  .intro__lead,
+  .intro__small {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .intro {
+    padding: 30px 20px 20px 20px;
   }
 
   .intro h2 {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .intro__lead,
   .intro__small {
-    font-size: 15px;
+    font-size: 13px;
   }
 }
-
-
 
 
 /*===================
@@ -1105,7 +1359,7 @@ onMounted(() => {
    ========================================= */
 
 .block {
-  padding: 5rem 20px;
+  padding: 5rem 20px 0 20px;
 
   &__grid {
     max-width: 2000px; /* Large comme ton hero */
@@ -1157,7 +1411,6 @@ onMounted(() => {
         color: rgba(17, 24, 39, 0.88);
         border-bottom: 1px solid rgba(17, 24, 39, 0.08);
         transition: all 0.2s ease;
-
         &::before {
           content: "";
           position: absolute;
@@ -1169,7 +1422,6 @@ onMounted(() => {
           background: rgba(17, 24, 39, 0.18);
           border-radius: 2px;
         }
-
         &:last-child {
           border-bottom: 0;
         }
@@ -1201,9 +1453,9 @@ onMounted(() => {
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
   .block {
-    padding: 4rem 20px;
+    padding: 4rem 20px 0 20px;
 
     &__grid {
       grid-template-columns: 1fr;
@@ -1221,9 +1473,9 @@ onMounted(() => {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 767.98px) {
   .block {
-    padding: 3rem 16px;
+    padding: 4rem 10px 0 10px;
 
     img {
       height: 320px;
@@ -1294,10 +1546,11 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .block {
-    padding: 2rem 10px;
+    padding: 1.5rem 10px;
 
     img {
-      height: 320px;
+      //height: 320px;
+      height: 550px
     }
 
     &__content h2 {
@@ -1316,21 +1569,26 @@ onMounted(() => {
 
 .accordion {
   max-width: 1200px;
-
-  margin: 120px auto 100px auto;
+  margin: 250px auto;
   padding: 0 20px;
   @media (max-width: 991.98px) {
-    margin: 50px auto;
+    margin: 100px auto;
   }
   @media (max-width: 767.98px) {
-    margin: 40px auto;
+    margin: 40px auto 80px auto;
+    padding: 0 10px;
   }
 }
 
 .accordion-item {
   border-bottom: 1px solid black;
-
   padding: 0 40px;
+  @media (max-width: 991.98px) {
+    padding: 0 20px;
+  }
+  @media (max-width: 767.98px) {
+    padding: 0 8px;
+  }
 }
 
 .accordion-header {
@@ -1412,10 +1670,7 @@ onMounted(() => {
 
 .case-submit {
   position: relative;
-
   overflow: hidden;
-  margin: 80px 0 0 0;
-
   height: 550px;
   h2 {
     font-size: 42px;
