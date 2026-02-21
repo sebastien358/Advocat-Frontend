@@ -408,8 +408,8 @@ onMounted(() => {
           </div>
 
           <div class="why-us__cta">
-            <a class="why-us__btn why-us__btn--primary" href="#contact">Nous contacter</a>
-            <a class="why-us__btn why-us__btn--ghost" href="#prendre-rdv">Prendre rendez-vous</a>
+            <router-link to="/contact/form" class="why-us__btn why-us__btn--primary">Nous contacter</router-link>
+            <router-link to="#" class="why-us__btn why-us__btn--ghost"> Prendre rendez-vous</router-link>
           </div>
         </div>
       </section>
@@ -702,6 +702,10 @@ onMounted(() => {
       line-height: 1.7;
       opacity: .85;
     }
+    &__cta {
+
+      margin-top: 23px;
+    }
     &__btn {
 
       font-size: 13px;
@@ -744,24 +748,24 @@ onMounted(() => {
       font-size: 15px;
       font-weight: 700;
     }
-
     &__text {
       margin: 0;
       font-size: 13px;
       line-height: 1.7;
       opacity: .85;
     }
+    &__cta {
+      margin-top: 22px;
+    }
     &__btn {
-
       font-size: 12px;
     }
   }
 }
 
-
-
-
-/////////////////// CLIENT SUPPORT
+/*============================
+ CLIENT SUPPORT
+============================*/
 
 .client-support-premium {
   position: relative;
@@ -769,69 +773,126 @@ onMounted(() => {
   padding: 120px 20px;
   color: white;
   overflow: hidden;
-}
-
-.client-support-premium__container {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-.client-support-premium h2 {
-  font-size: 38px;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
-
-.section-line {
-  width: 60px;
-  height: 2px;
-  background: #8b9f6f;
-  margin: 20px auto 60px auto;
-}
-
-.premium-grid {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.premium-item {
-  flex: 1;
-  min-width: 250px;
-  text-align: left;
-}
-
-.premium-item span {
-  font-size: 42px;
-  color: #8b9f6f;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 15px;
-}
-
-.premium-item h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.premium-item p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #cccccc;
+  h2 {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  &__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .section-line {
+    width: 60px;
+    height: 2px;
+    background: #8b9f6f;
+    margin: 20px auto 60px auto;
+  }
+  .premium-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .premium-item {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+  }
+  .premium-item span {
+    font-size: 42px;
+    color: #8b9f6f;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
+  }
+  .premium-item h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .premium-item p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #cccccc;
+  }
 }
 
 
-////////
+@media (max-width: 991.98px) {
+  .client-support-premium {
+    padding: 80px 20px;
+    h2 {
+      font-size: 30px;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+    .section-line {
+      margin: 20px auto 70px auto;
+    }
+    .premium-grid {
+
+      gap: 40px;
+
+    }
+
+    .premium-item span {
+      font-size: 36px;
+
+      margin-bottom: 13px;
+    }
+    .premium-item h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .premium-item p {
+      font-size: 14px;
+
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .client-support-premium {
+    padding: 50px 20px;
+    h2 {
+      font-size: 21px;
+    }
+    .premium-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .section-line {
+      margin: 20px auto 40px auto;
+    }
+    .premium-item span {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .premium-item h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .premium-item p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cccccc;
+    }
+  }
+}
+
+/*====================
+  IFRAME
+====================*/
+
 .iframe-container {
   margin: 60px 20px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-
   background: rgba(255, 255, 255, 0.84);
   border: 1px solid rgba(15, 23, 42, 0.10);
 
@@ -1225,83 +1286,54 @@ onMounted(() => {
   INTRO
 ===================*/
 
-/* ============================= */
-/* INTRO SECTION */
-/* ============================= */
-
 .intro {
   background: #ffffff;
   padding: 80px 20px 70px 20px;  // top | right | bottom | left
   text-align: center;
   max-width: 1100px;
   margin: 0 auto;
+  h2 {
+    font-size: 38px;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--green-page);
+    margin-bottom: 14px;
+  }
+  &__lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(15, 23, 42, 0.85);
+    margin-bottom: 18px;
+  }
+  &__small {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(15, 23, 42, 0.75);
+    margin-bottom: 18px;
+  }
 
-}
+  /* ============================= */
+  /* NOMS AVOCATS */
+  /* ============================= */
 
-/* ============================= */
-/* TITRE */
-/* ============================= */
+  &__names {
+    margin: 24px auto 24px auto;
+  }
 
-.intro h2 {
+  &__names p {
+    margin: 6px 0;
+    font-weight: bold;
+    font-size: 16px;
+  }
 
-
-  font-size: clamp(24px, 2.2vw, 38px);
-
-  font-family: "Playfair Display", serif;
-
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: var(--green-page);
-  margin-bottom: 14px;
-
-
-}
-
-/* ============================= */
-/* TEXTE PRINCIPAL */
-/* ============================= */
-
-.intro__lead {
-  font-size: 17px;
-  line-height: 1.8;
-  color: rgba(15, 23, 42, 0.85);
-  margin-bottom: 18px;
-}
-
-.intro__small {
-  font-size: 16px;
-  line-height: 1.75;
-  color: rgba(15, 23, 42, 0.75);
-  margin-bottom: 18px;
-}
-
-/* ============================= */
-/* NOMS AVOCATS */
-/* ============================= */
-
-.intro__names {
-  margin: 24px auto 24px auto;
-}
-
-.intro__names p {
-  margin: 6px 0;
-
-
-
-  font-weight: bold;
-
-
-}
-
-.intro__names strong {
-
-  color: rgba(15, 23, 42, 0.95);
-
-  font-family: "Playfair Display", serif; /* ou ta serif premium si tu en as une */
-  font-weight: 900;
-  letter-spacing: 0.01em;
-
+  &__names strong {
+    color: rgba(15, 23, 42, 0.95);
+    font-family: "Playfair Display", serif; /* ou ta serif premium si tu en as une */
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
 }
 
 /* ============================= */
@@ -1311,31 +1343,39 @@ onMounted(() => {
 @media (max-width: 991.98px) {
   .intro {
     padding: 70px 20px 60px 20px;
-  }
-  .intro h2 {
-    font-size: 26px;
-  }
-  .intro__lead,
-  .intro__small {
-    font-size: 14px;
+     h2 {
+      font-size: 26px;
+    }
+    &__lead,
+    &__small {
+      font-size: 14px;
+    }
   }
 }
 
 @media (max-width: 767.98px) {
   .intro {
-    padding: 30px 20px 20px 20px;
-  }
-
-  .intro h2 {
-    font-size: 24px;
-  }
-
-  .intro__lead,
-  .intro__small {
-    font-size: 13px;
+    padding: 30px 10px 30px 10px;
+    h2 {
+      font-size: 19px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .intro__names p {
+      margin: 6px 0;
+      font-weight: bold;
+      font-size: 13px;
+    }
+    &__lead,
+    &__small {
+      font-size: 13px;
+      margin-bottom: 13px;
+    }
+    &__names {
+      margin: 20px auto 20px auto;
+    }
   }
 }
-
 
 /*===================
   TEAM / DOMAINES (anti-fade)
@@ -1344,19 +1384,6 @@ onMounted(() => {
 .sections {
   background: #fff;
 }
-
-
-/* =========================================
-   SECTION ÉQUIPE — VERSION PROPRE
-   ========================================= */
-
-
-
-
-
-/* =========================================
-   BASE BLOCK
-   ========================================= */
 
 .block {
   padding: 5rem 20px 0 20px;
@@ -1385,7 +1412,7 @@ onMounted(() => {
     h2 {
       margin: 0 0 10px 0;
       font-family: "Playfair Display", serif;
-      font-size: clamp(26px, 2.3vw, 34px); /* Légèrement réduit pour harmoniser */
+      font-size: 34px; /* Légèrement réduit pour harmoniser */
       font-weight: 500;
       letter-spacing: -0.02em;
       color: var(--green-page);
@@ -1475,16 +1502,28 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .block {
-    padding: 4rem 10px 0 10px;
+    padding: 1.5rem 10px 0 10px;
 
     img {
       height: 320px;
       border-radius: 14px;
     }
-
     &__content {
+      max-width: 520px;
+      color: #111827;
+      h2 {
+        text-align: center;
+        font-size: 17px;
+      }
+      &__subtitle {
+        text-align: center;
+        margin: 0 0 30px 0;
+        font-size: 14px;
+        color: rgba(17, 24, 39, 0.55);
+      }
       ul li {
-        font-size: 15px;
+        text-align: center;
+        font-size: 13px;
       }
     }
   }
@@ -1520,48 +1559,7 @@ onMounted(() => {
 }
 
 /* responsive */
-@media (max-width: 991.98px) {
-  .block {
-    padding: 3rem 10px;
 
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    &__content h2 {
-      text-align: center;
-      font-size: 24px;
-    }
-
-    &__content__subtitle {
-      text-align: center;
-    }
-
-    &__content ul li {
-      text-align: center;
-    }
-  }
-}
-
-@media (max-width: 767.98px) {
-  .block {
-    padding: 1.5rem 10px;
-
-    img {
-      //height: 320px;
-      height: 550px
-    }
-
-    &__content h2 {
-      font-size: 20px;
-    }
-
-    &__content ul li {
-      font-size: 13px;
-    }
-  }
-}
 
 /*===================
   ACCORDIONS
@@ -1576,7 +1574,7 @@ onMounted(() => {
   }
   @media (max-width: 767.98px) {
     margin: 40px auto 80px auto;
-    padding: 0 10px;
+    padding: 40px 10px 20px 10px;
   }
 }
 
