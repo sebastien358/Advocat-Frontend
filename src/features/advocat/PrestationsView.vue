@@ -239,7 +239,7 @@ onMounted(() => {
 
           <div class="hero__actions" ref="heroButtonsRef">
             <a href="tel:0780468148" class="btn btn-primary">07 80 46 81 48</a>
-            <router-link to="/contact/form" class="btn btn-ghost">Contactez-nous</router-link>
+            <router-link to="/contact/form" class="btn btn-ghost">Rendez-nous</router-link>
           </div>
         </div>
       </section>
@@ -729,7 +729,7 @@ onMounted(() => {
     &__grid {
       grid-template-columns: 1fr;
       gap: 15px;
-      margin-top: 0;
+      margin: 0 10px 0 10px;
     }
     &__item {
       padding: 15px;
@@ -856,18 +856,20 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .client-support-premium {
-    padding: 50px 20px;
+    padding: 30px 20px;
     h2 {
-      font-size: 21px;
+      font-size: 19px;
+      letter-spacing: 0.05em;
+      font-weight: 500;
     }
     .premium-grid {
       display: flex;
       justify-content: space-between;
-      gap: 25px;
+      gap: 30px;
       flex-wrap: wrap;
     }
     .section-line {
-      margin: 20px auto 40px auto;
+      margin: 15px auto 40px auto;
     }
     .premium-item span {
       font-size: 28px;
@@ -890,26 +892,22 @@ onMounted(() => {
 ====================*/
 
 .iframe-container {
-  margin: 60px 20px 0;
+  max-width: 1440px;
+  margin: 80px auto 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: rgba(255, 255, 255, 0.84);
   border: 1px solid rgba(15, 23, 42, 0.10);
-
   box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
-
   &__content {
-
     padding: 40px 30px 0 30px;
     background: #faf8f8;
   }
-
   iframe {
     width: 100%;
     height: 600px;
   }
 }
-
 .iframe-head {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -917,18 +915,15 @@ onMounted(() => {
   align-items: center;
   margin-bottom: 14px;
 }
-
 .iframe-meta {
   font-size: 13px;
   opacity: 0.7;
   white-space: nowrap;
 }
-
 .iframe-results {
   display: grid;
   gap: 14px;
 }
-
 .place-card {
   display: grid;
   grid-template-columns: 150px 1fr;
@@ -944,14 +939,12 @@ onMounted(() => {
     font-size: 14px;
     letter-spacing: 0.2px;
   }
-
   &__subtitle {
     font-size: 12px;
     opacity: 0.7;
     margin-top: 2px;
     margin-bottom: 10px;
   }
-
   &__line {
     display: grid;
     grid-template-columns: 10px 1fr;
@@ -962,19 +955,16 @@ onMounted(() => {
     opacity: 0.92;
     margin: 6px 0;
   }
-
   &__actions {
     display: flex;
     gap: 10px;
     margin-top: 12px;
   }
-
   &__hint {
     font-size: 12px;
     opacity: 0.65;
     margin-top: 10px;
   }
-
   &--compact {
     grid-template-columns: 1fr;
 
@@ -982,14 +972,12 @@ onMounted(() => {
       display: none;
     }
   }
-
   &__chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin: 10px 0 8px;
   }
-
   &__text {
     margin: 0;
     font-size: 13px;
@@ -997,7 +985,6 @@ onMounted(() => {
     opacity: 0.9;
   }
 }
-
 .dot {
   width: 8px;
   height: 8px;
@@ -1005,7 +992,6 @@ onMounted(() => {
   background: rgba(122, 173, 80, 0.95);
   margin-top: 6px;
 }
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1016,12 +1002,10 @@ onMounted(() => {
   font-size: 13px;
   text-decoration: none;
   border: 1px solid transparent;
-
   &--primary {
     background: rgba(122, 173, 80, 1);
     color: #0b1220;
   }
-
   &--ghost {
     background: #ffffff;
     border-color: rgba(15, 23, 42, 0.14);
@@ -1030,15 +1014,14 @@ onMounted(() => {
 }
 
 /* Responsive */
-@media (max-width: 980px) {
+@media (max-width: 991.98px) {
   .iframe-container {
+    margin: 60px 40px 0 40px;
     grid-template-columns: 1fr;
   }
-
   .iframe-container iframe {
     height: 360px;
   }
-
   .place-card {
     grid-template-columns: 1fr;
 
@@ -1048,7 +1031,25 @@ onMounted(() => {
   }
 }
 
-
+@media (max-width: 768.98px) {
+  .iframe-container {
+    margin: 60px 10px 0 10px;
+    grid-template-columns: 1fr;
+    border: none;
+    &__content {
+      padding: 0;
+    }
+  }
+  .iframe-container iframe {
+    height: 360px;
+  }
+  .place-card {
+    grid-template-columns: 1fr;
+    &__media {
+      min-height: 140px;
+    }
+  }
+}
 
 
 /*==========================
@@ -1288,14 +1289,14 @@ onMounted(() => {
 
 .intro {
   background: #ffffff;
-  padding: 80px 20px 70px 20px;  // top | right | bottom | left
+  padding: 80px 20px 70px 20px;
   text-align: center;
   max-width: 1100px;
   margin: 0 auto;
   h2 {
     font-size: 38px;
     font-family: "Playfair Display", serif;
-    font-weight: 500;
+    font-weight: 300;
     letter-spacing: -0.02em;
     line-height: 1.2;
     color: var(--green-page);
@@ -1356,15 +1357,22 @@ onMounted(() => {
 @media (max-width: 767.98px) {
   .intro {
     padding: 30px 10px 30px 10px;
+    text-align: left;
+    max-width: 820px;
+    margin: 0 auto;
     h2 {
       font-size: 19px;
       margin-bottom: 16px;
       font-weight: 600;
+      text-align: left;
     }
     .intro__names p {
       margin: 6px 0;
       font-weight: bold;
       font-size: 13px;
+
+      line-height: 1.7;
+
     }
     &__lead,
     &__small {
@@ -1373,6 +1381,10 @@ onMounted(() => {
     }
     &__names {
       margin: 20px auto 20px auto;
+    }
+    &__names strong {
+      margin: 8px 0;
+      display: block;
     }
   }
 }
@@ -1502,18 +1514,27 @@ onMounted(() => {
 
 @media (max-width: 767.98px) {
   .block {
-    padding: 1.5rem 10px 0 10px;
+    padding: 0.5rem 10px 0 10px;
 
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: normal;
+    }
     img {
       height: 320px;
       border-radius: 14px;
+
+    }
+    img:last-of-type {
+      margin-top: 15px;
+      margin-bottom: 25px;
     }
     &__content {
-      max-width: 520px;
+      width: 100%;
       color: #111827;
       h2 {
         text-align: center;
-        font-size: 17px;
+        font-size: 18px;
       }
       &__subtitle {
         text-align: center;
@@ -1522,8 +1543,17 @@ onMounted(() => {
         color: rgba(17, 24, 39, 0.55);
       }
       ul li {
-        text-align: center;
         font-size: 13px;
+        text-align: left;
+
+        font-weight: 500;
+        padding: 16px 0;
+
+          border-bottom: 1px solid rgba(0,0,0,0.04);
+
+      }
+      ul li::before {
+        display: none;
       }
     }
   }
@@ -1573,8 +1603,7 @@ onMounted(() => {
     margin: 100px auto;
   }
   @media (max-width: 767.98px) {
-    margin: 40px auto 80px auto;
-    padding: 40px 10px 20px 10px;
+    margin: 50px auto 80px auto;
   }
 }
 
@@ -1585,6 +1614,7 @@ onMounted(() => {
     padding: 0 20px;
   }
   @media (max-width: 767.98px) {
+    border-bottom: 1px solid rgba(0,0,0,0.10);
     padding: 0 8px;
   }
 }
@@ -1605,6 +1635,7 @@ onMounted(() => {
     font-size: 18px;
   }
   @media (max-width: 767.98px) {
+    font-weight: 500;
     padding: 20px 0;
     font-size: 16px;
   }
@@ -1630,6 +1661,8 @@ onMounted(() => {
     height: 26px;
   }
   @media (max-width: 767.98px) {
+    background: #8dbf67;
+    color: white;
     font-size: 16px;
     width: 21px;
     height: 21px;
@@ -1639,7 +1672,6 @@ onMounted(() => {
 .accordion-content p {
   padding: 0 0 18px 0;
   line-height: 1.6;
-  //font-size: 15px;
   @media (max-width: 991.98px) {
     font-size: 14px;
   }
