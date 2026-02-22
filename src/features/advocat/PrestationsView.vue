@@ -439,79 +439,82 @@ onMounted(() => {
       <!-- IFRAME -->
 
       <div class="iframe-container">
-        <div class="iframe-container__content">
+        <div class="iframe">
+          <div class="iframe__content">
 
-          <div class="iframe-results">
-            <div class="place-card">
-              <div class="place-card__media" >
+            <div class="iframe-results">
+              <div class="place-card">
+                <div class="place-card__media" >
 
-                <img src="@/assets/images/salle-attente.jpg" class="img-salle-attente" />
+                  <img src="@/assets/images/salle-attente.jpg" class="img-salle-attente" />
 
 
+                </div>
+
+                <div class="place-card__body">
+                  <div class="place-card__title">Cabinet</div>
+                  <div class="place-card__subtitle">Accès et rendez-vous</div>
+
+                  <div class="place-card__line">
+                    <span class="dot"></span>
+                    <span>Repérez l’emplacement et préparez votre itinéraire.</span>
+                  </div>
+
+                  <div class="place-card__line">
+                    <span class="dot"></span>
+                    <span>Consultations sur rendez-vous (cabinet ou visio).</span>
+                  </div>
+
+                  <div class="place-card__actions">
+                    <a class="btn btn--primary" href="#prendre-rdv">Prendre RDV</a>
+                    <a
+                      class="btn btn--ghost"
+                      href="https://www.google.com/maps/dir/?api=1&destination=18%20Rue%20de%20la%20S%C3%A9r%C3%A9nit%C3%A9%2027000%20%C3%89vreux"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Itinéraire
+                    </a>
+                  </div>
+
+                  <div class="place-card__hint">
+                    Les coordonnées complètes sont indiquées plus bas sur la page.
+                  </div>
+                </div>
               </div>
 
-              <div class="place-card__body">
-                <div class="place-card__title">Cabinet</div>
-                <div class="place-card__subtitle">Accès et rendez-vous</div>
+              <div class="place-card place-card--compact">
+                <div class="place-card__body">
+                  <div class="place-card__title">Infos pratiques</div>
 
-                <div class="place-card__line">
-                  <span class="dot"></span>
-                  <span>Repérez l’emplacement et préparez votre itinéraire.</span>
+                  <div class="place-card__chips">
+                    <span class="chip">Accès PMR</span>
+                    <span class="chip">Parking à proximité</span>
+                    <span class="chip">Visio possible</span>
+                  </div>
+
+                  <p class="place-card__text">
+                    En cas d’urgence, privilégiez l’appel au cabinet. Pour éviter l’attente,
+                    la demande de rendez-vous peut se faire directement via le bouton “Prendre RDV”.
+                  </p>
                 </div>
-
-                <div class="place-card__line">
-                  <span class="dot"></span>
-                  <span>Consultations sur rendez-vous (cabinet ou visio).</span>
-                </div>
-
-                <div class="place-card__actions">
-                  <a class="btn btn--primary" href="#prendre-rdv">Prendre RDV</a>
-                  <a
-                    class="btn btn--ghost"
-                    href="https://www.google.com/maps/dir/?api=1&destination=18%20Rue%20de%20la%20S%C3%A9r%C3%A9nit%C3%A9%2027000%20%C3%89vreux"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Itinéraire
-                  </a>
-                </div>
-
-                <div class="place-card__hint">
-                  Les coordonnées complètes sont indiquées plus bas sur la page.
-                </div>
-              </div>
-            </div>
-
-            <div class="place-card place-card--compact">
-              <div class="place-card__body">
-                <div class="place-card__title">Infos pratiques</div>
-
-                <div class="place-card__chips">
-                  <span class="chip">Accès PMR</span>
-                  <span class="chip">Parking à proximité</span>
-                  <span class="chip">Visio possible</span>
-                </div>
-
-                <p class="place-card__text">
-                  En cas d’urgence, privilégiez l’appel au cabinet. Pour éviter l’attente,
-                  la demande de rendez-vous peut se faire directement via le bouton “Prendre RDV”.
-                </p>
               </div>
             </div>
           </div>
-        </div>
 
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12294.319109934564!2d-0.24133006287153588!3d49.28515163344128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480a6156d5655ba5%3A0x1eb3a9d9ae79f46a!2sPlage%20de%20Ouistreham!5e0!3m2!1sfr!2sfr!4v1765478462795!5m2!1sfr!2sfr"
-          width="400"
-          height="300"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Plan d’accès"
-        ></iframe>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12294.319109934564!2d-0.24133006287153588!3d49.28515163344128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480a6156d5655ba5%3A0x1eb3a9d9ae79f46a!2sPlage%20de%20Ouistreham!5e0!3m2!1sfr!2sfr!4v1765478462795!5m2!1sfr!2sfr"
+            width="400"
+            height="300"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Plan d’accès"
+          ></iframe>
+        </div>
       </div>
+
 
       <!--  CONTACT CABINET -->
 
@@ -714,8 +717,8 @@ onMounted(() => {
 }
 
 
-
 /* Responsive */
+
 @media (max-width: 767.98px) {
   .why-us {
     padding: 60px 10px 35px 10px;
@@ -892,8 +895,15 @@ onMounted(() => {
 ====================*/
 
 .iframe-container {
+  margin: 80px 20px 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iframe {
+  width: 100%;
   max-width: 1440px;
-  margin: 80px auto 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: rgba(255, 255, 255, 0.84);
@@ -1013,18 +1023,20 @@ onMounted(() => {
   }
 }
 
+
 /* Responsive */
 @media (max-width: 991.98px) {
   .iframe-container {
-    margin: 60px 40px 0 40px;
+    margin: 80px 20px 0 20px;
+  }
+  .iframe {
     grid-template-columns: 1fr;
   }
-  .iframe-container iframe {
+  .iframe iframe {
     height: 360px;
   }
   .place-card {
     grid-template-columns: 1fr;
-
     &__media {
       min-height: 140px;
     }
@@ -1033,20 +1045,33 @@ onMounted(() => {
 
 @media (max-width: 768.98px) {
   .iframe-container {
-    margin: 60px 10px 0 10px;
+    margin: 50px 10px 0 10px;
+  }
+  .iframe {
     grid-template-columns: 1fr;
-    border: none;
+    border: 0;
+    box-shadow: initial;
+    row-gap: 15px;
     &__content {
       padding: 0;
+      border-radius: 12px;
+      background: initial;
     }
   }
-  .iframe-container iframe {
+  .iframe iframe {
     height: 360px;
+    border-radius: 12px;
+    margin-top: 20px;
   }
   .place-card {
     grid-template-columns: 1fr;
+
     &__media {
       min-height: 140px;
+    }
+    &__media .img-salle-attente {
+      height: 300px;
+      border-radius: 12px 12px 0 0;
     }
   }
 }
@@ -1055,7 +1080,6 @@ onMounted(() => {
 /*==========================
   SALON PAGE
 ==========================*/
-
 
 .salon-page {
   overflow: hidden;
@@ -1485,7 +1509,6 @@ onMounted(() => {
     &__grid {
       gap: 3rem;
     }
-
     img {
       height: 560px;
     }
@@ -1495,17 +1518,14 @@ onMounted(() => {
 @media (max-width: 991.98px) {
   .block {
     padding: 4rem 20px 0 20px;
-
     &__grid {
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }
-
     img {
       height: 420px;
       border-radius: 16px;
     }
-
     &__content {
       max-width: 100%;
     }
@@ -1520,53 +1540,47 @@ onMounted(() => {
       grid-template-columns: 1fr;
       gap: normal;
     }
+
     img {
       height: 320px;
       border-radius: 14px;
-
     }
+
     img:last-of-type {
       margin-top: 15px;
       margin-bottom: 25px;
     }
+
     &__content {
       width: 100%;
       color: #111827;
+
       h2 {
         text-align: center;
         font-size: 18px;
       }
+
       &__subtitle {
         text-align: center;
         margin: 0 0 30px 0;
         font-size: 14px;
         color: rgba(17, 24, 39, 0.55);
       }
+
       ul li {
         font-size: 13px;
         text-align: left;
-
         font-weight: 500;
         padding: 16px 0;
-
-          border-bottom: 1px solid rgba(0,0,0,0.04);
-
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
       }
+
       ul li::before {
         display: none;
       }
     }
   }
 }
-
-
-
-
-
-
-
-
-
 
 /* checks : pas de "✓ " collé, juste un accent sobre */
 .checks {
@@ -1589,8 +1603,6 @@ onMounted(() => {
 }
 
 /* responsive */
-
-
 /*===================
   ACCORDIONS
 ===================*/
