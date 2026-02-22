@@ -165,7 +165,8 @@ const closeMenu = () => {
       <div class="header__nav">
         <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }" @click="closeMenu()">Accueil</RouterLink>
         <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }" @click="closeMenu()">Équipe</RouterLink>
-        <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }" @click="closeMenu()" >Engagements</RouterLink>
+        <RouterLink to="/#procedures" :class="{ active: $route.path === '/#procedures' && $route.path }" @click="closeMenu()">Procédures</RouterLink>
+        <RouterLink to="/#iframe" :class="{ active: $route.path === '/#iframe' && $route.path }" @click="closeMenu()">Cabinet</RouterLink>
         <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }" @click="closeMenu()">Contact</RouterLink>
         <div v-if="!roleAdmin()">
           <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }" @click="closeMenu()">Espace pro</RouterLink>
@@ -187,7 +188,8 @@ const closeMenu = () => {
     <div v-show="isVisible" class="mobile-menu" ref="serviceMenu">
       <RouterLink to="/" :class="{ active: $route.path === '/' && !$route.hash }" @click="closeMenu()">Accueil</RouterLink>
       <RouterLink to="/#equipe" :class="{ active: $route.path === '/#equipe' && $route.path }" @click="closeMenu()">Équipe</RouterLink>
-      <RouterLink to="/#engagements" :class="{ active: $route.path === '/#engagements' && $route.path }" @click="closeMenu()">Engagements</RouterLink>
+      <RouterLink to="/#procedures" :class="{ active: $route.path === '/#procedures' && $route.path }" @click="closeMenu()">Procédures</RouterLink>
+      <RouterLink to="/#iframe" :class="{ active: $route.path === '/#iframe' && $route.path }" @click="closeMenu()">Cabinet</RouterLink>
       <RouterLink to="/contact/form" :class="{ active: $route.path === '/contact/form' && !$route.hash }" @click="closeMenu()">Contact</RouterLink>
       <div v-if="!roleAdmin()">
         <RouterLink to="/login" :class="{ active: $route.path === '/login' && !$route.hash }" @click="closeMenu()">Connexion</RouterLink>

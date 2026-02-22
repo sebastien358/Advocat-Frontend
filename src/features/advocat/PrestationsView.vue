@@ -3,8 +3,16 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import {nextTick, onMounted, onUnmounted, ref} from "vue";
 import { gsap } from "gsap";
 import {useOpeningStatus} from "@/shared/date/useOpeningStatus.ts";
+import BookingView from "@/features/advocat/components/booking/BookingView.vue";
+import {useUiStore} from "@/stores/uiStore.ts";
 const { isOpen, nextOpening, closingHour } = useOpeningStatus();
 gsap.registerPlugin(ScrollTrigger);
+
+const uiStore = useUiStore()
+
+function bookingOpen() {
+  uiStore.openBooking()
+}
 
 /*======================
   SCROLL PAGE
@@ -239,7 +247,7 @@ onMounted(() => {
 
           <div class="hero__actions" ref="heroButtonsRef">
             <a href="tel:0780468148" class="btn btn-primary">07 80 46 81 48</a>
-            <router-link to="/contact/form" class="btn btn-ghost">Rendez-nous</router-link>
+            <router-link to="" class="btn btn-ghost" @click="bookingOpen()">Rendez-nous</router-link>
           </div>
         </div>
       </section>
@@ -303,9 +311,7 @@ onMounted(() => {
 
         <section id="expertises" class="block block--team" ref="cabinetTeamRef2">
           <div class="block__grid">
-
             <img src="@/assets/images/pexels-smuldur-30573089.jpg" alt="Statue de la justice">
-
             <div class="block__content">
               <h2>Des domaines de compétence diversifiés</h2>
               <p class="block__content__subtitle">
@@ -341,7 +347,6 @@ onMounted(() => {
 
       <section class="client-support-premium">
         <div class="overlay"></div>
-
         <div class="client-support-premium__container">
           <h2>Être accompagné à chaque étape</h2>
           <div class="section-line"></div>
@@ -409,12 +414,10 @@ onMounted(() => {
 
           <div class="why-us__cta">
             <router-link to="/contact/form" class="why-us__btn why-us__btn--primary">Nous contacter</router-link>
-            <router-link to="#" class="why-us__btn why-us__btn--ghost"> Prendre rendez-vous</router-link>
+            <router-link to="#" class="why-us__btn why-us__btn--ghost" @click="bookingOpen()"> Prendre rendez-vous</router-link>
           </div>
         </div>
       </section>
-
-
 
       <!--  AFFAIRE -->
 
@@ -436,19 +439,15 @@ onMounted(() => {
         </div>
       </section>
 
-      <!-- IFRAME -->
+      <!-- CONTAINER IFRAME -->
 
-      <div class="iframe-container">
+      <div class="iframe-container" id="iframe">
         <div class="iframe">
           <div class="iframe__content">
-
             <div class="iframe-results">
               <div class="place-card">
-                <div class="place-card__media" >
-
+                <div class="place-card__media">
                   <img src="@/assets/images/salle-attente.jpg" class="img-salle-attente" />
-
-
                 </div>
 
                 <div class="place-card__body">
@@ -466,7 +465,7 @@ onMounted(() => {
                   </div>
 
                   <div class="place-card__actions">
-                    <a class="btn btn--primary" href="#prendre-rdv">Prendre RDV</a>
+                    <a class="btn btn--primary" @click="bookingOpen()">Prendre RDV</a>
                     <a
                       class="btn btn--ghost"
                       href="https://www.google.com/maps/dir/?api=1&destination=18%20Rue%20de%20la%20S%C3%A9r%C3%A9nit%C3%A9%2027000%20%C3%89vreux"
@@ -488,7 +487,7 @@ onMounted(() => {
                   <div class="place-card__title">Infos pratiques</div>
 
                   <div class="place-card__chips">
-                    <span class="chip">Accès PMR</span>
+                    <span class="chip chip-1">Accès PMR</span>
                     <span class="chip">Parking à proximité</span>
                     <span class="chip">Visio possible</span>
                   </div>
@@ -502,6 +501,8 @@ onMounted(() => {
             </div>
           </div>
 
+          <!--  IFRAME -->
+
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12294.319109934564!2d-0.24133006287153588!3d49.28515163344128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480a6156d5655ba5%3A0x1eb3a9d9ae79f46a!2sPlage%20de%20Ouistreham!5e0!3m2!1sfr!2sfr!4v1765478462795!5m2!1sfr!2sfr"
             width="400"
@@ -514,7 +515,6 @@ onMounted(() => {
           ></iframe>
         </div>
       </div>
-
 
       <!--  CONTACT CABINET -->
 
@@ -542,6 +542,7 @@ onMounted(() => {
       </section>
 
       <!-- REVENUR EN HAUT -->
+
       <button
         class="scroll-top"
         :class="{ 'is-visible': showScrollTop }"
@@ -551,6 +552,10 @@ onMounted(() => {
       </button>
     </main>
   </div>
+
+  <!-- SYSTEM DE RÉSERVATION -->
+
+  <BookingView v-if="uiStore.isBookingOpen" />
 </template>
 
 <style scoped lang="scss">
@@ -823,7 +828,6 @@ onMounted(() => {
   }
 }
 
-
 @media (max-width: 991.98px) {
   .client-support-premium {
     padding: 80px 20px;
@@ -836,14 +840,10 @@ onMounted(() => {
       margin: 20px auto 70px auto;
     }
     .premium-grid {
-
       gap: 40px;
-
     }
-
     .premium-item span {
       font-size: 36px;
-
       margin-bottom: 13px;
     }
     .premium-item h3 {
@@ -852,7 +852,6 @@ onMounted(() => {
     }
     .premium-item p {
       font-size: 14px;
-
     }
   }
 }
@@ -918,6 +917,7 @@ onMounted(() => {
     height: 600px;
   }
 }
+
 .iframe-head {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -941,6 +941,7 @@ onMounted(() => {
   padding: 14px;
   border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.08);
+  background: white;
   &__media .img-salle-attente {
     height: 100%;
   }
@@ -977,7 +978,6 @@ onMounted(() => {
   }
   &--compact {
     grid-template-columns: 1fr;
-
     .place-card__media {
       display: none;
     }
@@ -1014,7 +1014,7 @@ onMounted(() => {
   border: 1px solid transparent;
   &--primary {
     background: rgba(122, 173, 80, 1);
-    color: #0b1220;
+    color: white;
   }
   &--ghost {
     background: #ffffff;
@@ -1023,29 +1023,11 @@ onMounted(() => {
   }
 }
 
+///* Responsive */
 
-/* Responsive */
 @media (max-width: 991.98px) {
   .iframe-container {
-    margin: 80px 20px 0 20px;
-  }
-  .iframe {
-    grid-template-columns: 1fr;
-  }
-  .iframe iframe {
-    height: 360px;
-  }
-  .place-card {
-    grid-template-columns: 1fr;
-    &__media {
-      min-height: 140px;
-    }
-  }
-}
-
-@media (max-width: 768.98px) {
-  .iframe-container {
-    margin: 50px 10px 0 10px;
+    margin: 50px 20px 0 20px;
   }
   .iframe {
     grid-template-columns: 1fr;
@@ -1058,24 +1040,58 @@ onMounted(() => {
       background: initial;
     }
   }
+
   .iframe iframe {
     height: 360px;
     border-radius: 12px;
     margin-top: 20px;
   }
+
   .place-card {
     grid-template-columns: 1fr;
-
-    &__media {
-      min-height: 140px;
-    }
+    padding: 0 0 10px 0;
     &__media .img-salle-attente {
-      height: 300px;
-      border-radius: 12px 12px 0 0;
+      height: 450px;
     }
+    &__title {
+      margin: 0 10px 10px 10px;
+    }
+    &__subtitle {
+      font-size: 12px;
+      opacity: 0.7;
+      margin: 2px 0 10px 10px;
+    }
+    &__line {
+      margin: 6px 10px;
+    }
+    &__actions {
+      margin: 12px 0 0 10px;
+    }
+    &__hint {
+      margin: 10px 0 0 10px;
+    }
+    &__chips {
+      margin: 10px;
+    }
+    &__text {
+      margin: 0 0 0 10px;
+    }
+  }
+  .btn {
+    margin: 3px 0 0 0;
   }
 }
 
+@media (max-width: 768.98px) {
+  .iframe-container {
+    margin: 50px 10px 0 10px;
+  }
+ .place-card {
+    &__media .img-salle-attente {
+      height: 250px;
+    }
+  }
+}
 
 /*==========================
   SALON PAGE
